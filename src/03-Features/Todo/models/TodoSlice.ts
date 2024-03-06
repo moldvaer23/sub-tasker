@@ -6,16 +6,11 @@ interface TodosState {
 }
 
 const initialState: TodosState = {
-  todos: [
-    {
-      id: 0,
-      task: "Привет 1",
-    },
-    {
-      id: 1,
-      task: "Привет 2",
-    },
-  ],
+  todos: [],
+};
+
+const saveLocalStorage = (todos: TTodo[]) => {
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 const todosSlice = createSlice({
@@ -24,9 +19,14 @@ const todosSlice = createSlice({
   reducers: {
     addTodo(state, action: PayloadAction<TTodo>) {
       state.todos.push(action.payload);
+      saveLocalStorage(state.todos);
+    },
+    // Нужен для инициализации приложения, по этому не сохраняем в localStorage
+    setTodos(state, action: PayloadAction<TTodo[]>) {
+      state.todos = action.payload;
     },
   },
 });
 
-export const { addTodo } = todosSlice.actions;
+export const { addTodo, setTodos } = todosSlice.actions;
 export default todosSlice.reducer;

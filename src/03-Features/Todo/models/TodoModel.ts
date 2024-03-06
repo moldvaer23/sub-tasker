@@ -1,26 +1,19 @@
-import { TTodo, ITodoModel, ITodoModelProps } from "./type";
+import { ITodoModel, ITodoModelProps } from "./type";
 
 class TodoModel implements ITodoModel {
   // Поля
-  static idCount: number = 0;
-
-  private _id: number;
-  private task: string;
+  public id: number;
+  public task: string;
 
   // Конструктор
   constructor(props: ITodoModelProps) {
-    this._id = TodoModel.idCount;
+    this.id = props.id;
     this.task = props.task;
-
-    TodoModel.idCount++;
   }
 
-  // Возвращаем объект todo
-  public get getTodo(): TTodo {
-    return {
-      id: this._id,
-      task: this.task,
-    };
+  // Метод для изменения задачи
+  public changeTask(task: string): TodoModel {
+    return new TodoModel({ id: this.id, task: task });
   }
 }
 

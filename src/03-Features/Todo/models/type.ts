@@ -4,10 +4,11 @@ export type TTodo = {
 };
 
 export interface ITodoModel {
-  // Геттеры
-  getTodo: TTodo;
+  task: string;
+  changeTask(task: string): ITodoModel;
 }
 
 export interface ITodoModelProps {
+  id: number;
   task: string;
 }

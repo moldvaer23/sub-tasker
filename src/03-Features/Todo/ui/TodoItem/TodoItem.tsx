@@ -1,16 +1,28 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import TodoModel from "../../models/TodoModel";
 
 interface TProps {
   task: string;
+  id: number;
 }
 
-const TodoItem: FC<TProps> = ({ task }) => {
+const TodoItem: FC<TProps> = ({ task, id }) => {
   // Создаем новый объект Todo
-  const todo = new TodoModel({ task: task }).getTodo;
+  const [todo, setTodo] = useState<TodoModel>(new TodoModel({ task: task, id: id }));
 
-  // Возвращаем разметку карточки
-  return <article>{todo.task}</article>;
+  return (
+    <article>
+      <button
+        onClick={() => {
+          const updatedTodo = todo.changeTask("Изменено");
+
+          setTodo(updatedTodo);
+        }}>
+        Редактировать
+      </button>
+      {todo.task}
+    </article>
+  );
 };
 
 export default TodoItem;

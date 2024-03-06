@@ -10,7 +10,7 @@ const TodoList: FC = () => {
       {todos.map((todo) => {
         return (
           <li key={todo.id}>
-            <TodoItem task={todo.task} />
+            <TodoItem id={todo.id} task={todo.task} />
           </li>
         );
       })}

@@ -1,16 +1,18 @@
-import { useAppDispatch } from "00-App/store";
+import { useAppDispatch, useAppSelector } from "00-App/store";
 import TodoModel from "03-Features/Todo/models/TodoModel";
 import { addTodo } from "03-Features/Todo/models/TodoSlice";
 import { FC, useState } from "react";
 
 const TodoForm: FC = () => {
   const [task, setTask] = useState<string>("");
+
+  const todos = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
 
   const handleSubmit = () => {
-    const todo = new TodoModel({ task: task }).getTodo;
+    const newTodo = new TodoModel({ id: todos.length, task: task });
 
-    dispatch(addTodo(todo));
+    dispatch(addTodo(newTodo));
   };
 
   return (
