@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAppSelector } from "00-App/store";
-import { TodoItem } from "02-Widgets/TodoItem";
+import TodoItem from "../TodoItem/TodoItem";
 
 const TodoList: FC = () => {
   const todos = useAppSelector((state) => state.todos.todos);

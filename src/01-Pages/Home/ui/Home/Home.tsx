@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { TodoList } from "02-Widgets/TodoList";
+import { TodoList } from "03-Features/Todo";
 import "./_style.scss";
 
 const Home: FC = () => {
