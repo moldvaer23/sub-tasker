@@ -7,7 +7,6 @@ interface TProps {
 }
 
 const TodoItem: FC<TProps> = ({ task, id }) => {
-  // Создаем новый объект Todo
   const [todo, setTodo] = useState<TodoModel>(new TodoModel({ task: task, id: id }));
 
   return (
