@@ -4,7 +4,7 @@ export type TTodo = {
 };
 
 export interface ITodoModel {
-  task: string;
+  getTodo: TTodo;
   changeTask(task: string): ITodoModel;
 }
 

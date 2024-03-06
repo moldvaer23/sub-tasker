@@ -14,16 +14,10 @@ const TodoForm: FC = () => {
     // Создаем новый уникальный id для Todo
     const newTodoId: number = todos.length === 0 ? 0 : todos[todos.length - 1].id + 1;
 
-    // Создаем модель Todo
-    const newTodoModel: TodoModel = new TodoModel({ id: newTodoId, task: task });
+    // Создаем новый объект Todo
+    const newTodoModel: TTodo = new TodoModel({ id: newTodoId, task: task }).getTodo;
 
-    // Создаем объект Todo для хранения в dispath & localStorage
-    const newTodo: TTodo = {
-      id: newTodoModel.id,
-      task: newTodoModel.task,
-    };
-
-    dispatch(addTodo(newTodo));
+    dispatch(addTodo(newTodoModel));
   };
 
   return (

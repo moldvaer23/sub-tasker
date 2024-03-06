@@ -1,4 +1,4 @@
-import { ITodoModel, ITodoModelProps } from "./type";
+import { ITodoModel, ITodoModelProps, TTodo } from "./type";
 
 class TodoModel implements ITodoModel {
   // Поля
@@ -9,6 +9,13 @@ class TodoModel implements ITodoModel {
   constructor(props: ITodoModelProps) {
     this.id = props.id;
     this.task = props.task;
+  }
+
+  public get getTodo(): TTodo {
+    return {
+      id: this.id,
+      task: this.task,
+    };
   }
 
   // Метод для изменения задачи
