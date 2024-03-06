@@ -1,7 +1,7 @@
 import { TodoForm, TodoList } from "03-Features/Todo";
 import { FC } from "react";
 
-const Todos: FC = () => {
+const Todo: FC = () => {
   return (
     <>
       <TodoForm />
@@ -10,4 +10,4 @@ const Todos: FC = () => {
   );
 };
 
-export default Todos;
+export default Todo;

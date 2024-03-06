@@ -1,12 +1,12 @@
 import { FC } from "react";
 import "./_style.scss";
-import { Todos } from "02-Widgets/Todos";
+import { Todo } from "03-Features/Todo";
 
 const Home: FC = () => {
   return (
     <main className="main">
       <section className="main__section">
-        <Todos />
+        <Todo />
       </section>
     </main>
   );

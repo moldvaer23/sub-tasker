@@ -25,8 +25,16 @@ const todosSlice = createSlice({
     setTodos(state, action: PayloadAction<TTodo[]>) {
       state.todos = action.payload;
     },
+    updateTodo(state, action: PayloadAction<TTodo>) {
+      state.todos.forEach((todo) => {
+        if (todo.id === action.payload.id) {
+          todo.task = action.payload.task;
+        }
+      });
+      saveLocalStorage(state.todos);
+    },
   },
 });
 
-export const { addTodo, setTodos } = todosSlice.actions;
+export const { addTodo, setTodos, updateTodo } = todosSlice.actions;
 export default todosSlice.reducer;

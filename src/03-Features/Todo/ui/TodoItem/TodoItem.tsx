@@ -1,5 +1,7 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import TodoModel from "../../models/TodoModel";
+import { useAppDispatch } from "00-App/store";
+import { updateTodo } from "03-Features/Todo/models/TodoSlice";
 
 interface TProps {
   task: string;
@@ -7,7 +9,8 @@ interface TProps {
 }
 
 const TodoItem: FC<TProps> = ({ task, id }) => {
-  const [todo, setTodo] = useState<TodoModel>(new TodoModel({ task: task, id: id }));
+  const todo: TodoModel = new TodoModel({ task: task, id: id });
+  const dispath = useAppDispatch();
 
   return (
     <article>
@@ -15,7 +18,7 @@ const TodoItem: FC<TProps> = ({ task, id }) => {
         onClick={() => {
           const updatedTodo = todo.changeTask("Изменено");
 
-          setTodo(updatedTodo);
+          dispath(updateTodo(updatedTodo));
         }}>
         Редактировать
       </button>
