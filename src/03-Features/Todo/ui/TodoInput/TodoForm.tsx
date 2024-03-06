@@ -15,9 +15,9 @@ const TodoForm: FC = () => {
     const newTodoId: number = todos.length === 0 ? 0 : todos[todos.length - 1].id + 1;
 
     // Создаем новый объект Todo
-    const newTodoModel: TTodo = new TodoModel({ id: newTodoId, task: task }).getTodo;
+    const newTodo: TTodo = new TodoModel({ id: newTodoId, task: task }).getTodo;
 
-    dispatch(addTodo(newTodoModel));
+    dispatch(addTodo(newTodo));
   };
 
   return (
