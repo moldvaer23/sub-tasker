@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { TodoList } from "03-Features/Todo";
 import "./_style.scss";
+import { Todos } from "02-Widgets/Todos";
 
 const Home: FC = () => {
   return (
     <main className="main">
       <section className="main__section">
-        <TodoList />
+        <Todos />
       </section>
     </main>
   );
