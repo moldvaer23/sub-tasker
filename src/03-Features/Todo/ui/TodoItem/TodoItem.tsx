@@ -5,6 +5,7 @@ import { deleteTodo } from "../../models/TodoSlice";
 import TodoModel from "../../models/TodoModel";
 
 import TodoEditForm from "../TodoEditForm/TodoEditForm";
+import { Button } from "05-Shared/ui/Button";
 
 interface IProps {
   id: number;
@@ -42,13 +43,8 @@ const TodoItem: FC<IProps> = ({ id, task }) => {
 
   return (
     <article>
-      <button onClick={() => setIsActiveEdit(true)}>Редактировать</button>
-      <button
-        onClick={() => {
-          dispath(deleteTodo(todo.id));
-        }}>
-        Удалить
-      </button>
+      <Button text="Редактировать" onClick={(): void => setIsActiveEdit(true)} />
+      <Button text="Удалить" onClick={() => dispath(deleteTodo(todo.id))} />
       {isActiveEdit ? (
         <TodoEditForm
           todoModel={todoModel}

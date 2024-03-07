@@ -2,6 +2,7 @@ import { useAppDispatch } from "00-App/store";
 import TodoModel from "03-Features/Todo/models/TodoModel";
 import { updateTodo } from "03-Features/Todo/models/TodoSlice";
 import { TTodo } from "03-Features/Todo/models/type";
+import { Button, ETypeButton } from "05-Shared/ui/Button";
 import validator from "05-Shared/utils/validator";
 import { FC, useEffect, useState } from "react";
 
@@ -31,22 +32,23 @@ const TodoEditForm: FC<IProps> = ({ todoModel, setIsActiveEdit, placeholderTask 
 
   return (
     <form>
-      <button type="button" onClick={() => setIsActiveEdit(false)}>
-        x
-      </button>
+      <Button text="x" onClick={(): void => setIsActiveEdit(false)} />
+
       <input
         type="text"
         placeholder={placeholderTask}
         onChange={(e) => setChangedTask(e.target.value)}
       />
-      <button
-        onClick={(e) => {
+
+      <Button
+        text="Применить"
+        type={ETypeButton.submit}
+        onClick={(e: MouseEvent): void => {
           e.preventDefault();
           handleSumbit();
         }}
-        disabled={error}>
-        Применить
-      </button>
+        disabled={error}
+      />
     </form>
   );
 };

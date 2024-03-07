@@ -4,6 +4,7 @@ import TodoModel from "../../models/TodoModel";
 import { addTodo } from "../../models/TodoSlice";
 import { TTodo } from "../../models/type";
 import validator from "05-Shared/utils/validator";
+import { Button, ETypeButton } from "05-Shared/ui/Button";
 
 const TodoNewForm: FC = () => {
   const [task, setTask] = useState<string>("");
@@ -45,14 +46,15 @@ const TodoNewForm: FC = () => {
         />
       </label>
 
-      <button
-        onClick={(e) => {
+      <Button
+        text="Добавить"
+        type={ETypeButton.submit}
+        onClick={(e: MouseEvent): void => {
           e.preventDefault();
           handleSubmit();
         }}
-        disabled={error}>
-        Добавить
-      </button>
+        disabled={error}
+      />
     </form>
   );
 };
