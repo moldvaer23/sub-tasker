@@ -27,9 +27,9 @@ const todosSlice = createSlice({
       state.todos.forEach((todo) => {
         if (todo.id === action.payload.id) {
           todo.task = action.payload.task;
+          localStorage.setItem("todos", JSON.stringify(state.todos));
         }
       });
-      localStorage.setItem("todos", JSON.stringify(state.todos));
     },
     // Удаление задачи по id
     deleteTodo(state, action: PayloadAction<number>) {
