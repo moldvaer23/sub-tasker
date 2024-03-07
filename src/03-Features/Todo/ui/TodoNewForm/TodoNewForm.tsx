@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from "00-App/store";
 import TodoModel from "../../models/TodoModel";
 import { addTodo } from "../../models/TodoSlice";
 import { TTodo } from "../../models/type";
+import validator from "05-Shared/utils/validator";
 
-const TodoForm: FC = () => {
+const TodoNewForm: FC = () => {
   const [task, setTask] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
@@ -12,15 +13,7 @@ const TodoForm: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const validateTask = (): void => {
-      if (task.length === 0) {
-        setError(true);
-      } else {
-        setError(false);
-      }
-    };
-
-    validateTask();
+    validator({ data: task, setError: setError });
   }, [task]);
 
   const handleSubmit = (): void => {
@@ -48,6 +41,7 @@ const TodoForm: FC = () => {
           onChange={(e) => setTask(e.target.value)}
           // Необходимо для отчистки значения при submit
           value={task}
+          required
         />
       </label>
 
@@ -63,4 +57,4 @@ const TodoForm: FC = () => {
   );
 };
 
-export default TodoForm;
+export default TodoNewForm;

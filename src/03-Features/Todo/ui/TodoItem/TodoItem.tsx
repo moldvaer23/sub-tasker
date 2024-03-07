@@ -1,15 +1,18 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppDispatch } from "00-App/store";
 import { TTodo } from "../../models/type";
-import { deleteTodo, updateTodo } from "../../models/TodoSlice";
+import { deleteTodo } from "../../models/TodoSlice";
 import TodoModel from "../../models/TodoModel";
 
-interface TProps {
+import TodoEditForm from "../TodoEditForm/TodoEditForm";
+
+interface IProps {
   id: number;
   task: string;
 }
 
-const TodoItem: FC<TProps> = ({ id, task }) => {
+const TodoItem: FC<IProps> = ({ id, task }) => {
+  const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
   const dispath = useAppDispatch();
 
   // Создаем модель Todo
@@ -18,23 +21,43 @@ const TodoItem: FC<TProps> = ({ id, task }) => {
   // Запрашиваем объект Todo
   const todo: TTodo = todoModel.getTodo;
 
+  // Вешаем и снимаем слушатели формы редактирования Todo
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent): void => {
+      if (e.code === "Escape") {
+        setIsActiveEdit(false);
+      }
+    };
+
+    // Если форма редактирования task открыта вешаем слушатели закрытия
+    if (isActiveEdit) {
+      document.addEventListener("keydown", handleEsc);
+    }
+
+    // Когда компонент демонтирован снимаем слушатели
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [isActiveEdit]);
+
   return (
     <article>
-      <button
-        onClick={() => {
-          const updatedTodo: TTodo = todoModel.changeTask("Изменено").getTodo;
-
-          dispath(updateTodo(updatedTodo));
-        }}>
-        Редактировать
-      </button>
+      <button onClick={() => setIsActiveEdit(true)}>Редактировать</button>
       <button
         onClick={() => {
           dispath(deleteTodo(todo.id));
         }}>
         Удалить
       </button>
-      {todo.task}
+      {isActiveEdit ? (
+        <TodoEditForm
+          todoModel={todoModel}
+          setIsActiveEdit={setIsActiveEdit}
+          placeholderTask={todo.task}
+        />
+      ) : (
+        todo.task
+      )}
     </article>
   );
 };
