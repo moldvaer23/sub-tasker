@@ -1,8 +1,8 @@
 import { FC } from "react";
-import TodoModel from "../../models/TodoModel";
 import { useAppDispatch } from "00-App/store";
-import { deleteTodo, updateTodo } from "03-Features/Todo/models/TodoSlice";
-import { TTodo } from "03-Features/Todo/models/type";
+import { TTodo } from "../../models/type";
+import { deleteTodo, updateTodo } from "../../models/TodoSlice";
+import TodoModel from "../../models/TodoModel";
 
 interface TProps {
   id: number;

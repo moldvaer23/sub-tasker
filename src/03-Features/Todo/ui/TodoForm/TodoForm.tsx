@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "00-App/store";
-import TodoModel from "03-Features/Todo/models/TodoModel";
-import { addTodo } from "03-Features/Todo/models/TodoSlice";
-import { TTodo } from "03-Features/Todo/models/type";
 import { FC, useState } from "react";
+import { useAppDispatch, useAppSelector } from "00-App/store";
+import TodoModel from "../../models/TodoModel";
+import { addTodo } from "../../models/TodoSlice";
+import { TTodo } from "../../models/type";
 
 const TodoForm: FC = () => {
   const [task, setTask] = useState<string>("");

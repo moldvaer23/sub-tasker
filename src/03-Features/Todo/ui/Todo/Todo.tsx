@@ -1,5 +1,6 @@
-import { TodoForm, TodoList } from "03-Features/Todo";
 import { FC } from "react";
+import TodoForm from "../TodoForm/TodoForm";
+import TodoList from "../TodoList/TodoList";
 
 const Todo: FC = () => {
   return (
