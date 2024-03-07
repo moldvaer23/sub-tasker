@@ -42,8 +42,8 @@ const Input: FC<IProps> = ({
       type={type}
       placeholder={placeholder}
       onChange={(e: ChangeEvent<HTMLInputElement>): void => handleOnChange(e)}
-      {...(value !== undefined && { value })}
       required={required}
+      {...(value !== undefined && { value })}
     />
   );
 };
