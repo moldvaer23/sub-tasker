@@ -3,8 +3,9 @@ import TodoModel from "03-Features/Todo/models/TodoModel";
 import { updateTodo } from "03-Features/Todo/models/TodoSlice";
 import { TTodo } from "03-Features/Todo/models/type";
 import { Button, ETypeButton } from "05-Shared/ui/Button";
+import { ETypeInput, Input } from "05-Shared/ui/Input";
 import validator from "05-Shared/utils/validator";
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 
 interface IProps {
   todoModel: TodoModel;
@@ -34,10 +35,12 @@ const TodoEditForm: FC<IProps> = ({ todoModel, setIsActiveEdit, placeholderTask 
     <form>
       <Button text="x" onClick={(): void => setIsActiveEdit(false)} />
 
-      <input
-        type="text"
+      <Input
+        name="changeTask"
+        id="changeTask"
         placeholder={placeholderTask}
-        onChange={(e) => setChangedTask(e.target.value)}
+        type={ETypeInput.text}
+        onChange={(e: ChangeEvent<HTMLInputElement>): void => setChangedTask(e.target.value)}
       />
 
       <Button

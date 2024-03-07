@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "00-App/store";
 import TodoModel from "../../models/TodoModel";
 import { addTodo } from "../../models/TodoSlice";
 import { TTodo } from "../../models/type";
 import validator from "05-Shared/utils/validator";
 import { Button, ETypeButton } from "05-Shared/ui/Button";
+import { ETypeInput, Input } from "05-Shared/ui/Input";
 
 const TodoNewForm: FC = () => {
   const [task, setTask] = useState<string>("");
@@ -34,15 +35,14 @@ const TodoNewForm: FC = () => {
     <form>
       <label>
         У Вас новая задача?
-        <input
-          type="text"
+        <Input
           name="task"
           id="task"
-          placeholder="Напишите её тут"
-          onChange={(e) => setTask(e.target.value)}
-          // Необходимо для отчистки значения при submit
+          placeholder="Напиши её тут"
+          type={ETypeInput.text}
           value={task}
           required
+          onChange={(e: ChangeEvent<HTMLInputElement>): void => setTask(e.target.value)}
         />
       </label>
 

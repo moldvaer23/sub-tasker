@@ -33,9 +33,9 @@ const Button: FC<IProps> = ({
 
   return (
     <button
-      onClick={(e: MouseEvent): void => handleOnClick(e)}
       className={usedClassName}
       type={type}
+      onClick={(e: MouseEvent): void => handleOnClick(e)}
       disabled={disabled}>
       {text}
     </button>
