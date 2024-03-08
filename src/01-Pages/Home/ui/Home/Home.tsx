@@ -1,8 +1,8 @@
-import { FC } from "react";
-import "./_style.scss";
+import { FC, ReactElement } from "react";
 import { Todo } from "03-Features/Todo";
+import "./_style.scss";
 
-const Home: FC = () => {
+const Home: FC = (): ReactElement => {
   return (
     <main className="main">
       <section className="main__section">

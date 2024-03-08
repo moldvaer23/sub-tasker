@@ -1,12 +1,11 @@
-import { FC } from "react";
-import { Home } from "01-Pages/Home";
-
-import "./styles/global.scss";
-import { useAppDispatch } from "./store";
+import { FC, ReactElement } from "react";
 import { setTodos } from "03-Features/Todo/models/TodoSlice";
 import { TTodo } from "03-Features/Todo/models/type";
+import { Home } from "01-Pages/Home";
+import { useAppDispatch } from "./store";
+import "./styles/global.scss";
 
-const App: FC = () => {
+const App: FC = (): ReactElement => {
   const localTodos: TTodo[] | null = JSON.parse(localStorage.getItem("todos") as string);
   const dispatch = useAppDispatch();
 
