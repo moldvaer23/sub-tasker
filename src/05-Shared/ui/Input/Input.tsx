@@ -28,13 +28,9 @@ const Input: FC<IProps> = ({
   value,
   required = false,
 }): ReactElement => {
-  const usedClassName: string = className
-    ? `${className} ${EDefaultClassNames.input}`
-    : EDefaultClassNames.input;
-
   return (
     <input
-      className={usedClassName}
+      className={className ? `${className} ${EDefaultClassNames.input}` : EDefaultClassNames.input}
       name={name}
       id={id}
       type={type}
