@@ -37,7 +37,6 @@ const TodoNewForm: FC = () => {
         У Вас новая задача?
         <Input
           name="task"
-          id="task"
           placeholder="Напиши её тут"
           type={ETypeInput.text}
           value={task}

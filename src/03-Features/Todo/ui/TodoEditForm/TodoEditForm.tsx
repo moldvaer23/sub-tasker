@@ -37,7 +37,6 @@ const TodoEditForm: FC<IProps> = ({ todoModel, setIsActiveEdit, placeholderTask 
 
       <Input
         name="changeTask"
-        id="changeTask"
         placeholder={placeholderTask}
         type={ETypeInput.text}
         onChange={(e: ChangeEvent<HTMLInputElement>): void => setChangedTask(e.target.value)}

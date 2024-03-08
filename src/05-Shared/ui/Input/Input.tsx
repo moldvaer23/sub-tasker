@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, ReactElement } from "react";
 
+// Типы Input as для поля type
 export enum ETypeInput {
   text = "text",
 }
@@ -7,7 +8,7 @@ export enum ETypeInput {
 interface IProps {
   type: ETypeInput;
   name: string;
-  id: string;
+  id?: string;
   className?: string;
   placeholder?: string;
   onChange?: Function;
@@ -15,12 +16,13 @@ interface IProps {
   required?: boolean;
 }
 
+// Для работы компонента нужно передать хотя бы type & name, id в случае если его не передали автоматически будет равно name
 const Input: FC<IProps> = ({
   type,
   name,
-  id,
+  id = name,
   className,
-  placeholder = "",
+  placeholder,
   onChange,
   value,
   required = false,
@@ -28,21 +30,15 @@ const Input: FC<IProps> = ({
   const defaultClassName: string = "input";
   const usedClassName: string = className ? `${className} ${defaultClassName}` : defaultClassName;
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (onChange) {
-      onChange(e);
-    }
-  };
-
   return (
     <input
       className={usedClassName}
       name={name}
       id={id}
       type={type}
-      placeholder={placeholder}
-      onChange={(e: ChangeEvent<HTMLInputElement>): void => handleOnChange(e)}
+      {...(placeholder !== undefined && { placeholder })}
       required={required}
+      onChange={onChange ? (e: ChangeEvent<HTMLInputElement>): void => onChange(e) : undefined}
       {...(value !== undefined && { value })}
     />
   );
