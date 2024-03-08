@@ -1,18 +1,19 @@
-import { FC, useEffect, useState } from "react";
-import { useAppDispatch } from "00-App/store";
-import { TTodo } from "../../models/type";
-import { deleteTodo } from "../../models/TodoSlice";
-import TodoModel from "../../models/TodoModel";
+import { FC, ReactElement, useEffect, useState } from "react";
 
-import TodoEditForm from "../TodoEditForm/TodoEditForm";
 import { Button } from "05-Shared/ui/Button";
+import { useAppDispatch } from "00-App/store";
+
+import { TTodo } from "../../models/type";
+import TodoModel from "../../models/TodoModel";
+import { deleteTodo } from "../../models/TodoSlice";
+import TodoEditForm from "../TodoEditForm/TodoEditForm";
 
 interface IProps {
   id: number;
   task: string;
 }
 
-const TodoItem: FC<IProps> = ({ id, task }) => {
+const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
   const dispath = useAppDispatch();
 
@@ -36,7 +37,7 @@ const TodoItem: FC<IProps> = ({ id, task }) => {
     }
 
     // Когда компонент демонтирован снимаем слушатели
-    return () => {
+    return (): void => {
       document.removeEventListener("keydown", handleEsc);
     };
   }, [isActiveEdit]);

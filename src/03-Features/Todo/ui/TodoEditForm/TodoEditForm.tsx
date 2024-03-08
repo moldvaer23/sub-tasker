@@ -1,26 +1,41 @@
+import {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  MouseEvent,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+
 import { useAppDispatch } from "00-App/store";
-import TodoModel from "03-Features/Todo/models/TodoModel";
-import { updateTodo } from "03-Features/Todo/models/TodoSlice";
-import { TTodo } from "03-Features/Todo/models/type";
-import { Button, ETypeButton } from "05-Shared/ui/Button";
-import { ETypeInput, Input } from "05-Shared/ui/Input";
 import validator from "05-Shared/utils/validator";
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ETypeInput, Input } from "05-Shared/ui/Input";
+import { Button, ETypeButton } from "05-Shared/ui/Button";
+
+import { TTodo } from "../../models/type";
+import TodoModel from "../../models/TodoModel";
+import { updateTodo } from "../../models/TodoSlice";
 
 interface IProps {
   todoModel: TodoModel;
-  setIsActiveEdit: Function;
+  setIsActiveEdit: Dispatch<SetStateAction<boolean>>;
   placeholderTask: string;
 }
 
-const TodoEditForm: FC<IProps> = ({ todoModel, setIsActiveEdit, placeholderTask }) => {
+const TodoEditForm: FC<IProps> = ({
+  todoModel,
+  setIsActiveEdit,
+  placeholderTask,
+}): ReactElement => {
   const [changedTask, setChangedTask] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
   const dispath = useAppDispatch();
 
   // Валидируем поле chgangeTask
-  useEffect(() => {
+  useEffect((): void => {
     validator({ data: changedTask, setError: setError });
   }, [changedTask]);
 
@@ -45,7 +60,7 @@ const TodoEditForm: FC<IProps> = ({ todoModel, setIsActiveEdit, placeholderTask 
       <Button
         text="Применить"
         type={ETypeButton.submit}
-        onClick={(e: MouseEvent): void => {
+        onClick={(e: MouseEvent<HTMLButtonElement>): void => {
           e.preventDefault();
           handleSumbit();
         }}

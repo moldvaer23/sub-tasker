@@ -1,7 +1,7 @@
 import { FC, MouseEvent, ReactElement } from "react";
+
 import { EDefaultClassNames } from "../classNames";
 
-// Типы Button as для поле type
 export enum ETypeButton {
   button = "button",
   submit = "submit",
@@ -10,7 +10,7 @@ export enum ETypeButton {
 
 interface IProps {
   text: string;
-  onClick?: Function;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type?: ETypeButton;
   className?: string;
   disabled?: boolean;
@@ -23,13 +23,19 @@ const Button: FC<IProps> = ({
   className,
   disabled = false,
 }): ReactElement => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <button
       className={
         className ? `${className} ${EDefaultClassNames.button}` : EDefaultClassNames.button
       }
       type={type}
-      onClick={onClick ? (e: MouseEvent): void => onClick(e) : undefined}
+      onClick={handleClick}
       disabled={disabled}>
       {text}
     </button>

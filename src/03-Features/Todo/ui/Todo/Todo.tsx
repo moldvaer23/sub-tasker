@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
 
 import TodoList from "../TodoList/TodoList";
 import TodoNewForm from "../TodoNewForm/TodoNewForm";
 
-const Todo: FC = () => {
+const Todo: FC = (): ReactElement => {
   return (
     <>
       <TodoNewForm />

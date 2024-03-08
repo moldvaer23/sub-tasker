@@ -1,8 +1,11 @@
 import { FC, ReactElement } from "react";
-import { setTodos } from "03-Features/Todo/models/TodoSlice";
-import { TTodo } from "03-Features/Todo/models/type";
+
 import { Home } from "01-Pages/Home";
+import { TTodo } from "03-Features/Todo/models/type";
+import { setTodos } from "03-Features/Todo/models/TodoSlice";
+
 import { useAppDispatch } from "./store";
+
 import "./styles/global.scss";
 
 const App: FC = (): ReactElement => {

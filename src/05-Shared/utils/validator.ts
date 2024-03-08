@@ -1,6 +1,8 @@
+import { Dispatch } from "react";
+
 type TProps = {
   data: string;
-  setError: Function;
+  setError: Dispatch<React.SetStateAction<boolean>>;
 };
 
 const validator = ({ data, setError }: TProps): void => {

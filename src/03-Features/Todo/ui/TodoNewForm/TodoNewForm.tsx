@@ -1,20 +1,22 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, MouseEvent, ReactElement, useEffect, useState } from "react";
+
+import validator from "05-Shared/utils/validator";
+import { ETypeInput, Input } from "05-Shared/ui/Input";
+import { Button, ETypeButton } from "05-Shared/ui/Button";
 import { useAppDispatch, useAppSelector } from "00-App/store";
+
+import { TTodo } from "../../models/type";
 import TodoModel from "../../models/TodoModel";
 import { addTodo } from "../../models/TodoSlice";
-import { TTodo } from "../../models/type";
-import validator from "05-Shared/utils/validator";
-import { Button, ETypeButton } from "05-Shared/ui/Button";
-import { ETypeInput, Input } from "05-Shared/ui/Input";
 
-const TodoNewForm: FC = () => {
+const TodoNewForm: FC = (): ReactElement => {
   const [task, setTask] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
 
-  const todos = useAppSelector((state) => state.todos.todos);
+  const todos: TTodo[] = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  useEffect((): void => {
     validator({ data: task, setError: setError });
   }, [task]);
 
@@ -33,7 +35,7 @@ const TodoNewForm: FC = () => {
 
   return (
     <form>
-      <label>
+      <label htmlFor="task">
         У Вас новая задача?
         <Input
           name="task"
@@ -48,7 +50,7 @@ const TodoNewForm: FC = () => {
       <Button
         text="Добавить"
         type={ETypeButton.submit}
-        onClick={(e: MouseEvent): void => {
+        onClick={(e: MouseEvent<HTMLButtonElement>): void => {
           e.preventDefault();
           handleSubmit();
         }}

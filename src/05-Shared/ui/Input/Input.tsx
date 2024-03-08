@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, ReactElement } from "react";
+
 import { EDefaultClassNames } from "../classNames";
 
 // Типы Input as для поля type
@@ -12,7 +13,7 @@ interface IProps {
   id?: string;
   className?: string;
   placeholder?: string;
-  onChange?: Function;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   required?: boolean;
 }

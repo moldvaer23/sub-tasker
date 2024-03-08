@@ -1,9 +1,12 @@
-import { FC } from "react";
+import { FC, ReactElement } from "react";
+
 import { useAppSelector } from "00-App/store";
+
+import { TTodo } from "../../models/type";
 import TodoItem from "../TodoItem/TodoItem";
 
-const TodoList: FC = () => {
-  const todos = useAppSelector((state) => state.todos.todos);
+const TodoList: FC = (): ReactElement => {
+  const todos: TTodo[] = useAppSelector((state) => state.todos.todos);
 
   return (
     <ul>
