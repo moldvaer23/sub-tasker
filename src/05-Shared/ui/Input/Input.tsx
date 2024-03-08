@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, ReactElement } from "react";
+import { EDefaultClassNames } from "../classNames";
 
 // Типы Input as для поля type
 export enum ETypeInput {
@@ -27,8 +28,9 @@ const Input: FC<IProps> = ({
   value,
   required = false,
 }): ReactElement => {
-  const defaultClassName: string = "input";
-  const usedClassName: string = className ? `${className} ${defaultClassName}` : defaultClassName;
+  const usedClassName: string = className
+    ? `${className} ${EDefaultClassNames.input}`
+    : EDefaultClassNames.input;
 
   return (
     <input

@@ -1,4 +1,5 @@
 import { FC, MouseEvent, ReactElement } from "react";
+import { EDefaultClassNames } from "../classNames";
 
 // Типы Button as для поле type
 export enum ETypeButton {
@@ -22,8 +23,9 @@ const Button: FC<IProps> = ({
   className,
   disabled = false,
 }): ReactElement => {
-  const defaultClassName: string = "button";
-  const usedClassName: string = className ? `${className} ${defaultClassName}` : defaultClassName;
+  const usedClassName: string = className
+    ? `${className} ${EDefaultClassNames.button}`
+    : EDefaultClassNames.button;
 
   return (
     <button
