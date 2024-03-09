@@ -52,6 +52,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sonarjs": "^0.24.0",
     "sass": "^1.71.1",
-    "typescript": "^5.4.2"
+    "typescript": "^4.9.5"
   }
 }
