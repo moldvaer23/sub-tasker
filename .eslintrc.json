@@ -10,7 +10,11 @@
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:import/recommended"
+    "plugin:import/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:sonarjs/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,7 +23,7 @@
   },
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
-    "import/no-unresolved": "off",
+    "eslint-plugin-import/no-unresolved": "off",
     "no-console": "warn",
     "quotes": ["error", "double"]
   },
@@ -31,7 +35,8 @@
       "node": {
         "extensions": [".ts", ".tsx"],
         "moduleDirectory": ["node_modules", "src"]
-      }
+      },
+      "typescript": true
     }
   }
 }

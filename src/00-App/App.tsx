@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+import type { FC, ReactElement } from "react";
 
 import { Home } from "01-Pages/Home";
 import { TTodo } from "03-Features/Todo/models/type";
