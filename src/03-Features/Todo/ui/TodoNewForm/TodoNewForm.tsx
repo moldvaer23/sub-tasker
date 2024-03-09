@@ -1,12 +1,13 @@
-import { ChangeEvent, FC, MouseEvent, ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { ChangeEvent, FC, MouseEvent, ReactElement } from "react";
 
 import validator from "05-Shared/utils/validator";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
 import { Button, ETypeButton } from "05-Shared/ui/Button";
 import { useAppDispatch, useAppSelector } from "00-App/store";
 
-import { TTodo } from "../../models/type";
 import TodoModel from "../../models/TodoModel";
+import type { TTodo } from "../../models/type";
 import { addTodo } from "../../models/TodoSlice";
 
 const TodoNewForm: FC = (): ReactElement => {

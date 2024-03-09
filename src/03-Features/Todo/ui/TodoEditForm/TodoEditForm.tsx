@@ -1,21 +1,13 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FC,
-  MouseEvent,
-  ReactElement,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
+import type { ChangeEvent, Dispatch, FC, MouseEvent, ReactElement, SetStateAction } from "react";
 
 import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
 import { Button, ETypeButton } from "05-Shared/ui/Button";
 
-import { TTodo } from "../../models/type";
 import TodoModel from "../../models/TodoModel";
+import type { TTodo } from "../../models/type";
 import { updateTodo } from "../../models/TodoSlice";
 
 interface IProps {

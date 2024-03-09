@@ -1,4 +1,4 @@
-import { FC, ReactElement } from "react";
+import type { FC, ReactElement } from "react";
 
 import TodoList from "../TodoList/TodoList";
 import TodoNewForm from "../TodoNewForm/TodoNewForm";

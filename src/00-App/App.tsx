@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from "react";
 
 import { Home } from "01-Pages/Home";
-import { TTodo } from "03-Features/Todo/models/type";
+import type { TTodo } from "03-Features/Todo/models/type";
 import { setTodos } from "03-Features/Todo/models/TodoSlice";
 
 import { useAppDispatch } from "./store";

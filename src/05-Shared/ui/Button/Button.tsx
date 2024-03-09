@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactElement } from "react";
+import type { FC, MouseEvent, ReactElement } from "react";
 
 import { EDefaultClassNames } from "../classNames";
 

@@ -1,4 +1,4 @@
-import { ITodoModel, ITodoModelProps, TTodo } from "./type";
+import type { ITodoModel, ITodoModelProps, TTodo } from "./type";
 
 class TodoModel implements ITodoModel {
   // Поля

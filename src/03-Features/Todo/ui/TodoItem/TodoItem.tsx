@@ -1,10 +1,11 @@
-import { FC, ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { FC, ReactElement } from "react";
 
 import { Button } from "05-Shared/ui/Button";
 import { useAppDispatch } from "00-App/store";
 
-import { TTodo } from "../../models/type";
 import TodoModel from "../../models/TodoModel";
+import type { TTodo } from "../../models/type";
 import { deleteTodo } from "../../models/TodoSlice";
 import TodoEditForm from "../TodoEditForm/TodoEditForm";
 
