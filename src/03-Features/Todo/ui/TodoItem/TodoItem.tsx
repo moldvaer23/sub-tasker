@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import type { FC, ReactElement } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "05-Shared/ui/Button";
 import { useAppDispatch } from "00-App/store";
@@ -19,10 +19,10 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
   const dispath = useAppDispatch();
 
   // Создаем модель Todo
-  const todoModel: TodoModel = new TodoModel({ id: id, task: task });
+  const todoModel: TodoModel = useMemo(() => new TodoModel({ id: id, task: task }), [id, task]);
 
   // Запрашиваем объект Todo
-  const todo: TTodo = todoModel.getTodo;
+  const todo: TTodo = useMemo(() => todoModel.getTodo, [todoModel]);
 
   // Вешаем и снимаем слушатели формы редактирования Todo
   useEffect(() => {

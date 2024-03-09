@@ -23,19 +23,13 @@ const Button: FC<IProps> = ({
   className,
   disabled = false,
 }): ReactElement => {
-  const handleClick = (e: MouseEvent<HTMLButtonElement>): void => {
-    if (onClick) {
-      onClick(e);
-    }
-  };
-
   return (
     <button
       className={
         className ? `${className} ${EDefaultClassNames.button}` : EDefaultClassNames.button
       }
       type={type}
-      onClick={handleClick}
+      onClick={onClick ? onClick : undefined}
       disabled={disabled}>
       {text}
     </button>

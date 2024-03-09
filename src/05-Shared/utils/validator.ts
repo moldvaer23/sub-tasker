@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import type { Dispatch } from "react";
 
 type TProps = {
   data: string;
