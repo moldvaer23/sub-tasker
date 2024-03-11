@@ -1,0 +1,6 @@
+@import "../../../../00-App/styles/_mixin";
+
+.section-todos__list-todos {
+  @include fl-cl;
+  gap: 15px;
+}

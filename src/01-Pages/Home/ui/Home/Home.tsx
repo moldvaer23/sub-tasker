@@ -7,7 +7,7 @@ import "./_style.scss";
 const Home: FC = (): ReactElement => {
   return (
     <main className="main">
-      <section className="main__section">
+      <section className="main__section-todos">
         <Todo />
       </section>
     </main>

@@ -6,6 +6,7 @@ import { setTodos } from "03-Features/Todo/models/TodoSlice";
 
 import { useAppDispatch } from "./store";
 
+import "./styles/_fonts.scss";
 import "./styles/global.scss";
 
 const App: FC = (): ReactElement => {

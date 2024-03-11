@@ -1,0 +1,27 @@
+.button {
+  cursor: pointer;
+
+  &__image {
+    width: 25px;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: transparent;
+    border: 0;
+  }
+}
+
+.button:disabled {
+  pointer-events: none;
+}
+
+.large {
+  padding: 10px 20px;
+  font-size: 20px;
+}

@@ -1,0 +1,28 @@
+@import "../../../../00-App/styles/_mixin";
+
+.todo-item__todo {
+  display: flex;
+  gap: 10px;
+
+  width: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
+  padding: 10px 20px;
+
+  font-size: 20px;
+
+  background-color: rgb(246 249 253);
+  border: 1px solid rgb(126 126 126);
+  border-radius: 8px;
+
+  .todo {
+    &__buttons-wrapper {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    &__task {
+      max-width: 400px;
+      overflow-wrap: break-word;
+    }
+  }
+}

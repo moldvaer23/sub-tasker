@@ -4,11 +4,13 @@ import type { ChangeEvent, Dispatch, FC, MouseEvent, ReactElement, SetStateActio
 import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
-import { Button, ETypeButton } from "05-Shared/ui/Button";
+import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
 import type { TTodo } from "../../models/type";
 import { updateTodo } from "../../models/TodoSlice";
+
+import "./_style.scss";
 
 interface IProps {
   todoModel: TodoModel;
@@ -26,6 +28,10 @@ const TodoEditForm: FC<IProps> = ({
 
   const dispath = useAppDispatch();
 
+  useEffect(() => {
+    setChangedTask(placeholderTask);
+  }, [placeholderTask]);
+
   // Валидируем поле chgangeTask
   useEffect((): void => {
     validator({ data: changedTask, setError: setError });
@@ -39,18 +45,19 @@ const TodoEditForm: FC<IProps> = ({
   };
 
   return (
-    <form>
-      <Button text="x" onClick={(): void => setIsActiveEdit(false)} />
-
+    <form className="todo__form-edit-todo">
       <Input
+        className="form-edit-todo__input"
         name="changeTask"
-        placeholder={placeholderTask}
+        value={changedTask}
         type={ETypeInput.text}
         onChange={(e: ChangeEvent<HTMLInputElement>): void => setChangedTask(e.target.value)}
       />
 
       <Button
         text="Применить"
+        typeSize={ETypeSizeButtom.medium}
+        typeStyle={ETypeButtonStyle.primary}
         type={ETypeButton.submit}
         onClick={(e: MouseEvent<HTMLButtonElement>): void => {
           e.preventDefault();

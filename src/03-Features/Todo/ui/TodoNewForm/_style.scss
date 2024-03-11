@@ -1,0 +1,35 @@
+@import "../../../../00-App/styles/_mixin";
+
+.section-todos__form-new-todo {
+  @include fl-cl;
+  gap: 40px;
+  padding: 20px;
+}
+
+.form-new-todo {
+  &__label {
+    @include fl-cl;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__label-head {
+    // TODO: clamp
+    font-size: 25px;
+  }
+
+  &__input {
+    // TODO: clamp
+    width: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
+    padding: 15px 20px;
+
+    font-size: 20px;
+
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+
+  &__button-submit {
+    align-self: flex-end;
+  }
+}

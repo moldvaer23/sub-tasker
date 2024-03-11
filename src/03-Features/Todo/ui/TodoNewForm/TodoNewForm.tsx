@@ -3,12 +3,14 @@ import type { ChangeEvent, FC, MouseEvent, ReactElement } from "react";
 
 import validator from "05-Shared/utils/validator";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
-import { Button, ETypeButton } from "05-Shared/ui/Button";
+import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 import { useAppDispatch, useAppSelector } from "00-App/store";
 
 import TodoModel from "../../models/TodoModel";
 import type { TTodo } from "../../models/type";
 import { addTodo } from "../../models/TodoSlice";
+
+import "./_style.scss";
 
 const TodoNewForm: FC = (): ReactElement => {
   const [task, setTask] = useState<string>("");
@@ -35,10 +37,11 @@ const TodoNewForm: FC = (): ReactElement => {
   };
 
   return (
-    <form>
-      <label htmlFor="task">
-        У Вас новая задача?
+    <form className="section-todos__form-new-todo">
+      <label className="form-new-todo__label" htmlFor="task">
+        <span className="form-new-todo__label-head">У Вас новая задача?</span>
         <Input
+          className="form-new-todo__input"
           name="task"
           placeholder="Напиши её тут"
           type={ETypeInput.text}
@@ -49,8 +52,11 @@ const TodoNewForm: FC = (): ReactElement => {
       </label>
 
       <Button
+        className="form-new-todo__button-submit"
         text="Добавить"
         type={ETypeButton.submit}
+        typeStyle={ETypeButtonStyle.primary}
+        typeSize={ETypeSizeButtom.large}
         onClick={(e: MouseEvent<HTMLButtonElement>): void => {
           e.preventDefault();
           handleSubmit();
