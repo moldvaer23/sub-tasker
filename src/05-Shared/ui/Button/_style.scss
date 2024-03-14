@@ -1,4 +1,5 @@
 .button {
+  transition: all 0.3s;
   cursor: pointer;
 
   &__image {
@@ -41,6 +42,10 @@
     padding: 8px 10px;
     font-size: 16px;
   }
+}
+
+.button:hover {
+  filter: brightness(80%);
 }
 
 .button:disabled {

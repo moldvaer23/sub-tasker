@@ -51,7 +51,7 @@ const TodoNewForm: FC = (): ReactElement => {
           required
           onChange={(e: ChangeEvent<HTMLInputElement>): void => setTask(e.target.value)}
         />
-        {error && <ErrorAlert errorMessage={errorMessage} />}
+        {errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
       </label>
 
       <Button

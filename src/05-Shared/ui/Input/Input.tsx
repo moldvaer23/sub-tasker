@@ -2,6 +2,8 @@ import type { ChangeEvent, FC, ReactElement } from "react";
 
 import { EDefaultClassNames } from "../classNames";
 
+import "./_style.scss";
+
 // Типы Input as для поля type
 export enum ETypeInput {
   text = "text",
