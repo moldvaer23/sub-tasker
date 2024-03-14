@@ -11,16 +11,18 @@ import type { TTodo } from "../../models/type";
 import { addTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
+import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 
 const TodoNewForm: FC = (): ReactElement => {
   const [task, setTask] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const todos: TTodo[] = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
 
   useEffect((): void => {
-    validator({ data: task, setError: setError });
+    validator({ data: task, setError: setError, setErrorMessage: setErrorMessage });
   }, [task]);
 
   const handleSubmit = (): void => {
@@ -49,6 +51,7 @@ const TodoNewForm: FC = (): ReactElement => {
           required
           onChange={(e: ChangeEvent<HTMLInputElement>): void => setTask(e.target.value)}
         />
+        {error && <ErrorAlert errorMessage={errorMessage} />}
       </label>
 
       <Button

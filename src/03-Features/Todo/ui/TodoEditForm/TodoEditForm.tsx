@@ -11,6 +11,7 @@ import type { TTodo } from "../../models/type";
 import { updateTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
+import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 
 interface IProps {
   todoModel: TodoModel;
@@ -25,6 +26,7 @@ const TodoEditForm: FC<IProps> = ({
 }): ReactElement => {
   const [changedTask, setChangedTask] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const dispath = useAppDispatch();
 
@@ -34,7 +36,7 @@ const TodoEditForm: FC<IProps> = ({
 
   // Валидируем поле chgangeTask
   useEffect((): void => {
-    validator({ data: changedTask, setError: setError });
+    validator({ data: changedTask, setError: setError, setErrorMessage: setErrorMessage });
   }, [changedTask]);
 
   const handleSumbit = (): void => {
@@ -46,6 +48,7 @@ const TodoEditForm: FC<IProps> = ({
 
   return (
     <form className="todo__form-edit-todo">
+      {error && <ErrorAlert errorMessage={errorMessage} />}
       <Input
         className="form-edit-todo__input"
         name="changeTask"
