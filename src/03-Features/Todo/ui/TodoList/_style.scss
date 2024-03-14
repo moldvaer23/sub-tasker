@@ -1,6 +1,21 @@
 @import "/src/00-App/styles/mixin";
+@import "/src/00-App/styles/variables";
 
 .section-todos__list-todos {
   @include fl-cl;
   gap: 30px;
+}
+
+.list-todos__todo-item {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  @media (max-width: $media-width-mobile) {
+    @include fl-cl;
+    position: unset;
+    gap: 20px;
+    align-items: flex-end;
+  }
 }

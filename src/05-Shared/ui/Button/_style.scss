@@ -43,6 +43,17 @@
     padding: 8px 10px;
     font-size: $min-font-size;
   }
+
+  &__small {
+    padding: 5px;
+  }
+
+  // medias
+  @media (max-width: $media-width-mobile) {
+    &__image {
+      width: 40px;
+    }
+  }
 }
 
 .button:hover {

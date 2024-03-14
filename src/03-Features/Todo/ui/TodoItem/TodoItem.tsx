@@ -8,7 +8,7 @@ import editIcon from "05-Shared/assets/svg/edit-icon.svg";
 import closeIcon from "05-Shared/assets/svg/close-icon.svg";
 import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
 
-import { Button, ETypeButtonStyle } from "05-Shared/ui/Button";
+import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
 import type { TTodo } from "../../models/type";
@@ -52,26 +52,26 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
   }, [isActiveEdit]);
 
   return (
-    <article className="todo-item__todo">
-      <div className="todo__buttons-wrapper">
+    <>
+      <div className="todo-item__buttons-wrapper">
         <Button
-          className="todo__button-delete"
           image={{
             imageSrc: deleteIcon,
             alt: "Кнопка удалиния",
           }}
           typeStyle={ETypeButtonStyle.icon}
+          typeSize={ETypeSizeButtom.small}
           onClick={() => dispath(deleteTodo(todo.id))}
         />
 
         {!isActiveEdit ? (
           <Button
-            className="todo__button-edit"
             image={{
               imageSrc: editIcon,
               alt: "Кнопка редактирования",
             }}
             typeStyle={ETypeButtonStyle.icon}
+            typeSize={ETypeSizeButtom.small}
             onClick={(): void => setIsActiveEdit(true)}
           />
         ) : (
@@ -85,7 +85,7 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
           />
         )}
       </div>
-      <div className="todo__task-wrapper">
+      <article className="todo-item__todo">
         {isActiveEdit ? (
           <TodoEditForm
             todoModel={todoModel}
@@ -95,8 +95,8 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
         ) : (
           <p className="todo__task">{todo.task}</p>
         )}
-      </div>
-    </article>
+      </article>
+    </>
   );
 };
 
