@@ -1,5 +1,7 @@
-import { ChangeEvent, FC, ReactElement } from "react";
+import type { ChangeEvent, FC, ReactElement } from "react";
+
 import { EDefaultClassNames } from "../classNames";
+
 import "./_style.scss";
 
 interface IProps {

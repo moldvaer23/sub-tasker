@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import type { ChangeEvent, FC, MouseEvent, ReactElement } from "react";
 
 import validator from "05-Shared/utils/validator";
+import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
-import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 import { useAppDispatch, useAppSelector } from "00-App/store";
+import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
 import type { TTodo } from "../../models/type";
 import { addTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
-import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 
 const TodoNewForm: FC = (): ReactElement => {
   const [task, setTask] = useState<string>("");

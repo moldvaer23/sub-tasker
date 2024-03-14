@@ -1,8 +1,14 @@
 import type { FC, ReactElement } from "react";
 import { useEffect, useMemo, useState } from "react";
 
-import { Button, ETypeButtonStyle } from "05-Shared/ui/Button";
 import { useAppDispatch } from "00-App/store";
+
+// svg
+import editIcon from "05-Shared/assets/svg/edit-icon.svg";
+import closeIcon from "05-Shared/assets/svg/close-icon.svg";
+import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
+
+import { Button, ETypeButtonStyle } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
 import type { TTodo } from "../../models/type";
@@ -10,10 +16,6 @@ import { deleteTodo } from "../../models/TodoSlice";
 import TodoEditForm from "../TodoEditForm/TodoEditForm";
 
 import "./_style.scss";
-
-import editIcon from "05-Shared/assets/svg/edit-icon.svg";
-import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
-import closeIcon from "05-Shared/assets/svg/close-icon.svg";
 
 interface IProps {
   id: number;

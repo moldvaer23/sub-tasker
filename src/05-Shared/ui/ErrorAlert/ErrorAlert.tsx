@@ -1,4 +1,5 @@
 import type { FC, ReactElement } from "react";
+
 import { EDefaultClassNames } from "../classNames";
 
 import "./_style.scss";

@@ -3,7 +3,8 @@ import type { ChangeEvent, Dispatch, FC, MouseEvent, ReactElement, SetStateActio
 
 import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
-import { ETypeInput, Input } from "05-Shared/ui/Input";
+import { TextArea } from "05-Shared/ui/TeaxtArea";
+import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
@@ -11,8 +12,6 @@ import type { TTodo } from "../../models/type";
 import { updateTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
-import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
-import { TextArea } from "05-Shared/ui/TeaxtArea";
 
 interface IProps {
   todoModel: TodoModel;
