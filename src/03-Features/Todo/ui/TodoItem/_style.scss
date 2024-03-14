@@ -12,17 +12,20 @@
   background-color: #458e5d;
   border-radius: 5px;
   box-shadow: -1px 5px 11px 9px rgb(48 84 32 / 58%);
+}
 
-  .todo {
-    &__buttons-wrapper {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-    }
+.todo {
+  &__buttons-wrapper {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
 
-    &__task {
-      max-width: 400px;
-      overflow-wrap: break-word;
-    }
+  &__task-wrapper {
+    width: 100%;
+  }
+
+  &__task {
+    overflow-wrap: break-word;
   }
 }
