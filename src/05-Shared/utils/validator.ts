@@ -7,8 +7,10 @@ type TProps = {
 };
 
 const validator = ({ data, setError, setErrorMessage }: TProps): void => {
+  const isEmptyOrWhitespace = /^\s*$/.test(data); // Проверяем наличие только пробельных символов
+
   // Проверка на пустое поле
-  if (data.length === 0) {
+  if (data.length === 0 || isEmptyOrWhitespace) {
     setError(true);
   }
   // Проверка на длину задачи не > 400 символов
