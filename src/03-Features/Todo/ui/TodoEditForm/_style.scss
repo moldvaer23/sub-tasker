@@ -1,15 +1,11 @@
-.todo {
-  &__form-edit-todo {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    justify-content: space-between;
-  }
+.todo__form-edit-todo {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.form-edit-todo {
-  &__textarea {
-    padding: 5px 10px;
-    border-radius: 8px;
-  }
+.form-edit-todo__textarea {
+  padding: 5px 10px;
+  border-radius: 8px;
 }

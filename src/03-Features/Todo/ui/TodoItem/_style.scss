@@ -4,6 +4,8 @@
   align-items: center;
 
   width: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
+  min-height: 90px;
+  max-height: 300px;
   padding: 10px 20px;
 
   font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
@@ -12,9 +14,6 @@
   background-color: #458e5d;
   border-radius: 5px;
   box-shadow: -1px 5px 11px 9px rgb(48 84 32 / 58%);
-
-  min-height: 90px;
-  max-height: 300px;
 }
 
 .todo {
