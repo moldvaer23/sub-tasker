@@ -1,17 +1,17 @@
-@import "../../../../00-App/styles/_mixin";
-
 .todo-item__todo {
   display: flex;
   gap: 10px;
+  align-items: center;
 
   width: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
   padding: 10px 20px;
 
-  font-size: 20px;
+  font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
+  color: #eee;
 
-  background-color: rgb(246 249 253);
-  border: 1px solid rgb(126 126 126);
-  border-radius: 8px;
+  background-color: #458e5d;
+  border-radius: 5px;
+  box-shadow: -1px 5px 11px 9px rgb(48 84 32 / 58%);
 
   .todo {
     &__buttons-wrapper {

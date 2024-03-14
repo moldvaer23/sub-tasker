@@ -11,22 +11,32 @@
     @include fl-cl;
     gap: 10px;
     align-items: center;
+    color: white;
   }
 
   &__label-head {
-    // TODO: clamp
-    font-size: 25px;
+    font-size: clamp(1.25rem, 1.136rem + 0.57vw, 1.563rem);
   }
 
   &__input {
-    // TODO: clamp
     width: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
     padding: 15px 20px;
 
     font-size: 20px;
+    color: white;
 
-    border: 1px solid black;
+    background-color: #458e5d;
+    border: 0;
     border-radius: 5px;
+    box-shadow: -1px 5px 11px 9px rgb(48 84 32 / 58%);
+  }
+
+  &__input::placeholder {
+    color: rgb(255 255 255 / 50%);
+  }
+
+  &__input:focus-visible {
+    outline: 1px solid white;
   }
 
   &__button-submit {

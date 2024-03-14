@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from "react";
 import { useEffect, useMemo, useState } from "react";
 
-import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
+import { Button, ETypeButtonStyle } from "05-Shared/ui/Button";
 import { useAppDispatch } from "00-App/store";
 
 import TodoModel from "../../models/TodoModel";
@@ -58,7 +58,6 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
             imageSrc: deleteIcon,
             alt: "Кнопка удалиния",
           }}
-          typeSize={ETypeSizeButtom.medium}
           typeStyle={ETypeButtonStyle.icon}
           onClick={() => dispath(deleteTodo(todo.id))}
         />
@@ -70,7 +69,6 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
               imageSrc: editIcon,
               alt: "Кнопка редактирования",
             }}
-            typeSize={ETypeSizeButtom.medium}
             typeStyle={ETypeButtonStyle.icon}
             onClick={(): void => setIsActiveEdit(true)}
           />
@@ -80,25 +78,22 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
               imageSrc: closeIcon,
               alt: "Кнопка закрыть",
             }}
-            typeSize={ETypeSizeButtom.medium}
             typeStyle={ETypeButtonStyle.icon}
             onClick={(): void => setIsActiveEdit(false)}
           />
         )}
       </div>
-      {isActiveEdit ? (
-        <div className="todo__task-wrapper">
+      <div className="todo__task-wrapper">
+        {isActiveEdit ? (
           <TodoEditForm
             todoModel={todoModel}
             setIsActiveEdit={setIsActiveEdit}
             placeholderTask={todo.task}
           />
-        </div>
-      ) : (
-        <div className="todo__task-wrapper">
+        ) : (
           <p className="todo__task">{todo.task}</p>
-        </div>
-      )}
+        )}
+      </div>
     </article>
   );
 };

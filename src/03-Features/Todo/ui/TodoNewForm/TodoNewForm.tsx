@@ -39,7 +39,7 @@ const TodoNewForm: FC = (): ReactElement => {
   return (
     <form className="section-todos__form-new-todo">
       <label className="form-new-todo__label" htmlFor="task">
-        <span className="form-new-todo__label-head">У Вас новая задача?</span>
+        <span className="form-new-todo__label-head">У тебя новая задача?</span>
         <Input
           className="form-new-todo__input"
           name="task"
@@ -55,7 +55,7 @@ const TodoNewForm: FC = (): ReactElement => {
         className="form-new-todo__button-submit"
         text="Добавить"
         type={ETypeButton.submit}
-        typeStyle={ETypeButtonStyle.primary}
+        typeStyle={ETypeButtonStyle.accent}
         typeSize={ETypeSizeButtom.large}
         onClick={(e: MouseEvent<HTMLButtonElement>): void => {
           e.preventDefault();

@@ -12,13 +12,14 @@ export enum ETypeButton {
 
 export enum ETypeButtonStyle {
   primary = "button__primary",
+  accent = "button__accent",
   icon = "button__icon",
 }
 
 export enum ETypeSizeButtom {
-  small = "small",
-  medium = "medium",
-  large = "large",
+  small = "button__small",
+  medium = "button__medium",
+  large = "button__large",
 }
 
 type TImageSrcProps = {
@@ -31,7 +32,7 @@ interface IProps {
   image?: TImageSrcProps;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type?: ETypeButton;
-  typeSize: ETypeSizeButtom;
+  typeSize?: ETypeSizeButtom;
   typeStyle: ETypeButtonStyle;
   className?: string;
   disabled?: boolean;

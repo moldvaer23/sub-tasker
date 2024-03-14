@@ -5,6 +5,7 @@
     width: 25px;
   }
 
+  // style type
   &__icon {
     display: flex;
     align-items: center;
@@ -15,13 +16,34 @@
     background: transparent;
     border: 0;
   }
+
+  &__primary {
+    color: white;
+    background-color: #ff4070;
+    border: 0;
+    border-radius: 5px;
+  }
+
+  &__accent {
+    color: white;
+    background-color: #ff5d40;
+    border: 0;
+    border-radius: 5px;
+  }
+
+  // type sizes
+  &__large {
+    padding: 10px 20px;
+    font-size: 20px;
+  }
+
+  &__medium {
+    padding: 8px 10px;
+    font-size: 16px;
+  }
 }
 
 .button:disabled {
   pointer-events: none;
-}
-
-.large {
-  padding: 10px 20px;
-  font-size: 20px;
+  filter: brightness(65%);
 }
