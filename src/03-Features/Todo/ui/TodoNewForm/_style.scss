@@ -9,7 +9,7 @@
 .form-new-todo {
   &__label {
     @include fl-cl;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     color: white;
   }
