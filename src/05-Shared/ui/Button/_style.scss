@@ -1,13 +1,20 @@
+@import "/src/00-App/styles/variables";
+
 .button {
   cursor: pointer;
+
+  color: $accent-text-color;
+
   border: 0;
+  border-radius: 5px;
+
   transition: all 0.3s;
 
   &__image {
     width: 25px;
   }
 
-  // style type
+  // types styles
   &__icon {
     display: flex;
     align-items: center;
@@ -19,26 +26,22 @@
   }
 
   &__primary {
-    color: white;
-    background-color: #ff4070;
-    border-radius: 5px;
+    background-color: $secondary-color;
   }
 
   &__accent {
-    color: white;
-    background-color: #ff5d40;
-    border-radius: 5px;
+    background-color: $accent-color;
   }
 
-  // type sizes
+  // types sizes
   &__large {
     padding: 10px 20px;
-    font-size: 20px;
+    font-size: $secondary-font-size;
   }
 
   &__medium {
     padding: 8px 10px;
-    font-size: 16px;
+    font-size: $min-font-size;
   }
 }
 

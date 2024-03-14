@@ -1,0 +1,31 @@
+// colors
+$primary-color: #458e5d;
+$accent-color: #ff5d40;
+$secondary-color: #ff4070;
+$error-color: rgb(255 113 113);
+$primary-outline-color: #fff;
+
+// text-color
+$primary-text-color: #eee;
+$accent-text-color: #fff;
+
+// font-family
+$primary-font-family: roboto, arial, sans-serif;
+
+// font-size
+$primary-font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
+$accent-font-size: clamp(1.25rem, 1.136rem + 0.57vw, 1.563rem);
+$secondary-font-size: 20px;
+$min-font-size: 16px;
+
+// width-element
+$primary-width-element: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
+
+// box-shadow
+$primary-box-shadow: -1px 5px 11px 9px rgb(48 84 32 / 58%);
+
+// placeholder-colors
+$input-placeholder-color: rgb(255 255 255 / 50%);
+
+// page-bcg-color
+$page-background-color: #3b703d;

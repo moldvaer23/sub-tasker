@@ -1,3 +1,5 @@
+@import "/src/00-App/styles/variables";
+
 .error-alert {
-  color: rgb(255 113 113);
+  color: $error-color;
 }

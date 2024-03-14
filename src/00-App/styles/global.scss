@@ -1,10 +1,9 @@
-// Импортируем normalize
-@import "../../../node_modules/normalize.css/normalize.css";
+@import "/node_modules/normalize.css/normalize.css";
+@import "./variables";
+@import "./fonts";
 
 * {
   box-sizing: border-box;
-
-  // outline: 1px solid red;
 }
 
 ul {
@@ -17,7 +16,6 @@ li {
 }
 
 body {
-  font-family: Roboto, Arial, sans-serif;
-  font-size: 16px;
-  background-color: #3b703d;
+  font-family: $primary-font-family;
+  background-color: $page-background-color;
 }

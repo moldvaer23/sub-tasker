@@ -1,4 +1,5 @@
-@import "../../../../00-App/styles/mixin";
+@import "/src/00-App/styles/mixin";
+@import "/src/00-App/styles/variables";
 
 .section-todos__form-new-todo {
   @include fl-cl;
@@ -11,22 +12,22 @@
     @include fl-cl;
     gap: 20px;
     align-items: center;
-    color: white;
+    color: $primary-text-color;
   }
 
   &__label-head {
-    font-size: clamp(1.25rem, 1.136rem + 0.57vw, 1.563rem);
+    font-size: $accent-font-size;
   }
 
   &__input {
-    width: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
+    width: $primary-width-element;
     padding: 15px 20px;
 
     font-size: 20px;
 
-    background-color: #458e5d;
+    background-color: $primary-color;
     border-radius: 5px;
-    box-shadow: -1px 5px 11px 9px rgb(48 84 32 / 58%);
+    box-shadow: $primary-box-shadow;
   }
 
   &__button-submit {

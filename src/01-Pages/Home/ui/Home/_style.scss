@@ -1,6 +1,7 @@
+@import "/src/00-App/styles/mixin";
+
 .main__section-todos {
-  display: flex;
-  flex-direction: column;
+  @include fl-cl;
   gap: 20px;
   align-items: center;
   justify-content: center;
