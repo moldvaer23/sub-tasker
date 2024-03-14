@@ -12,6 +12,7 @@ import { updateTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
+import { TextArea } from "05-Shared/ui/TeaxtArea";
 
 interface IProps {
   todoModel: TodoModel;
@@ -48,13 +49,13 @@ const TodoEditForm: FC<IProps> = ({
 
   return (
     <form className="todo__form-edit-todo">
-      {error && <ErrorAlert errorMessage={errorMessage} />}
-      <Input
-        className="form-edit-todo__input"
+      {errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
+
+      <TextArea
+        className="form-edit-todo__textarea"
         name="changeTask"
         value={changedTask}
-        type={ETypeInput.text}
-        onChange={(e: ChangeEvent<HTMLInputElement>): void => setChangedTask(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>): void => setChangedTask(e.target.value)}
       />
 
       <Button

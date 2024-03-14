@@ -8,10 +8,8 @@
 }
 
 .form-edit-todo {
-  &__input {
+  &__textarea {
     padding: 5px 10px;
-    background: transparent;
-    border: 1px solid black;
     border-radius: 8px;
   }
 }
