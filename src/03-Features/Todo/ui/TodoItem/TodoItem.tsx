@@ -1,20 +1,13 @@
 import type { FC, ReactElement } from "react";
 import { useEffect, useMemo, useState } from "react";
 
-import { useAppDispatch } from "00-App/store";
-
-// svg
 import addSubTaskIcon from "05-Shared/assets/svg/add-icon.svg";
-import editIcon from "05-Shared/assets/svg/edit-icon.svg";
-import closeIcon from "05-Shared/assets/svg/close-icon.svg";
-import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
-
 import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
 import type { TTodo } from "../../models/type";
-import { deleteTodo } from "../../models/TodoSlice";
 import TodoEditForm from "../TodoEditForm/TodoEditForm";
+import TodoItemButtons from "../TodoItemButtons/TodoItemButtons";
 
 import "./_style.scss";
 
@@ -26,7 +19,6 @@ interface IProps {
 const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false);
-  const dispath = useAppDispatch();
 
   // Создаем модель Todo
   const todoModel: TodoModel = useMemo(() => new TodoModel({ id: id, task: task }), [id, task]);
@@ -55,40 +47,12 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
 
   return (
     <>
-      <div className="todo-item__buttons-wrapper">
-        <Button
-          image={{
-            imageSrc: deleteIcon,
-            alt: "Кнопка удалиния",
-          }}
-          typeStyle={ETypeButtonStyle.icon}
-          typeSize={ETypeSizeButtom.small}
-          onClick={() => dispath(deleteTodo(todo.id))}
-        />
-
-        {/* Если нажатия на кнопку редактирования не было то показываем кнопку редактирования */}
-        {/* Иначе показываем кнопку закрыть форму редактирования */}
-        {!isActiveEdit ? (
-          <Button
-            image={{
-              imageSrc: editIcon,
-              alt: "Кнопка редактирования",
-            }}
-            typeStyle={ETypeButtonStyle.icon}
-            typeSize={ETypeSizeButtom.small}
-            onClick={(): void => setIsActiveEdit(true)}
-          />
-        ) : (
-          <Button
-            image={{
-              imageSrc: closeIcon,
-              alt: "Кнопка закрыть",
-            }}
-            typeStyle={ETypeButtonStyle.icon}
-            onClick={(): void => setIsActiveEdit(false)}
-          />
-        )}
-      </div>
+      {/* Кнопки для взаимодействия с карточкой задачи */}
+      <TodoItemButtons
+        isActiveEdit={isActiveEdit}
+        setIsActiveEdit={setIsActiveEdit}
+        todoId={todo.id}
+      />
       <article
         className="todo-item__todo"
         onMouseEnter={(): void => {
@@ -107,8 +71,8 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
         ) : (
           <p className="todo__task">{todo.task}</p>
         )}
-        {/* Если навели на карточку показываем кнопку добавления подзадачи */}
-        {isMouseEnter && (
+        {/* Если навели на карточку и она не в состоянии редактирования показываем кнопку добавления подзадачи */}
+        {isMouseEnter && !isActiveEdit && (
           <Button
             className="todo__new-subtask-button"
             image={{

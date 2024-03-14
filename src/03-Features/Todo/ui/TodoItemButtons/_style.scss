@@ -1,0 +1,17 @@
+@import "/src/00-App/styles/variables";
+@import "/src/00-App/styles/mixin";
+
+.todo-item__buttons-wrapper {
+  @include fl-cl;
+  position: absolute;
+  left: -50px;
+  gap: 10px;
+}
+
+@media (max-width: $media-width-mobile) {
+  .todo-item__buttons-wrapper {
+    position: unset;
+    left: unset;
+    flex-direction: row;
+  }
+}

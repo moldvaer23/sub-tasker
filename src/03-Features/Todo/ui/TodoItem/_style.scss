@@ -20,21 +20,6 @@
     border-radius: 5px;
     box-shadow: $primary-box-shadow;
   }
-
-  &__buttons-wrapper {
-    @include fl-cl;
-    position: absolute;
-    left: -50px;
-    gap: 10px;
-  }
-
-  @media (max-width: $media-width-mobile) {
-    &__buttons-wrapper {
-      position: unset;
-      left: unset;
-      flex-direction: row;
-    }
-  }
 }
 
 .todo {
