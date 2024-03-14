@@ -7,7 +7,7 @@ import editIcon from "05-Shared/assets/svg/edit-icon.svg";
 import closeIcon from "05-Shared/assets/svg/close-icon.svg";
 import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
 
-import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
+import { Button, ETypeButtonStyle, ETypeSizeButtom, TImageSrcProps } from "05-Shared/ui/Button";
 
 import { deleteTodo } from "../../models/TodoSlice";
 
@@ -22,13 +22,26 @@ interface IProps {
 const TodoItemButtons: FC<IProps> = ({ setIsActiveEdit, isActiveEdit, todoId }): ReactElement => {
   const dispath = useAppDispatch();
 
+  // Конфиги для иконок кнопок
+  const configImageDelete: TImageSrcProps = {
+    imageSrc: deleteIcon,
+    alt: "Кнопка удалиния",
+  };
+
+  const configImageEdit: TImageSrcProps = {
+    imageSrc: editIcon,
+    alt: "Кнопка редактирования",
+  };
+
+  const configImageClose: TImageSrcProps = {
+    imageSrc: closeIcon,
+    alt: "Кнопка закрыть",
+  };
+
   return (
     <div className="todo-item__buttons-wrapper">
       <Button
-        image={{
-          imageSrc: deleteIcon,
-          alt: "Кнопка удалиния",
-        }}
+        image={configImageDelete}
         typeStyle={ETypeButtonStyle.icon}
         typeSize={ETypeSizeButtom.small}
         onClick={() => dispath(deleteTodo(todoId))}
@@ -38,21 +51,16 @@ const TodoItemButtons: FC<IProps> = ({ setIsActiveEdit, isActiveEdit, todoId }):
       {/* Иначе показываем кнопку закрыть форму редактирования */}
       {!isActiveEdit ? (
         <Button
-          image={{
-            imageSrc: editIcon,
-            alt: "Кнопка редактирования",
-          }}
+          image={configImageEdit}
           typeStyle={ETypeButtonStyle.icon}
           typeSize={ETypeSizeButtom.small}
           onClick={(): void => setIsActiveEdit(true)}
         />
       ) : (
         <Button
-          image={{
-            imageSrc: closeIcon,
-            alt: "Кнопка закрыть",
-          }}
+          image={configImageClose}
           typeStyle={ETypeButtonStyle.icon}
+          typeSize={ETypeSizeButtom.small}
           onClick={(): void => setIsActiveEdit(false)}
         />
       )}

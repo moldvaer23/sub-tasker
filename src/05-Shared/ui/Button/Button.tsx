@@ -22,7 +22,7 @@ export enum ETypeSizeButtom {
   large = "button__large",
 }
 
-type TImageSrcProps = {
+export type TImageSrcProps = {
   imageSrc: string;
   alt: string;
 };
