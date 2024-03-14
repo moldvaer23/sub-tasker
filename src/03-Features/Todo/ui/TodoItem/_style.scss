@@ -3,6 +3,7 @@
 
 .todo-item {
   &__todo {
+    position: relative;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -40,5 +41,11 @@
   &__task {
     width: 100%;
     overflow-wrap: break-word;
+  }
+
+  &__new-subtask-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 }

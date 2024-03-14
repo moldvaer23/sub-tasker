@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "00-App/store";
 
 // svg
+import addSubTaskIcon from "05-Shared/assets/svg/add-icon.svg";
 import editIcon from "05-Shared/assets/svg/edit-icon.svg";
 import closeIcon from "05-Shared/assets/svg/close-icon.svg";
 import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
@@ -24,6 +25,7 @@ interface IProps {
 
 const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
+  const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false);
   const dispath = useAppDispatch();
 
   // Создаем модель Todo
@@ -64,6 +66,8 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
           onClick={() => dispath(deleteTodo(todo.id))}
         />
 
+        {/* Если нажатия на кнопку редактирования не было то показываем кнопку редактирования */}
+        {/* Иначе показываем кнопку закрыть форму редактирования */}
         {!isActiveEdit ? (
           <Button
             image={{
@@ -85,7 +89,15 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
           />
         )}
       </div>
-      <article className="todo-item__todo">
+      <article
+        className="todo-item__todo"
+        onMouseEnter={(): void => {
+          setIsMouseEnter(true);
+        }}
+        onMouseLeave={(): void => {
+          setIsMouseEnter(false);
+        }}>
+        {/* Если нажали на кнопку редактирования задачи, показываем форму редактирования */}
         {isActiveEdit ? (
           <TodoEditForm
             todoModel={todoModel}
@@ -94,6 +106,18 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
           />
         ) : (
           <p className="todo__task">{todo.task}</p>
+        )}
+        {/* Если навели на карточку показываем кнопку добавления подзадачи */}
+        {isMouseEnter && (
+          <Button
+            className="todo__new-subtask-button"
+            image={{
+              imageSrc: addSubTaskIcon,
+              alt: "Кнопка добавить подзадачу",
+            }}
+            typeStyle={ETypeButtonStyle.icon}
+            typeSize={ETypeSizeButtom.small}
+          />
         )}
       </article>
     </>
