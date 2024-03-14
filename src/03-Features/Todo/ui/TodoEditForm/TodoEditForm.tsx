@@ -24,15 +24,11 @@ const TodoEditForm: FC<IProps> = ({
   setIsActiveEdit,
   placeholderTask,
 }): ReactElement => {
-  const [changedTask, setChangedTask] = useState<string>("");
+  const [changedTask, setChangedTask] = useState<string>(placeholderTask);
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const dispath = useAppDispatch();
-
-  useEffect(() => {
-    setChangedTask(placeholderTask);
-  }, [placeholderTask]);
 
   // Валидируем поле chgangeTask
   useEffect((): void => {

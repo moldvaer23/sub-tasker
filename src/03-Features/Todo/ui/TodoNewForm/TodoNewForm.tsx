@@ -21,6 +21,7 @@ const TodoNewForm: FC = (): ReactElement => {
   const todos: TTodo[] = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
 
+  // Валидируем поле task
   useEffect((): void => {
     validator({ data: task, setError: setError, setErrorMessage: setErrorMessage });
   }, [task]);
