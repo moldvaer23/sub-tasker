@@ -4,6 +4,7 @@
 .todo-item {
   &__todo {
     position: relative;
+
     display: flex;
     gap: 10px;
     align-items: center;
@@ -36,8 +37,8 @@
 }
 
 .subtodo {
-  font-size: $min-font-size;
   width: $accent-width-element;
   min-height: 50px;
   max-height: 320px;
+  font-size: $min-font-size;
 }
