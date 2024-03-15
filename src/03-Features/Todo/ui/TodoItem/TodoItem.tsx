@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from "react";
 import { useEffect, useMemo, useState } from "react";
 
-import addSubTaskIcon from "05-Shared/assets/svg/add-icon.svg";
+import addSubTodoIcon from "05-Shared/assets/svg/add-icon.svg";
 import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
@@ -74,9 +74,9 @@ const TodoItem: FC<IProps> = ({ id, task }): ReactElement => {
         {/* Если навели на карточку и она не в состоянии редактирования показываем кнопку добавления подзадачи */}
         {isMouseEnter && !isActiveEdit && (
           <Button
-            className="todo__new-subtask-button"
+            className="todo__new-subtodo-button"
             image={{
-              imageSrc: addSubTaskIcon,
+              imageSrc: addSubTodoIcon,
               alt: "Кнопка добавить подзадачу",
             }}
             typeStyle={ETypeButtonStyle.icon}
