@@ -1,5 +1,6 @@
+// Задачи
 export type TTodo = {
-  id: number;
+  readonly id: number;
   task: string;
 };
 
@@ -8,7 +9,16 @@ export interface ITodoModel {
   changeTask(task: string): ITodoModel;
 }
 
-export interface ITodoModelProps {
-  id: number;
-  task: string;
+export type TTodoModelProps = TTodo;
+
+// Подзадачи
+export type TSubTodo = TTodo & {
+  readonly pinnedId: number;
+};
+
+export interface ISubTodoModel {
+  getSubTodo: TTodo;
+  changeSubTask(task: string): ISubTodoModel;
 }
+
+export type TSubTodoModelProps = TSubTodo;

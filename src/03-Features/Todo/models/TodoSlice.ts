@@ -3,11 +3,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import type { TTodo } from "./type";
 
-interface TodosState {
+interface ITodosState {
   todos: TTodo[];
 }
 
-const initialState: TodosState = {
+const initialState: ITodosState = {
   todos: [],
 };
 
