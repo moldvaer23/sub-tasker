@@ -12,14 +12,21 @@ import { Button, ETypeButtonStyle, ETypeSizeButtom, TImageSrcProps } from "05-Sh
 import { deleteTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
+import { deleteSubTodo } from "03-Features/Todo/models/SubTodoSlice";
 
 interface IProps {
   todoId: number;
   isActiveEdit: boolean;
   setIsActiveEdit: Dispatch<React.SetStateAction<boolean>>;
+  isSubTodo?: boolean;
 }
 
-const TodoItemButtons: FC<IProps> = ({ setIsActiveEdit, isActiveEdit, todoId }): ReactElement => {
+const TodoItemButtons: FC<IProps> = ({
+  setIsActiveEdit,
+  isActiveEdit,
+  todoId,
+  isSubTodo = false,
+}): ReactElement => {
   const dispath = useAppDispatch();
 
   // Конфиги для иконок кнопок
@@ -38,13 +45,23 @@ const TodoItemButtons: FC<IProps> = ({ setIsActiveEdit, isActiveEdit, todoId }):
     alt: "Кнопка закрыть",
   };
 
+  const handleDelete = (): void => {
+    if (isSubTodo) {
+      dispath(deleteSubTodo(todoId));
+    } else {
+      dispath(deleteTodo(todoId));
+    }
+  };
+
   return (
     <div className="todo-item__buttons-wrapper">
       <Button
         image={configImageDelete}
         typeStyle={ETypeButtonStyle.icon}
         typeSize={ETypeSizeButtom.small}
-        onClick={() => dispath(deleteTodo(todoId))}
+        onClick={() => {
+          handleDelete();
+        }}
       />
 
       {/* Если нажатия на кнопку редактирования не было то показываем кнопку редактирования */}

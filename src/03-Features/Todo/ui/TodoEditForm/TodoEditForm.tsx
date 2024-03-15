@@ -5,16 +5,18 @@ import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
 import { TextArea } from "05-Shared/ui/TeaxtArea";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
+import SubTodoModel from "03-Features/Todo/models/SubTodoModel";
+import { updateSubTodo } from "03-Features/Todo/models/SubTodoSlice";
 import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import TodoModel from "../../models/TodoModel";
-import type { TTodo } from "../../models/type";
 import { updateTodo } from "../../models/TodoSlice";
+import type { TSubTodo, TTodo } from "../../models/type";
 
 import "./_style.scss";
 
 interface IProps {
-  todoModel: TodoModel;
+  todoModel: TodoModel | SubTodoModel;
   setIsActiveEdit: Dispatch<SetStateAction<boolean>>;
   placeholderTask: string;
 }
@@ -36,10 +38,21 @@ const TodoEditForm: FC<IProps> = ({
   }, [changedTask]);
 
   const handleSumbit = (): void => {
-    const updatedTodo: TTodo = todoModel.changeTask(changedTask).getTodo;
+    // Если нажали в обычной задаче
+    if (todoModel instanceof TodoModel) {
+      const updatedTodo: TTodo = todoModel.changeTask(changedTask).getTodo;
 
-    dispath(updateTodo(updatedTodo));
-    setIsActiveEdit(false);
+      dispath(updateTodo(updatedTodo));
+      setIsActiveEdit(false);
+    }
+
+    // Если нажали в подзадаче
+    if (todoModel instanceof SubTodoModel) {
+      const updatedTodo: TSubTodo = todoModel.changeSubTask(changedTask).getSubTodo;
+
+      dispath(updateSubTodo(updatedTodo));
+      setIsActiveEdit(false);
+    }
   };
 
   return (

@@ -9,6 +9,7 @@
 .list-todos__todo-item {
   position: relative;
   display: flex;
+  flex-direction: column;
   gap: 20px;
   align-items: center;
 
@@ -18,4 +19,18 @@
     gap: 20px;
     align-items: flex-end;
   }
+}
+
+.todo-item__list-subtodos {
+  width: 100%;
+  @include fl-cl;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+.list-subtodos__subtodo-item {
+  position: relative;
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }

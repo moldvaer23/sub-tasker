@@ -17,7 +17,7 @@ export type TSubTodo = TTodo & {
 };
 
 export interface ISubTodoModel {
-  getSubTodo: TTodo;
+  getSubTodo: TSubTodo;
   changeSubTask(task: string): ISubTodoModel;
 }
 

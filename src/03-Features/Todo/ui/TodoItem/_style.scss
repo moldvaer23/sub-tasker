@@ -10,7 +10,7 @@
 
     width: $primary-width-element;
     min-height: 90px;
-    max-height: 300px;
+    max-height: 470px;
     padding: 10px 20px;
 
     font-size: $primary-font-size;
@@ -33,4 +33,11 @@
     right: 0;
     bottom: 0;
   }
+}
+
+.subtodo {
+  font-size: $min-font-size;
+  width: $accent-width-element;
+  min-height: 50px;
+  max-height: 320px;
 }
