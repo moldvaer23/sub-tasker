@@ -1,24 +1,24 @@
-// Задачи
-export type TTodo = {
+export type TSubTodo = {
   readonly id: number;
   task: string;
 };
 
-export interface ITodoModel {
-  getTodo: TTodo;
-  changeTask(task: string): ITodoModel;
-}
-
-export type TTodoModelProps = TTodo;
-
-// Подзадачи
-export type TSubTodo = TTodo & {
-  readonly pinnedId: number;
+export type TTodo = {
+  readonly id: number;
+  task: string;
+  subTodos: TSubTodo[];
 };
 
-export interface ISubTodoModel {
-  getSubTodo: TSubTodo;
-  changeSubTask(task: string): ISubTodoModel;
+export interface ITodoModel {
+  readonly id: number;
+  task: string;
 }
 
-export type TSubTodoModelProps = TSubTodo;
+export type TTodoModelProps = {
+  readonly id: number;
+  task: string;
+};
+
+export type TSubTodoModelProps = TTodoModelProps & {
+  idPinnedTodo: number;
+};

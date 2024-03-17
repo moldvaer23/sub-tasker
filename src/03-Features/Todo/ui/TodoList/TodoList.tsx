@@ -2,31 +2,29 @@ import type { FC, ReactElement } from "react";
 
 import { useAppSelector } from "00-App/store";
 
-import TodoItem from "../TodoItem/TodoItem";
-import type { TSubTodo, TTodo } from "../../models/type";
+import type { TTodo } from "../../models/type";
+import SubTodoItem from "../SubTodoItem/SubTodoItem";
+import MainTodoItem from "../MainTodoItem/MainTodoItem";
 
 import "./_style.scss";
 
 const TodoList: FC = (): ReactElement => {
   const todos: TTodo[] = useAppSelector((state) => state.todos.todos);
-  const subTodos: TSubTodo[] = useAppSelector((state) => state.subTodos.subTodos);
 
   return todos.length !== 0 ? (
     <ul className="section-todos__list-todos">
       {todos.map((todo) => {
         return (
           <li className="list-todos__todo-item" key={todo.id}>
-            <TodoItem id={todo.id} task={todo.task} />
-            {subTodos.find((object) => object.pinnedId === todo.id) && (
+            <MainTodoItem id={todo.id} task={todo.task} />
+            {todo.subTodos.length !== 0 && (
               <ul className="todo-item__list-subtodos">
-                {subTodos.map((subTodo) => {
-                  if (subTodo.pinnedId === todo.id) {
-                    return (
-                      <li key={subTodo.id} className="list-subtodos__subtodo-item">
-                        <TodoItem id={subTodo.id} pinnedId={subTodo.pinnedId} task={subTodo.task} />
-                      </li>
-                    );
-                  }
+                {todo.subTodos.map((subTodo) => {
+                  return (
+                    <li className="list-subtodos__subtodo-item" key={subTodo.id}>
+                      <SubTodoItem id={subTodo.id} idPinnedTodo={todo.id} task={subTodo.task} />
+                    </li>
+                  );
                 })}
               </ul>
             )}

@@ -9,23 +9,22 @@ import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
 
 import { Button, ETypeButtonStyle, ETypeSizeButtom, TImageSrcProps } from "05-Shared/ui/Button";
 
-import { deleteTodo } from "../../models/TodoSlice";
+import { deleteSubTodo, deleteTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
-import { deleteSubTodo } from "03-Features/Todo/models/SubTodoSlice";
+import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
+import SubTodoModel from "03-Features/Todo/models/SubTodoModel";
 
 interface IProps {
-  todoId: number;
+  todoModel: MainTodoModel | SubTodoModel;
   isActiveEdit: boolean;
   setIsActiveEdit: Dispatch<React.SetStateAction<boolean>>;
-  isSubTodo?: boolean;
 }
 
 const TodoItemButtons: FC<IProps> = ({
-  setIsActiveEdit,
+  todoModel,
   isActiveEdit,
-  todoId,
-  isSubTodo = false,
+  setIsActiveEdit,
 }): ReactElement => {
   const dispath = useAppDispatch();
 
@@ -46,10 +45,12 @@ const TodoItemButtons: FC<IProps> = ({
   };
 
   const handleDelete = (): void => {
-    if (isSubTodo) {
-      dispath(deleteSubTodo(todoId));
-    } else {
-      dispath(deleteTodo(todoId));
+    if (todoModel instanceof MainTodoModel) {
+      dispath(deleteTodo(todoModel.id));
+    }
+
+    if (todoModel instanceof SubTodoModel) {
+      dispath(deleteSubTodo({ idPinnedTodo: todoModel.idPinnedTodo, idSubTodo: todoModel.id }));
     }
   };
 

@@ -5,9 +5,9 @@ import validator from "05-Shared/utils/validator";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
 import { useAppDispatch, useAppSelector } from "00-App/store";
+import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
 import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
-import TodoModel from "../../models/TodoModel";
 import type { TTodo } from "../../models/type";
 import { addTodo } from "../../models/TodoSlice";
 
@@ -31,9 +31,11 @@ const TodoNewForm: FC = (): ReactElement => {
     const newTodoId: number = todos.length === 0 ? 0 : todos[todos.length - 1].id + 1;
 
     // Создаем новый объект Todo
-    const newTodo: TTodo = new TodoModel({ id: newTodoId, task: task }).getTodo;
+    const newTodoModel: MainTodoModel = new MainTodoModel({ id: newTodoId, task: task });
 
-    dispatch(addTodo(newTodo));
+    dispatch(
+      addTodo({ id: newTodoModel.id, task: newTodoModel.task, subTodos: newTodoModel.subTodos })
+    );
 
     // Обнуляем значение поля Task
     setTask("");
