@@ -1,7 +1,7 @@
 import TodoModel from "./TodoModel";
-import type { TSubTodoModelProps } from "./type";
+import type { ISubTodoModel, TSubTodoModelProps } from "./type";
 
-class SubTodoModel extends TodoModel {
+class SubTodoModel extends TodoModel implements ISubTodoModel {
   public idPinnedTodo: number;
 
   constructor(props: TSubTodoModelProps) {

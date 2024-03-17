@@ -4,11 +4,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { TSubTodo, TTodo } from "./type";
 
 interface ITodosState {
-  todos: TTodo[];
+  todos: Record<number, TTodo>;
 }
 
 const initialState: ITodosState = {
-  todos: [],
+  todos: {},
 };
 
 interface IActionAddSubTodo {
@@ -34,67 +34,87 @@ const todosSlice = createSlice({
     // Работа с задачами
     // Добавление новой задачи
     addTodo(state, action: PayloadAction<TTodo>) {
-      state.todos.push(action.payload);
+      const todo: TTodo = action.payload;
+
+      state.todos[todo.id] = todo;
       localStorage.setItem("todos", JSON.stringify(state.todos));
     },
+
     // Нужен для инициализации приложения, по этому не сохраняем в localStorage
     setTodos(state, action: PayloadAction<TTodo[]>) {
       state.todos = action.payload;
     },
+
     // Обновление задачи
     updateTodo(state, action: PayloadAction<TTodo>) {
-      state.todos.forEach((todo) => {
-        if (todo.id === action.payload.id) {
-          todo.task = action.payload.task;
-          localStorage.setItem("todos", JSON.stringify(state.todos));
-        }
-      });
+      const todoId: number = action.payload.id;
+
+      if (todoId in state.todos) {
+        state.todos[todoId].task = action.payload.task;
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+      } else {
+        console.error(`Task with id ${todoId} not found.`);
+      }
     },
+
     // Удаление задачи
     deleteTodo(state, action: PayloadAction<number>) {
-      state.todos.forEach((todo, index) => {
-        if (todo.id === action.payload) {
-          state.todos.splice(index, 1);
-          localStorage.setItem("todos", JSON.stringify(state.todos));
-        }
-      });
+      const todoId: number = action.payload;
+
+      if (todoId in state.todos) {
+        delete state.todos[todoId];
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+      } else {
+        console.error(`Task with id ${todoId} not found.`);
+      }
     },
 
     // Работа с подзадачами
     // Добавления новой подзадачи
     addSubTodo(state, action: PayloadAction<IActionAddSubTodo>) {
-      state.todos.forEach((todo) => {
-        if (todo.id === action.payload.idPinnedTodo) {
-          todo.subTodos.push(action.payload.subTodo);
-          localStorage.setItem("todos", JSON.stringify(state.todos));
-        }
-      });
+      const todoId: number = action.payload.idPinnedTodo;
+      const subTodo: TSubTodo = action.payload.subTodo;
+
+      if (todoId in state.todos) {
+        state.todos[todoId].subTodos[subTodo.id] = subTodo;
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+      } else {
+        console.error(`Task with id ${todoId} not found.`);
+      }
     },
+
     // Обновление подзадачи
     updateSubTodo(state, action: PayloadAction<IActionUpdateSubTodo>) {
-      state.todos.forEach((todo) => {
-        if (todo.id === action.payload.idPinnedTodo) {
-          todo.subTodos.forEach((subTodo) => {
-            if (subTodo.id === action.payload.idSubTodo) {
-              subTodo.task = action.payload.task;
-              localStorage.setItem("todos", JSON.stringify(state.todos));
-            }
-          });
+      const todoId: number = action.payload.idPinnedTodo;
+      const subTodoId: number = action.payload.idSubTodo;
+
+      if (todoId in state.todos) {
+        if (subTodoId in state.todos[todoId]) {
+          state.todos[todoId].subTodos[subTodoId].task === action.payload.task;
+          localStorage.setItem("todos", JSON.stringify(state.todos));
+        } else {
+          console.error(`Sub Task with id ${subTodoId} not found.`);
         }
-      });
+      } else {
+        console.error(`Task with id ${todoId} not found.`);
+      }
     },
+
     // Удаление подзадачи
     deleteSubTodo(state, action: PayloadAction<IActionDeleteSubTodo>) {
-      state.todos.forEach((todo) => {
-        if (todo.id === action.payload.idPinnedTodo) {
-          todo.subTodos.forEach((subTodo, index) => {
-            if (subTodo.id === action.payload.idSubTodo) {
-              todo.subTodos.splice(index, 1);
-              localStorage.setItem("todos", JSON.stringify(state.todos));
-            }
-          });
+      const todoId: number = action.payload.idPinnedTodo;
+      const subTodoId: number = action.payload.idSubTodo;
+
+      if (todoId in state.todos) {
+        if (subTodoId in state.todos[todoId].subTodos) {
+          delete state.todos[todoId].subTodos[subTodoId];
+          localStorage.setItem("todos", JSON.stringify(state.todos));
+        } else {
+          console.error(`Sub Task with id ${subTodoId} not found.`);
         }
-      });
+      } else {
+        console.error(`Task with id ${todoId} not found.`);
+      }
     },
   },
 });

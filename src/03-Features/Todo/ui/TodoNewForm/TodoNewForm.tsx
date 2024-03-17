@@ -18,7 +18,7 @@ const TodoNewForm: FC = (): ReactElement => {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const todos: TTodo[] = useAppSelector((state) => state.todos.todos);
+  const todos: Record<number, TTodo> = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
 
   // Валидируем поле task
@@ -28,7 +28,8 @@ const TodoNewForm: FC = (): ReactElement => {
 
   const handleSubmit = (): void => {
     // Создаем новый уникальный id для Todo
-    const newTodoId: number = todos.length === 0 ? 0 : todos[todos.length - 1].id + 1;
+    const todosIds: number[] = Object.keys(todos).map((key) => parseInt(key));
+    const newTodoId: number = todosIds.length === 0 ? 0 : Math.max(...todosIds) + 1;
 
     // Создаем новый объект Todo
     const newTodoModel: MainTodoModel = new MainTodoModel({ id: newTodoId, task: task });

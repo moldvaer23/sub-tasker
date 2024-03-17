@@ -38,6 +38,7 @@ const TodoEditForm: FC<IProps> = ({
   const handleSumbit = (): void => {
     if (todoModel instanceof MainTodoModel) {
       todoModel.task = changedTask;
+
       dispath(updateTodo({ id: todoModel.id, task: todoModel.task, subTodos: todoModel.subTodos }));
     }
 

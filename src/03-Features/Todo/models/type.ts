@@ -6,12 +6,16 @@ export type TSubTodo = {
 export type TTodo = {
   readonly id: number;
   task: string;
-  subTodos: TSubTodo[];
+  subTodos: Record<number, TSubTodo>;
 };
 
 export interface ITodoModel {
   readonly id: number;
   task: string;
+}
+
+export interface ISubTodoModel extends ITodoModel {
+  idPinnedTodo: number;
 }
 
 export type TTodoModelProps = {

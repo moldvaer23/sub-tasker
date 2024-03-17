@@ -1,20 +1,25 @@
+import SubTodoModel from "./SubTodoModel";
 import TodoModel from "./TodoModel";
-import type { TTodoModelProps, TSubTodo } from "./type";
+import type { TTodoModelProps, ISubTodoModel } from "./type";
 
 class MainTodoModel extends TodoModel {
-  public subTodos: TSubTodo[] = [];
+  public subTodos: Record<number, ISubTodoModel> = {};
 
   constructor(props: TTodoModelProps) {
     super(props);
   }
 
-  public pushSubTodo(task: string): TSubTodo {
-    const id: number =
-      this.subTodos.length === 0 ? 0 : this.subTodos[this.subTodos.length - 1].id + 1;
+  public pushSubTodo(task: string): ISubTodoModel {
+    const subTodoids: number[] = Object.keys(this.subTodos).map((key) => parseInt(key));
+    const newSubTodoId: number = subTodoids.length === 0 ? 0 : Math.max(...subTodoids) + 1;
 
-    this.subTodos.push({ id: id, task: task });
+    this.subTodos[newSubTodoId] = new SubTodoModel({
+      id: newSubTodoId,
+      idPinnedTodo: this.id,
+      task: task,
+    });
 
-    return this.subTodos[this.subTodos.length - 1];
+    return this.subTodos[newSubTodoId];
   }
 }
 

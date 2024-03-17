@@ -7,7 +7,7 @@ import { addSubTodo } from "03-Features/Todo/models/TodoSlice";
 import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
 import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
-import type { TSubTodo } from "../../models/type";
+import type { ISubTodoModel, TSubTodo } from "../../models/type";
 import TodoEditForm from "../TodoEditForm/TodoEditForm";
 import TodoItemButtons from "../TodoItemButtons/TodoItemButtons";
 
@@ -49,9 +49,14 @@ const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
   }, [isActiveEdit]);
 
   const handleCreateSubTodo = (): void => {
-    const newSubTodo: TSubTodo = todoModel.pushSubTodo("Привет");
+    const newSubTodoModel: ISubTodoModel = todoModel.pushSubTodo("Привет");
 
-    dispatch(addSubTodo({ idPinnedTodo: todoModel.id, subTodo: newSubTodo }));
+    const objNewSubTodo: TSubTodo = {
+      id: newSubTodoModel.id,
+      task: newSubTodoModel.task,
+    };
+
+    dispatch(addSubTodo({ idPinnedTodo: todoModel.id, subTodo: objNewSubTodo }));
   };
 
   return (

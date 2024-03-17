@@ -24,7 +24,6 @@
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
     "eslint-plugin-import/no-unresolved": "off",
-    "no-console": "warn",
     "quotes": ["error", "double"]
   },
   "settings": {
