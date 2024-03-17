@@ -7,25 +7,27 @@ interface ITodosState {
   todos: Record<number, TTodo>;
 }
 
+// Типы Action для Sub Todo
+type TActionSubTodoInstance = {
+  idPinnedTodo: number;
+};
+
+type TActionAddSubTodo = TActionSubTodoInstance & {
+  subTodo: TSubTodo;
+};
+
+type TActionUpdateSubTodo = TActionSubTodoInstance & {
+  idSubTodo: number;
+  task: string;
+};
+
+type TActionDelSubTodo = TActionSubTodoInstance & {
+  idSubTodo: number;
+};
+
 const initialState: ITodosState = {
   todos: {},
 };
-
-interface IActionAddSubTodo {
-  idPinnedTodo: number;
-  subTodo: TSubTodo;
-}
-
-interface IActionUpdateSubTodo {
-  idPinnedTodo: number;
-  idSubTodo: number;
-  task: string;
-}
-
-interface IActionDeleteSubTodo {
-  idPinnedTodo: number;
-  idSubTodo: number;
-}
 
 const todosSlice = createSlice({
   name: "todos",
@@ -71,7 +73,7 @@ const todosSlice = createSlice({
 
     // Работа с подзадачами
     // Добавления новой подзадачи
-    addSubTodo(state, action: PayloadAction<IActionAddSubTodo>) {
+    addSubTodo(state, action: PayloadAction<TActionAddSubTodo>) {
       const todoId: number = action.payload.idPinnedTodo;
       const subTodo: TSubTodo = action.payload.subTodo;
 
@@ -84,7 +86,7 @@ const todosSlice = createSlice({
     },
 
     // Обновление подзадачи
-    updateSubTodo(state, action: PayloadAction<IActionUpdateSubTodo>) {
+    updateSubTodo(state, action: PayloadAction<TActionUpdateSubTodo>) {
       const todoId: number = action.payload.idPinnedTodo;
       const subTodoId: number = action.payload.idSubTodo;
 
@@ -101,7 +103,7 @@ const todosSlice = createSlice({
     },
 
     // Удаление подзадачи
-    deleteSubTodo(state, action: PayloadAction<IActionDeleteSubTodo>) {
+    deleteSubTodo(state, action: PayloadAction<TActionDelSubTodo>) {
       const todoId: number = action.payload.idPinnedTodo;
       const subTodoId: number = action.payload.idSubTodo;
 

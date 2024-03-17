@@ -1,11 +1,11 @@
-import SubTodoModel from "./SubTodoModel";
 import TodoModel from "./TodoModel";
-import type { TTodoModelProps, ISubTodoModel } from "./type";
+import SubTodoModel from "./SubTodoModel";
+import type { IMainTodoModel, ISubTodoModel, TMainTodoModelProps } from "./type";
 
-class MainTodoModel extends TodoModel {
+class MainTodoModel extends TodoModel implements IMainTodoModel {
   public subTodos: Record<number, ISubTodoModel> = {};
 
-  constructor(props: TTodoModelProps) {
+  constructor(props: TMainTodoModelProps) {
     super(props);
   }
 
