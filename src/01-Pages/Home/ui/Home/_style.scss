@@ -1,9 +1,9 @@
 @import "/src/00-App/styles/mixin";
 
 .main__section-todos {
-  padding: 50px;
   @include fl-cl;
   gap: 20px;
   align-items: center;
   justify-content: center;
+  padding: 50px;
 }
