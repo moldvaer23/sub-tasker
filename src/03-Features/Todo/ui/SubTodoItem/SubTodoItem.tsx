@@ -15,6 +15,7 @@ interface IProps {
 const SubTodoItem: FC<IProps> = ({ id, idPinnedTodo, task }): ReactElement => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
 
+  // Создание модели
   const todoModel: SubTodoModel = useMemo(
     (): SubTodoModel => new SubTodoModel({ id: id, idPinnedTodo: idPinnedTodo, task: task }),
     [id, idPinnedTodo, task]
@@ -28,34 +29,32 @@ const SubTodoItem: FC<IProps> = ({ id, idPinnedTodo, task }): ReactElement => {
       }
     };
 
-    // Если форма редактирования task открыта вешаем слушатели закрытия
     if (isActiveEdit) {
       document.addEventListener("keydown", handleEsc);
     }
 
-    // Когда компонент демонтирован снимаем слушатели
-    return (): void => {
+    return () => {
       document.removeEventListener("keydown", handleEsc);
     };
   }, [isActiveEdit]);
 
   return (
     <>
-      {/* Кнопки для взаимодействия с карточкой задачи */}
       <TodoItemButtons
         todoModel={todoModel}
         isActiveEdit={isActiveEdit}
         setIsActiveEdit={setIsActiveEdit}
       />
       <article className="todo-item__todo subtodo">
-        {/* Если нажали на кнопку редактирования задачи, показываем форму редактирования */}
         {isActiveEdit ? (
+          //  Показываем форму редактирования
           <TodoEditForm
             todoModel={todoModel}
             placeholderTask={todoModel.task}
             setIsActiveEdit={setIsActiveEdit}
           />
         ) : (
+          // Показываем текст подзадачи
           <p className="todo__task">{todoModel.task}</p>
         )}
       </article>

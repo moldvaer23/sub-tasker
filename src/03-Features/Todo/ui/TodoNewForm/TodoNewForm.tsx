@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { ChangeEvent, FC, MouseEvent, ReactElement } from "react";
+import type { ChangeEvent, FC, ReactElement } from "react";
 
 import validator from "05-Shared/utils/validator";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
@@ -26,24 +26,33 @@ const TodoNewForm: FC = (): ReactElement => {
     validator({ data: task, setError: setError, setErrorMessage: setErrorMessage });
   }, [task]);
 
-  const handleSubmit = (): void => {
-    // Создаем новый уникальный id для Todo
-    const todosIds: number[] = Object.keys(todos).map((key) => parseInt(key));
-    const newTodoId: number = todosIds.length === 0 ? 0 : Math.max(...todosIds) + 1;
+  // Хендлер подтверждения формы
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
-    // Создаем новый объект Todo
-    const newTodoModel: MainTodoModel = new MainTodoModel({ id: newTodoId, task: task });
+    if (!error) {
+      // Создаем новый id
+      const todosIds: number[] = Object.keys(todos).map((key) => parseInt(key));
+      const newTodoId: number = todosIds.length === 0 ? 0 : Math.max(...todosIds) + 1;
 
-    dispatch(
-      addTodo({ id: newTodoModel.id, task: newTodoModel.task, subTodos: newTodoModel.subTodos })
-    );
+      // Создаем модель главной задачи
+      const newTodoModel = new MainTodoModel({ id: newTodoId, task: task });
 
-    // Обнуляем значение поля Task
-    setTask("");
+      dispatch(
+        addTodo({
+          id: newTodoModel.id,
+          task: newTodoModel.task,
+          subTodos: newTodoModel.subTodos,
+        })
+      );
+
+      // Обнуляем поле формы
+      setTask("");
+    }
   };
 
   return (
-    <form className="section-todos__form-new-todo">
+    <form className="section-todos__form-new-todo" onSubmit={handleSubmit}>
       <label className="form-new-todo__label" htmlFor="task">
         <span className="form-new-todo__label-head">У тебя новая задача?</span>
         <Input
@@ -64,10 +73,6 @@ const TodoNewForm: FC = (): ReactElement => {
         type={ETypeButton.submit}
         typeStyle={ETypeButtonStyle.accent}
         typeSize={ETypeSizeButtom.large}
-        onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-          e.preventDefault();
-          handleSubmit();
-        }}
         disabled={error}
       />
     </form>

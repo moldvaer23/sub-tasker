@@ -7,6 +7,13 @@ interface ITodosState {
   todos: Record<number, TTodo>;
 }
 
+// Типы Action для Main Todo
+
+type TActionupdateMainTodo = {
+  id: number;
+  task: string;
+};
+
 // Типы Action для Sub Todo
 type TActionSubTodoInstance = {
   idPinnedTodo: number;
@@ -48,7 +55,7 @@ const todosSlice = createSlice({
     },
 
     // Обновление задачи
-    updateTodo(state, action: PayloadAction<TTodo>) {
+    updateTodo(state, action: PayloadAction<TActionupdateMainTodo>) {
       const todoId: number = action.payload.id;
 
       if (todoId in state.todos) {
@@ -91,8 +98,8 @@ const todosSlice = createSlice({
       const subTodoId: number = action.payload.idSubTodo;
 
       if (todoId in state.todos) {
-        if (subTodoId in state.todos[todoId]) {
-          state.todos[todoId].subTodos[subTodoId].task === action.payload.task;
+        if (subTodoId in state.todos[todoId].subTodos) {
+          state.todos[todoId].subTodos[subTodoId].task = action.payload.task;
           localStorage.setItem("todos", JSON.stringify(state.todos));
         } else {
           console.error(`Sub Task with id ${subTodoId} not found.`);

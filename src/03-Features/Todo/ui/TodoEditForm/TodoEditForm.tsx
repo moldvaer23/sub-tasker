@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { ChangeEvent, Dispatch, FC, MouseEvent, ReactElement, SetStateAction } from "react";
+import type { ChangeEvent, FC, ReactElement } from "react";
 
 import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
@@ -16,7 +16,7 @@ import "./_style.scss";
 interface IProps {
   todoModel: MainTodoModel | SubTodoModel;
   placeholderTask: string;
-  setIsActiveEdit: Dispatch<SetStateAction<boolean>>;
+  setIsActiveEdit: (isActive: boolean) => void;
 }
 
 const TodoEditForm: FC<IProps> = ({
@@ -28,37 +28,46 @@ const TodoEditForm: FC<IProps> = ({
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   // Валидируем поле chgangeTask
-  useEffect((): void => {
+  useEffect(() => {
     validator({ data: changedTask, setError: setError, setErrorMessage: setErrorMessage });
   }, [changedTask]);
 
-  const handleSumbit = (): void => {
-    if (todoModel instanceof MainTodoModel) {
-      todoModel.task = changedTask;
+  // Хендлер подтверждения формы
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
 
-      dispath(updateTodo({ id: todoModel.id, task: todoModel.task, subTodos: todoModel.subTodos }));
+    if (!error) {
+      if (todoModel instanceof MainTodoModel) {
+        todoModel.task = changedTask;
+
+        dispatch(
+          updateTodo({
+            id: todoModel.id,
+            task: todoModel.task,
+          })
+        );
+      }
+
+      if (todoModel instanceof SubTodoModel) {
+        todoModel.task = changedTask;
+        dispatch(
+          updateSubTodo({
+            idPinnedTodo: todoModel.idPinnedTodo,
+            idSubTodo: todoModel.id,
+            task: todoModel.task,
+          })
+        );
+      }
+
+      setIsActiveEdit(false);
     }
-
-    if (todoModel instanceof SubTodoModel) {
-      todoModel.task = changedTask;
-
-      dispath(
-        updateSubTodo({
-          idPinnedTodo: todoModel.idPinnedTodo,
-          idSubTodo: todoModel.id,
-          task: todoModel.task,
-        })
-      );
-    }
-
-    setIsActiveEdit(false);
   };
 
   return (
-    <form className="todo__form-edit-todo">
+    <form className="todo__form-edit-todo" onSubmit={handleSubmit}>
       {errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
 
       <TextArea
@@ -73,10 +82,6 @@ const TodoEditForm: FC<IProps> = ({
         typeSize={ETypeSizeButtom.medium}
         typeStyle={ETypeButtonStyle.primary}
         type={ETypeButton.submit}
-        onClick={(e: MouseEvent<HTMLButtonElement>): void => {
-          e.preventDefault();
-          handleSumbit();
-        }}
         disabled={error}
       />
     </form>

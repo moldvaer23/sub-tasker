@@ -1,5 +1,5 @@
 import type { FC, ReactElement } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useAppDispatch } from "00-App/store";
 import addSubTodoIcon from "05-Shared/assets/svg/add-icon.svg";
@@ -7,9 +7,9 @@ import { addSubTodo } from "03-Features/Todo/models/TodoSlice";
 import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
 import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
-import type { ISubTodoModel, TSubTodo } from "../../models/type";
 import TodoEditForm from "../TodoEditForm/TodoEditForm";
 import TodoItemButtons from "../TodoItemButtons/TodoItemButtons";
+import type { ISubTodoModel, TSubTodo } from "../../models/type";
 
 import "./_style.scss";
 
@@ -24,8 +24,9 @@ const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
 
   const dispatch = useAppDispatch();
 
+  // Создание модели
   const todoModel: MainTodoModel = useMemo(
-    (): MainTodoModel => new MainTodoModel({ id: id, task: task }),
+    () => new MainTodoModel({ id: id, task: task }),
     [id, task]
   );
 
@@ -37,18 +38,17 @@ const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
       }
     };
 
-    // Если форма редактирования task открыта вешаем слушатели закрытия
     if (isActiveEdit) {
       document.addEventListener("keydown", handleEsc);
     }
 
-    // Когда компонент демонтирован снимаем слушатели
-    return (): void => {
+    return () => {
       document.removeEventListener("keydown", handleEsc);
     };
   }, [isActiveEdit]);
 
-  const handleCreateSubTodo = (): void => {
+  // Хендлер создания подзадачи
+  const handleCreateSubTodo = useCallback(() => {
     const newSubTodoModel: ISubTodoModel = todoModel.pushSubTodo("Привет");
 
     const objNewSubTodo: TSubTodo = {
@@ -57,11 +57,10 @@ const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
     };
 
     dispatch(addSubTodo({ idPinnedTodo: todoModel.id, subTodo: objNewSubTodo }));
-  };
+  }, [dispatch, todoModel]);
 
   return (
     <>
-      {/* Кнопки для взаимодействия с карточкой задачи */}
       <TodoItemButtons
         todoModel={todoModel}
         isActiveEdit={isActiveEdit}
@@ -69,31 +68,25 @@ const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
       />
       <article
         className="todo-item__todo"
-        onMouseEnter={(): void => {
-          setIsMouseEnter(true);
-        }}
-        onMouseLeave={(): void => {
-          setIsMouseEnter(false);
-        }}>
-        {/* Если нажали на кнопку редактирования задачи, показываем форму редактирования */}
+        onMouseEnter={() => setIsMouseEnter(true)}
+        onMouseLeave={() => setIsMouseEnter(false)}>
         {isActiveEdit ? (
+          // Показываем форму редактирования
           <TodoEditForm
             todoModel={todoModel}
-            setIsActiveEdit={setIsActiveEdit}
             placeholderTask={todoModel.task}
+            setIsActiveEdit={setIsActiveEdit}
           />
         ) : (
+          // Показываем текст задачи
           <p className="todo__task">{todoModel.task}</p>
         )}
-        {/* Если навели на карточку, она не в состоянии редактирования */}
-        {/* Показываем кнопку добавления подзадачи  */}
+
         {isMouseEnter && !isActiveEdit && (
+          // Показываем кнопку добавления подзадачи
           <Button
             className="todo__new-subtodo-button"
-            image={{
-              imageSrc: addSubTodoIcon,
-              alt: "Кнопка добавить подзадачу",
-            }}
+            image={{ imageSrc: addSubTodoIcon, alt: "Кнопка добавить подзадачу" }}
             typeStyle={ETypeButtonStyle.icon}
             typeSize={ETypeSizeButtom.small}
             onClick={() => {
