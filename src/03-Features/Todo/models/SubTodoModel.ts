@@ -1,12 +1,16 @@
-import TodoModel from "./TodoModel";
+import { v4 as uuidv4 } from "uuid";
+
 import type { ISubTodoModel, TSubTodoModelProps } from "./type";
 
-class SubTodoModel extends TodoModel implements ISubTodoModel {
-  public idPinnedTodo: number;
+class SubTodoModel implements ISubTodoModel {
+  public uuid: string;
+  public uuidPinTodo: string;
+  public task: string;
 
   constructor(props: TSubTodoModelProps) {
-    super(props);
-    this.idPinnedTodo = props.idPinnedTodo;
+    this.uuid = props.uuid ? props.uuid : uuidv4();
+    this.uuidPinTodo = props.uuidPinTodo;
+    this.task = props.task;
   }
 }
 

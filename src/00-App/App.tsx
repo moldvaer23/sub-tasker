@@ -9,7 +9,9 @@ import { useAppDispatch } from "./store";
 import "./styles/global.scss";
 
 const App: FC = (): ReactElement => {
-  const localTodos: TTodo[] | null = JSON.parse(localStorage.getItem("todos") as string);
+  const localTodos: Record<string, TTodo> | null = JSON.parse(
+    localStorage.getItem("todos") as string
+  );
 
   const dispatch = useAppDispatch();
 

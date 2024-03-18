@@ -1,38 +1,43 @@
 // Объекты
 type TAbstractTodo = {
-  readonly id: number;
+  readonly uuid: string;
   task: string;
 };
 
 export type TSubTodo = TAbstractTodo;
 
 export type TTodo = TAbstractTodo & {
-  subTodos: Record<number, TSubTodo>;
+  subTodos: Record<string, TSubTodo>;
 };
 
 // Соглашения для моделей
 export interface ITodoModel {
-  readonly id: number;
+  readonly uuid: string;
   task: string;
 }
 
 export interface ISubTodoModel extends ITodoModel {
-  idPinnedTodo: number;
+  uuidPinTodo: string;
 }
 
+export type TPushSubTodoProps = {
+  task: string;
+  uuid?: string;
+};
+
 export interface IMainTodoModel extends ITodoModel {
-  subTodos: Record<number, ISubTodoModel>;
-  pushSubTodo(task: string): ISubTodoModel;
+  subTodos: Record<string, ISubTodoModel>;
+  pushSubTodo({ task, uuid }: TPushSubTodoProps): ISubTodoModel;
 }
 
 // Пропсы моделей
 export type TTodoModelProps = {
-  readonly id: number;
+  readonly uuid?: string;
   task: string;
 };
 
 export type TSubTodoModelProps = TTodoModelProps & {
-  idPinnedTodo: number;
+  uuidPinTodo: string;
 };
 
 export type TMainTodoModelProps = TTodoModelProps;

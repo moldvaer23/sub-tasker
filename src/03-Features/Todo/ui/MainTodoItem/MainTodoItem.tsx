@@ -14,11 +14,11 @@ import type { ISubTodoModel, TSubTodo } from "../../models/type";
 import "./_style.scss";
 
 interface IProps {
-  id: number;
+  uuid: string;
   task: string;
 }
 
-const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
+const MainTodoItem: FC<IProps> = ({ uuid, task }): ReactElement => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false);
 
@@ -26,8 +26,8 @@ const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
 
   // Создание модели
   const todoModel: MainTodoModel = useMemo(
-    () => new MainTodoModel({ id: id, task: task }),
-    [id, task]
+    () => new MainTodoModel({ uuid: uuid, task: task }),
+    [uuid, task]
   );
 
   // Вешаем и снимаем слушатели формы редактирования Todo
@@ -49,14 +49,14 @@ const MainTodoItem: FC<IProps> = ({ id, task }): ReactElement => {
 
   // Хендлер создания подзадачи
   const handleCreateSubTodo = useCallback(() => {
-    const newSubTodoModel: ISubTodoModel = todoModel.pushSubTodo("Привет");
+    const newSubTodoModel: ISubTodoModel = todoModel.pushSubTodo({ task: "Привет" });
 
     const objNewSubTodo: TSubTodo = {
-      id: newSubTodoModel.id,
+      uuid: newSubTodoModel.uuid,
       task: newSubTodoModel.task,
     };
 
-    dispatch(addSubTodo({ idPinnedTodo: todoModel.id, subTodo: objNewSubTodo }));
+    dispatch(addSubTodo({ uuidPinTodo: todoModel.uuid, subTodo: objNewSubTodo }));
   }, [dispatch, todoModel]);
 
   return (

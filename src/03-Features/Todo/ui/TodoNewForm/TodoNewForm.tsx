@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import type { ChangeEvent, FC, ReactElement } from "react";
 
+import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
-import { useAppDispatch, useAppSelector } from "00-App/store";
 import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
 import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
-import type { TTodo } from "../../models/type";
 import { addTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
@@ -18,7 +17,6 @@ const TodoNewForm: FC = (): ReactElement => {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const todos: Record<number, TTodo> = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
 
   // Валидируем поле task
@@ -31,16 +29,12 @@ const TodoNewForm: FC = (): ReactElement => {
     e.preventDefault();
 
     if (!error) {
-      // Создаем новый id
-      const todosIds: number[] = Object.keys(todos).map((key) => parseInt(key));
-      const newTodoId: number = todosIds.length === 0 ? 0 : Math.max(...todosIds) + 1;
-
-      // Создаем модель главной задачи
-      const newTodoModel = new MainTodoModel({ id: newTodoId, task: task });
+      // Создаем новую модель главной задачи
+      const newTodoModel = new MainTodoModel({ task: task });
 
       dispatch(
         addTodo({
-          id: newTodoModel.id,
+          uuid: newTodoModel.uuid,
           task: newTodoModel.task,
           subTodos: newTodoModel.subTodos,
         })

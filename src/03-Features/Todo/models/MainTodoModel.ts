@@ -1,25 +1,28 @@
-import TodoModel from "./TodoModel";
-import SubTodoModel from "./SubTodoModel";
-import type { IMainTodoModel, ISubTodoModel, TMainTodoModelProps } from "./type";
+import { v4 as uuidv4 } from "uuid";
 
-class MainTodoModel extends TodoModel implements IMainTodoModel {
-  public subTodos: Record<number, ISubTodoModel> = {};
+import SubTodoModel from "./SubTodoModel";
+import type { IMainTodoModel, ISubTodoModel, TMainTodoModelProps, TPushSubTodoProps } from "./type";
+
+class MainTodoModel implements IMainTodoModel {
+  public uuid: string;
+  public task: string;
+  public subTodos: Record<string, ISubTodoModel> = {};
 
   constructor(props: TMainTodoModelProps) {
-    super(props);
+    this.uuid = props.uuid ? props.uuid : uuidv4();
+    this.task = props.task;
   }
 
-  public pushSubTodo(task: string): ISubTodoModel {
-    const subTodoids: number[] = Object.keys(this.subTodos).map((key) => parseInt(key));
-    const newSubTodoId: number = subTodoids.length === 0 ? 0 : Math.max(...subTodoids) + 1;
+  public pushSubTodo({ task, uuid }: TPushSubTodoProps): ISubTodoModel {
+    const uuidSubTodo = uuid ? uuid : uuidv4();
 
-    this.subTodos[newSubTodoId] = new SubTodoModel({
-      id: newSubTodoId,
-      idPinnedTodo: this.id,
+    this.subTodos[uuidSubTodo] = new SubTodoModel({
+      uuid: uuidSubTodo,
+      uuidPinTodo: this.uuid,
       task: task,
     });
 
-    return this.subTodos[newSubTodoId];
+    return this.subTodos[uuidSubTodo];
   }
 }
 

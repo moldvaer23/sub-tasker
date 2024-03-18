@@ -45,7 +45,7 @@ const TodoEditForm: FC<IProps> = ({
 
         dispatch(
           updateTodo({
-            id: todoModel.id,
+            uuid: todoModel.uuid,
             task: todoModel.task,
           })
         );
@@ -53,10 +53,11 @@ const TodoEditForm: FC<IProps> = ({
 
       if (todoModel instanceof SubTodoModel) {
         todoModel.task = changedTask;
+
         dispatch(
           updateSubTodo({
-            idPinnedTodo: todoModel.idPinnedTodo,
-            idSubTodo: todoModel.id,
+            uuidPinTodo: todoModel.uuidPinTodo,
+            uuidSubTodo: todoModel.uuid,
             task: todoModel.task,
           })
         );

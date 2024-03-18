@@ -27,9 +27,9 @@ const TodoItemButtons: FC<IProps> = ({
 
   const handleDelete = (): void => {
     if (todoModel instanceof MainTodoModel) {
-      dispatch(deleteTodo(todoModel.id));
+      dispatch(deleteTodo(todoModel.uuid));
     } else if (todoModel instanceof SubTodoModel) {
-      dispatch(deleteSubTodo({ idPinnedTodo: todoModel.idPinnedTodo, idSubTodo: todoModel.id }));
+      dispatch(deleteSubTodo({ uuidPinTodo: todoModel.uuidPinTodo, uuidSubTodo: todoModel.uuid }));
     }
   };
 

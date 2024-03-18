@@ -7,18 +7,18 @@ import TodoEditForm from "../TodoEditForm/TodoEditForm";
 import TodoItemButtons from "../TodoItemButtons/TodoItemButtons";
 
 interface IProps {
-  id: number;
-  idPinnedTodo: number;
+  uuid: string;
+  uuidPinTodo: string;
   task: string;
 }
 
-const SubTodoItem: FC<IProps> = ({ id, idPinnedTodo, task }): ReactElement => {
+const SubTodoItem: FC<IProps> = ({ uuid, uuidPinTodo, task }): ReactElement => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
 
   // Создание модели
   const todoModel: SubTodoModel = useMemo(
-    (): SubTodoModel => new SubTodoModel({ id: id, idPinnedTodo: idPinnedTodo, task: task }),
-    [id, idPinnedTodo, task]
+    (): SubTodoModel => new SubTodoModel({ uuid: uuid, uuidPinTodo: uuidPinTodo, task: task }),
+    [uuid, uuidPinTodo, task]
   );
 
   // Вешаем и снимаем слушатели формы редактирования Todo
