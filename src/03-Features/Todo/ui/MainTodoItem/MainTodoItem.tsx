@@ -61,15 +61,16 @@ const MainTodoItem: FC<IProps> = ({ uuid, task }): ReactElement => {
 
   return (
     <>
-      <TodoItemButtons
-        todoModel={todoModel}
-        isActiveEdit={isActiveEdit}
-        setIsActiveEdit={setIsActiveEdit}
-      />
       <article
         className="todo-item__todo"
         onMouseEnter={() => setIsMouseEnter(true)}
         onMouseLeave={() => setIsMouseEnter(false)}>
+        <TodoItemButtons
+          todoModel={todoModel}
+          isActiveEdit={isActiveEdit}
+          setIsActiveEdit={setIsActiveEdit}
+        />
+
         {isActiveEdit ? (
           // Показываем форму редактирования
           <TodoEditForm
@@ -82,18 +83,17 @@ const MainTodoItem: FC<IProps> = ({ uuid, task }): ReactElement => {
           <p className="todo__task">{todoModel.task}</p>
         )}
 
-        {isMouseEnter && !isActiveEdit && (
-          // Показываем кнопку добавления подзадачи
-          <Button
-            className="todo__new-subtodo-button"
-            image={{ imageSrc: addSubTodoIcon, alt: "Кнопка добавить подзадачу" }}
-            typeStyle={ETypeButtonStyle.icon}
-            typeSize={ETypeSizeButtom.small}
-            onClick={() => {
-              handleCreateSubTodo();
-            }}
-          />
-        )}
+        <Button
+          className="todo__new-subtodo-button"
+          image={{ imageSrc: addSubTodoIcon, alt: "Кнопка добавить подзадачу" }}
+          typeStyle={ETypeButtonStyle.icon}
+          typeSize={ETypeSizeButtom.small}
+          onClick={() => {
+            handleCreateSubTodo();
+          }}
+          opacity={!isActiveEdit && isMouseEnter ? 1 : 0}
+          disabled={isActiveEdit}
+        />
       </article>
     </>
   );

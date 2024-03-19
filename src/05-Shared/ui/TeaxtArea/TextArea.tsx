@@ -23,7 +23,6 @@ const TextArea: FC<IProps> = ({ className, value, onChange, name, id = name }): 
       onChange={onChange ? (e: ChangeEvent<HTMLTextAreaElement>): void => onChange(e) : undefined}
       {...(value !== undefined && { value })}
       spellCheck={true}
-      cols={30}
       rows={5}
     />
   );

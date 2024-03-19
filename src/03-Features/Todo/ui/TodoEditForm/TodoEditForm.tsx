@@ -5,23 +5,24 @@ import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
 import { TextArea } from "05-Shared/ui/TeaxtArea";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
+import checkIcon from "05-Shared/assets/svg/check-icon.svg";
 import SubTodoModel from "03-Features/Todo/models/SubTodoModel";
 import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
-import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
+import { Button, ETypeButton, ETypeButtonStyle } from "05-Shared/ui/Button";
 
 import { updateSubTodo, updateTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
 
 interface IProps {
-  todoModel: MainTodoModel | SubTodoModel;
   placeholderTask: string;
-  setIsActiveEdit: (isActive: boolean) => void;
+  todoModel: MainTodoModel | SubTodoModel;
+  setIsActiveEdit: (isActiveEdit: boolean) => void;
 }
 
 const TodoEditForm: FC<IProps> = ({
-  todoModel,
   placeholderTask,
+  todoModel,
   setIsActiveEdit,
 }): ReactElement => {
   const [changedTask, setChangedTask] = useState<string>(placeholderTask);
@@ -79,11 +80,13 @@ const TodoEditForm: FC<IProps> = ({
       />
 
       <Button
-        text="Применить"
-        typeSize={ETypeSizeButtom.medium}
-        typeStyle={ETypeButtonStyle.primary}
+        className="form-edit-todo__button-submit"
+        image={{
+          imageSrc: checkIcon,
+          alt: "Кнопка подтвердить",
+        }}
         type={ETypeButton.submit}
-        disabled={error}
+        typeStyle={ETypeButtonStyle.icon}
       />
     </form>
   );

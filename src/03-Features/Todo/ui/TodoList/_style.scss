@@ -4,6 +4,8 @@
 .section-todos__list-todos {
   @include fl-cl;
   gap: 30px;
+  margin-top: 200px;
+  margin-bottom: 200px;
 }
 
 .list-todos__todo-item {

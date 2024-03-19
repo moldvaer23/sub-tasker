@@ -1,13 +1,19 @@
 // colors
-$primary-color: #458e5d;
-$accent-color: #ff5d40;
-$secondary-color: #ff4070;
+$primary-color: #f3e69f;
+$accent-color: #f08d67;
+$secondary-color: #538f79;
 $error-color: rgb(255 113 113);
 $primary-outline-color: #fff;
 
+// page-bcg-color
+$page-background-color: #56b294;
+
 // text-color
-$primary-text-color: #eee;
+$primary-text-color: #102028;
 $accent-text-color: #fff;
+
+// placeholder-colors
+$input-placeholder-color: rgba(16 32 40 / 50%);
 
 // font-family
 $primary-font-family: roboto, arial, sans-serif;
@@ -21,15 +27,10 @@ $min-font-size: 16px;
 // width-element
 $primary-width-element: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
 $accent-width-element: clamp(12.5rem, 9.091rem + 17.05vw, 21.875rem);
+$secondary-width-element: clamp(31.25rem, 24.432rem + 34.09vw, 50rem);
 
 // box-shadow
-$primary-box-shadow: -1px 5px 11px 9px rgb(48 84 32 / 58%);
-
-// placeholder-colors
-$input-placeholder-color: rgb(255 255 255 / 50%);
-
-// page-bcg-color
-$page-background-color: #3b703d;
+$primary-box-shadow: -1px 5px 11px 9px rgb(88 84 56 / 58%);
 
 // medias
 $media-width-mobile: 576px;

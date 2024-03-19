@@ -60,12 +60,14 @@ const TodoItemButtons: FC<IProps> = ({
         />
       ) : (
         // Показываем кнопку закрыть форму редактирования
-        <Button
-          image={{ imageSrc: closeIcon, alt: "Кнопка закрыть форму редактирования" }}
-          typeStyle={ETypeButtonStyle.icon}
-          typeSize={ETypeSizeButtom.small}
-          onClick={handleCloseButtonClick}
-        />
+        <>
+          <Button
+            image={{ imageSrc: closeIcon, alt: "Кнопка закрыть форму редактирования" }}
+            typeStyle={ETypeButtonStyle.icon}
+            typeSize={ETypeSizeButtom.small}
+            onClick={handleCloseButtonClick}
+          />
+        </>
       )}
     </div>
   );

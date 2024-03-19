@@ -1,5 +1,7 @@
 import type { FC, MouseEvent, ReactElement } from "react";
 
+import { AnimatePresence, motion } from "framer-motion";
+
 import { EDefaultClassNames } from "../classNames";
 
 import "./_style.scss";
@@ -36,6 +38,7 @@ interface IProps {
   typeStyle: ETypeButtonStyle;
   className?: string;
   disabled?: boolean;
+  opacity?: number;
 }
 
 const Button: FC<IProps> = ({
@@ -47,23 +50,31 @@ const Button: FC<IProps> = ({
   className,
   typeSize,
   disabled = false,
+  opacity = 1,
 }): ReactElement => {
   return (
-    <button
-      className={
-        className
-          ? `${className} ${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
-          : `${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
-      }
-      type={type}
-      onClick={onClick ? onClick : undefined}
-      disabled={disabled}>
-      {image ? (
-        <img className={EDefaultClassNames.buttonImage} src={image.imageSrc} alt={image.alt} />
-      ) : (
-        text
-      )}
-    </button>
+    <AnimatePresence>
+      <motion.button
+        initial={{ scale: 1 }}
+        whileTap={{ scale: typeStyle !== ETypeButtonStyle.icon ? 2 : 3 }}
+        exit={{ scale: 1 }}
+        style={{ opacity: opacity }}
+        transition={{ type: "spring", stiffness: 500, damping: 5 }}
+        className={
+          className
+            ? `${className} ${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
+            : `${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
+        }
+        type={type}
+        onClick={onClick ? onClick : undefined}
+        disabled={disabled}>
+        {image ? (
+          <img className={EDefaultClassNames.buttonImage} src={image.imageSrc} alt={image.alt} />
+        ) : (
+          text
+        )}
+      </motion.button>
+    </AnimatePresence>
   );
 };
 

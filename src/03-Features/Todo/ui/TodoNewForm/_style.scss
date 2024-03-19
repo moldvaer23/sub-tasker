@@ -3,8 +3,10 @@
 
 .section-todos__form-new-todo {
   @include fl-cl;
+  position: fixed;
+  z-index: 1;
+  top: 0;
   gap: 40px;
-  padding: 20px;
 }
 
 .form-new-todo {
@@ -12,7 +14,12 @@
     @include fl-cl;
     gap: 20px;
     align-items: center;
+
+    padding-top: 20px;
+
     color: $primary-text-color;
+
+    backdrop-filter: blur(10px);
   }
 
   &__label-head {
@@ -20,8 +27,8 @@
   }
 
   &__input {
-    width: $primary-width-element;
-    padding: 15px 20px;
+    width: $secondary-width-element;
+    padding: 20px;
 
     font-size: 20px;
 
