@@ -136,4 +136,5 @@ export const {
   deleteTodo,
   deleteSubTodo,
 } = todosSlice.actions;
+
 export default todosSlice.reducer;

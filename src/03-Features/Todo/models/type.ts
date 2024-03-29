@@ -4,40 +4,20 @@ type TAbstractTodo = {
   task: string;
 };
 
-export type TSubTodo = TAbstractTodo;
+export type TSubTodo = TAbstractTodo & {
+  uuidPinTodo: string;
+};
 
 export type TTodo = TAbstractTodo & {
   subTodos: Record<string, TSubTodo>;
 };
 
-// Соглашения для моделей
 export interface ITodoModel {
-  readonly uuid: string;
-  task: string;
+  uuid: string;
+  createSubTodo: (data: { uuid?: string; task: string }) => TSubTodo | undefined;
+  editTodo: (data: { uuid: string; task: string }) => void | undefined;
+  editSubTodo: (data: { uuid: string; task: string }) => void | undefined;
+  getSubTodos: () => TSubTodo[];
+  deleteTodo: () => void;
+  deleteSubTodo: (data: { uuidPinTodo: string; uuidSubTodo: string }) => void;
 }
-
-export interface ISubTodoModel extends ITodoModel {
-  uuidPinTodo: string;
-}
-
-export type TPushSubTodoProps = {
-  task: string;
-  uuid?: string;
-};
-
-export interface IMainTodoModel extends ITodoModel {
-  subTodos: Record<string, ISubTodoModel>;
-  pushSubTodo({ task, uuid }: TPushSubTodoProps): ISubTodoModel;
-}
-
-// Пропсы моделей
-export type TTodoModelProps = {
-  readonly uuid?: string;
-  task: string;
-};
-
-export type TSubTodoModelProps = TTodoModelProps & {
-  uuidPinTodo: string;
-};
-
-export type TMainTodoModelProps = TTodoModelProps;

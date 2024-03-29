@@ -5,7 +5,7 @@ import { useAppDispatch } from "00-App/store";
 import validator from "05-Shared/utils/validator";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
-import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
+import TodoModel from "03-Features/Todo/models/TodoModel";
 import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
 import { addTodo } from "../../models/TodoSlice";
@@ -30,7 +30,7 @@ const TodoNewForm: FC = (): ReactElement => {
 
     if (!error) {
       // Создаем новую модель главной задачи
-      const newTodoModel = new MainTodoModel({ task: task });
+      const newTodoModel = new TodoModel({ task: task, dispatch: dispatch }).getTodo();
 
       dispatch(
         addTodo({

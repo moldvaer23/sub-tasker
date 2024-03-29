@@ -1,38 +1,23 @@
 import type { FC, ReactElement } from "react";
 
-import { useAppDispatch } from "00-App/store";
 import editIcon from "05-Shared/assets/svg/edit-icon.svg";
 import closeIcon from "05-Shared/assets/svg/close-icon.svg";
 import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
-import SubTodoModel from "03-Features/Todo/models/SubTodoModel";
-import MainTodoModel from "03-Features/Todo/models/MainTodoModel";
 import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
-
-import { deleteSubTodo, deleteTodo } from "../../models/TodoSlice";
 
 import "./_style.scss";
 
 interface IProps {
-  todoModel: MainTodoModel | SubTodoModel;
+  handleDelete: () => void;
   isActiveEdit: boolean;
   setIsActiveEdit: (isActive: boolean) => void;
 }
 
 const TodoItemButtons: FC<IProps> = ({
-  todoModel,
+  handleDelete,
   isActiveEdit,
   setIsActiveEdit,
 }): ReactElement => {
-  const dispatch = useAppDispatch();
-
-  const handleDelete = (): void => {
-    if (todoModel instanceof MainTodoModel) {
-      dispatch(deleteTodo(todoModel.uuid));
-    } else if (todoModel instanceof SubTodoModel) {
-      dispatch(deleteSubTodo({ uuidPinTodo: todoModel.uuidPinTodo, uuidSubTodo: todoModel.uuid }));
-    }
-  };
-
   const handleEditButtonClick = (): void => {
     setIsActiveEdit(true);
   };
