@@ -14,10 +14,14 @@ export type TTodo = TAbstractTodo & {
 
 export interface ITodoModel {
   uuid: string;
-  createSubTodo: (data: { uuid?: string; task: string }) => TSubTodo | undefined;
+  createSubTodo: (data: { uuid?: string; task: string }) => TSubTodo;
+
   editTodo: (data: { uuid: string; task: string }) => void | undefined;
   editSubTodo: (data: { uuid: string; task: string }) => void | undefined;
-  getSubTodos: () => TSubTodo[];
+
   deleteTodo: () => void;
   deleteSubTodo: (data: { uuidPinTodo: string; uuidSubTodo: string }) => void;
+
+  getTodo: () => TTodo;
+  getSubTodos: () => TSubTodo[];
 }

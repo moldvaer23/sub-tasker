@@ -2,20 +2,20 @@ import type { FC, ReactElement } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import TodoModel from "03-Features/Todo/models/TodoModel";
-import { useAppDispatch, useAppSelector } from "00-App/store";
-
-import TodoItem from "../TodoItem/TodoItem";
-import type { TTodo } from "../../models/type";
+import { ITodoModel } from "05-Shared/types";
+import { useAppSelector } from "00-App/store";
+import { TodoCard } from "04-Entities/TodoCard";
 
 import "./_style.scss";
 
-const TodoList: FC = (): ReactElement => {
-  const todos: Record<number, TTodo> = useAppSelector((state) => state.todos.todos);
+interface IProps {
+  createPresentTodo: (data: { task: string; uuid: string }) => ITodoModel;
+}
+
+const TodoList: FC<IProps> = ({ createPresentTodo }): ReactElement => {
+  const todos = useAppSelector((state) => state.todos.todos);
 
   console.log(todos);
-
-  const dispatch = useAppDispatch();
 
   if (Object.keys(todos).length === 0) {
     return <p>Список задач пуст</p>;
@@ -25,7 +25,7 @@ const TodoList: FC = (): ReactElement => {
     <ul className="section-todos__list-todos">
       {Object.values(todos).map((todo, indexMain) => {
         // Создаем модель
-        const todoModel = new TodoModel({ uuid: todo.uuid, task: todo.task, dispatch: dispatch });
+        const todoModel = createPresentTodo({ task: todo.task, uuid: todo.uuid });
 
         return (
           <AnimatePresence key={indexMain}>
@@ -34,7 +34,7 @@ const TodoList: FC = (): ReactElement => {
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}>
-              <TodoItem
+              <TodoCard
                 task={todo.task}
                 handleDelete={() => todoModel.deleteTodo()}
                 handleSubmit={(changeTask: string) =>
@@ -59,7 +59,7 @@ const TodoList: FC = (): ReactElement => {
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}>
-                        <TodoItem
+                        <TodoCard
                           task={subTodoObj.task}
                           handleDelete={() =>
                             todoModel.deleteSubTodo({

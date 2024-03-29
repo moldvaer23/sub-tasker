@@ -13,11 +13,7 @@ interface IProps {
   setIsActiveEdit: (isActive: boolean) => void;
 }
 
-const TodoItemButtons: FC<IProps> = ({
-  handleDelete,
-  isActiveEdit,
-  setIsActiveEdit,
-}): ReactElement => {
+const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }): ReactElement => {
   const handleEditButtonClick = (): void => {
     setIsActiveEdit(true);
   };
@@ -58,4 +54,4 @@ const TodoItemButtons: FC<IProps> = ({
   );
 };
 
-export default TodoItemButtons;
+export default TodoButtons;

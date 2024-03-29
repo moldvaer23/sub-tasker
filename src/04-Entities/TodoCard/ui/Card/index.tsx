@@ -4,8 +4,8 @@ import type { FC, ReactElement } from "react";
 import addSubTodoIcon from "05-Shared/assets/svg/add-icon.svg";
 import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
 
-import TodoEditForm from "../TodoEditForm/TodoEditForm";
-import TodoItemButtons from "../TodoItemButtons/TodoItemButtons";
+import TodoButtons from "../Buttons";
+import TodoEditForm from "../EditForm";
 
 import "./_style.scss";
 
@@ -17,7 +17,7 @@ interface IProps {
   isSubTodo?: boolean;
 }
 
-const TodoItem: FC<IProps> = ({
+const TodoCard: FC<IProps> = ({
   task,
   isSubTodo,
   handleDelete,
@@ -50,7 +50,7 @@ const TodoItem: FC<IProps> = ({
         className={isSubTodo ? " subtodo todo-item__todo" : "todo-item__todo"}
         onMouseEnter={() => setIsMouseEnter(true)}
         onMouseLeave={() => setIsMouseEnter(false)}>
-        <TodoItemButtons
+        <TodoButtons
           handleDelete={handleDelete}
           isActiveEdit={isActiveEdit}
           setIsActiveEdit={setIsActiveEdit}
@@ -84,4 +84,4 @@ const TodoItem: FC<IProps> = ({
   );
 };
 
-export default TodoItem;
+export default TodoCard;

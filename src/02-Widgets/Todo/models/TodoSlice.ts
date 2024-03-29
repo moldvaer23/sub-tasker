@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import type { TSubTodo, TTodo } from "./type";
+import type { TSubTodo, TTodo } from "05-Shared/types";
 
 interface ITodosState {
   todos: Record<string, TTodo>;

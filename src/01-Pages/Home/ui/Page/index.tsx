@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from "react";
 
-import { Todo } from "03-Features/Todo";
+import { Todo } from "02-Widgets/Todo";
 
 import "./_style.scss";
 

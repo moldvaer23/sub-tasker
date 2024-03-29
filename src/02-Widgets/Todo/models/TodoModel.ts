@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { AppDispatch } from "00-App/store";
 
-import type { ITodoModel, TSubTodo, TTodo } from "./type";
+import type { ITodoModel, TSubTodo, TTodo } from "05-Shared/types";
 import {
   addSubTodo,
   addTodo,
