@@ -1,0 +1,37 @@
+@import "/src/00-App/styles/mixin";
+@import "/src/00-App/styles/variables";
+
+.fields {
+  @include fl-cl;
+  justify-content: center;
+  height: 100%;
+  position: fixed;
+  padding: 10px;
+
+  &__list {
+    @include fl-cl;
+    gap: 10px;
+
+    &__field-item {
+      width: 300px;
+    }
+  }
+}
+
+.list__field-item {
+  max-width: 200px;
+}
+
+.field__button {
+  width: 100%;
+  overflow-wrap: break-word;
+  filter: brightness(60%);
+}
+
+.field__button:first-letter {
+  text-transform: uppercase;
+}
+
+.field__active {
+  filter: unset;
+}
