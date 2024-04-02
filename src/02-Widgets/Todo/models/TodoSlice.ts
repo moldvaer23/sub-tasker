@@ -4,6 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { TSubTodo, TTodo } from "05-Shared/types";
 
 interface ITodosState {
+  uuidTodos: string;
   todos: Record<string, TTodo>;
 }
 
@@ -32,6 +33,7 @@ type TActionDelSubTodo = TActionSubTodoInstance & {
 };
 
 const initialState: ITodosState = {
+  uuidTodos: "",
   todos: {},
 };
 
@@ -39,13 +41,18 @@ const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
+    // Установка uuid объекта задач (его ключа)
+    setUuidTodos(state, action: PayloadAction<string>) {
+      state.uuidTodos = action.payload;
+    },
+
     // Работа с задачами
     // Добавление новой задачи
     addTodo(state, action: PayloadAction<TTodo>) {
       const todo: TTodo = action.payload;
 
       state.todos[todo.uuid] = todo;
-      localStorage.setItem("todos", JSON.stringify(state.todos));
+      localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
     },
 
     // Нужен для инициализации приложения, по этому не сохраняем в localStorage
@@ -59,7 +66,7 @@ const todosSlice = createSlice({
 
       if (todoUuid in state.todos) {
         state.todos[todoUuid].task = action.payload.task;
-        localStorage.setItem("todos", JSON.stringify(state.todos));
+        localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
       } else {
         console.error(`Task with id ${todoUuid} not found.`);
       }
@@ -71,7 +78,7 @@ const todosSlice = createSlice({
 
       if (todoUuid in state.todos) {
         delete state.todos[todoUuid];
-        localStorage.setItem("todos", JSON.stringify(state.todos));
+        localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
       } else {
         console.error(`Task with id ${todoUuid} not found.`);
       }
@@ -85,7 +92,7 @@ const todosSlice = createSlice({
 
       if (todoUuid in state.todos) {
         state.todos[todoUuid].subTodos[subTodo.uuid] = subTodo;
-        localStorage.setItem("todos", JSON.stringify(state.todos));
+        localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
       } else {
         console.error(`Task with id ${todoUuid} not found.`);
       }
@@ -99,7 +106,7 @@ const todosSlice = createSlice({
       if (todoUuid in state.todos) {
         if (subTodoUuid in state.todos[todoUuid].subTodos) {
           state.todos[todoUuid].subTodos[subTodoUuid].task = action.payload.task;
-          localStorage.setItem("todos", JSON.stringify(state.todos));
+          localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
         } else {
           console.error(`Sub Task with id ${subTodoUuid} not found.`);
         }
@@ -116,7 +123,7 @@ const todosSlice = createSlice({
       if (todoUuid in state.todos) {
         if (subTodoUuid in state.todos[todoUuid].subTodos) {
           delete state.todos[todoUuid].subTodos[subTodoUuid];
-          localStorage.setItem("todos", JSON.stringify(state.todos));
+          localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
         } else {
           console.error(`Sub Task with id ${subTodoUuid} not found.`);
         }
@@ -128,6 +135,7 @@ const todosSlice = createSlice({
 });
 
 export const {
+  setUuidTodos,
   addTodo,
   addSubTodo,
   setTodos,

@@ -1,29 +1,36 @@
-import FieldsModel from "02-Widgets/Fields/models/FieldsModel";
-import { FieldsList } from "03-Features/FieldsList";
-import { TField } from "05-Shared/types";
 import { FC } from "react";
 
-const Fields: FC = () => {
-  const fieldsModel = new FieldsModel();
+import { TField } from "05-Shared/types";
+import { useAppDispatch } from "00-App/store";
+import { FieldsList } from "03-Features/FieldsList";
+import FieldsModel from "02-Widgets/Fields/models/FieldsModel";
 
-  const arr: TField[] = [
-    {
-      uuid: "111",
-      uuidTodos: "1",
-      active: true,
-      name: "основной проект",
-    },
-    {
-      uuid: "222",
-      uuidTodos: "2",
-      active: false,
-      name: "другой проект",
-    },
-  ];
+const Fields: FC = () => {
+  const dispatch = useAppDispatch();
+  const fieldsModel = new FieldsModel({ dispatch: dispatch });
+
+  // Хендлер установки активного поля
+  const setActiveField = (uuid: string) => {
+    fieldsModel.setActiveField(uuid);
+  };
+
+  // Хендлер инициализации полей
+  const setFields = (fields: TField[]) => {
+    fieldsModel.setFields(fields);
+  };
+
+  // Хендлер создания нового поля
+  const createNewField = (data: { name: string; uuidTodos?: string }) => {
+    return fieldsModel.createField({ name: data.name, uuidTodos: data.uuidTodos });
+  };
 
   return (
     <>
-      <FieldsList fields={fieldsModel.setFields(arr)} />
+      <FieldsList
+        createNewField={createNewField}
+        setFields={setFields}
+        setActiveField={setActiveField}
+      />
     </>
   );
 };

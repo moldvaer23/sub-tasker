@@ -3,9 +3,12 @@
 
 .fields {
   @include fl-cl;
-  justify-content: center;
-  height: 100%;
   position: fixed;
+
+  gap: 50px;
+  justify-content: center;
+
+  height: 100%;
   padding: 10px;
 
   &__list {
@@ -25,13 +28,14 @@
 .field__button {
   width: 100%;
   overflow-wrap: break-word;
-  filter: brightness(60%);
+  filter: brightness(40%);
 }
 
-.field__button:first-letter {
+.field__button::first-letter {
   text-transform: uppercase;
 }
 
 .field__active {
+  pointer-events: none;
   filter: unset;
 }

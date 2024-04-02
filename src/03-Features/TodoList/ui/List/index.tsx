@@ -15,8 +15,6 @@ interface IProps {
 const TodoList: FC<IProps> = ({ createPresentTodo }): ReactElement => {
   const todos = useAppSelector((state) => state.todos.todos);
 
-  console.log(todos);
-
   if (Object.keys(todos).length === 0) {
     return <p>Список задач пуст</p>;
   }
