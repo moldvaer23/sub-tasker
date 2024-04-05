@@ -11,18 +11,23 @@
   height: 100%;
   padding: 10px;
 
+  &__buttons {
+    @include fl-cl;
+    gap: 10px;
+  }
+
+  &__button {
+    font-size: 14px;
+  }
+
   &__list {
     @include fl-cl;
     gap: 10px;
-
-    &__field-item {
-      width: 300px;
-    }
   }
 }
 
 .list__field-item {
-  max-width: 200px;
+  max-width: 300px;
 }
 
 .field__button {

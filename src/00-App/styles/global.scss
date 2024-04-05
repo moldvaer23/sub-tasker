@@ -19,3 +19,8 @@ body {
   font-family: $primary-font-family;
   background-color: $page-background-color;
 }
+
+// Блокирует прокрутку
+.locked {
+  overflow: hidden;
+}

@@ -1,0 +1,18 @@
+@import "/src/00-App/styles/mixin";
+
+.form-list {
+  @include fl-cl;
+  gap: 50px;
+  min-width: 500px;
+}
+
+.form-list__label {
+  @include fl-cl;
+  gap: 10px;
+  align-items: center;
+}
+
+.form-list__input {
+  width: 100%;
+  padding: 10px;
+}

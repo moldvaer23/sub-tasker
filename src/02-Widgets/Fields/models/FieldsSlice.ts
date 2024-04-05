@@ -29,6 +29,20 @@ const fieldsSlice = createSlice({
       localStorage.setItem("fields", JSON.stringify(state.fields));
     },
 
+    // Удаление поля
+    deleteField(state, action: PayloadAction<{ uuid: string; uuidTodos: string }>) {
+      delete state.fields[action.payload.uuid];
+
+      localStorage.setItem("fields", JSON.stringify(state.fields));
+      localStorage.removeItem(action.payload.uuidTodos);
+    },
+
+    // Редактирование имени поля
+    editFieldName(state, action: PayloadAction<{ uuid: string; name: string }>) {
+      state.fields[action.payload.uuid].name = action.payload.name;
+      localStorage.setItem("fields", JSON.stringify(state.fields));
+    },
+
     // Инициализация полей
     setFields(state, action: PayloadAction<TField[]>) {
       const fields = action.payload;
@@ -40,6 +54,7 @@ const fieldsSlice = createSlice({
   },
 });
 
-export const { setActiveField, createField, setFields } = fieldsSlice.actions;
+export const { setActiveField, createField, deleteField, setFields, editFieldName } =
+  fieldsSlice.actions;
 
 export default fieldsSlice.reducer;

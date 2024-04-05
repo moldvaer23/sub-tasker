@@ -34,6 +34,8 @@ export type TField = {
 // Модель листов задач
 export interface IFields {
   createField: (data: { uuidTodos?: string; name: string }) => TField;
+  deleteField: (data: { uuid: string; uuidTodos: string }) => void;
+  editFieldName: (data: { uuid: string; name: string }) => void;
   getfield: (uuid: string) => TField | undefined;
   getfields: () => TField[];
   setActiveField: (uuid: string) => void;

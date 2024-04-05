@@ -24,12 +24,24 @@ const Fields: FC = () => {
     return fieldsModel.createField({ name: data.name, uuidTodos: data.uuidTodos });
   };
 
+  // Хендлер удаления поля
+  const deleteField = (data: { uuid: string; uuidTodos: string }) => {
+    fieldsModel.deleteField({ uuid: data.uuid, uuidTodos: data.uuidTodos });
+  };
+
+  // Хендлер редактирования поля
+  const editFieldName = (data: { uuid: string; name: string }) => {
+    fieldsModel.editFieldName({ uuid: data.uuid, name: data.name });
+  };
+
   return (
     <>
       <FieldsList
         createNewField={createNewField}
-        setFields={setFields}
+        deleteField={deleteField}
+        editFieldName={editFieldName}
         setActiveField={setActiveField}
+        setFields={setFields}
       />
     </>
   );
