@@ -30,9 +30,8 @@ const TodoEditForm: FC<IProps> = ({ placeholderTask, submitHandle, setIsActiveEd
 
     if (!error) {
       submitHandle(changedTask);
+      setIsActiveEdit(false);
     }
-
-    setIsActiveEdit(false);
   };
 
   return (
@@ -40,16 +39,17 @@ const TodoEditForm: FC<IProps> = ({ placeholderTask, submitHandle, setIsActiveEd
       {errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
 
       <TextArea
+        // eslint-disable-next-line
+        autoFocus
         className="form-edit-todo__textarea"
         name="changeTask"
         onChange={(e: ChangeEvent<HTMLTextAreaElement>): void => setChangedTask(e.target.value)}
         value={changedTask}
-        // eslint-disable-next-line
-        autoFocus
       />
 
       <Button
         className="form-edit-todo__button-submit"
+        disabled={error}
         type={ETypeButton.submit}
         typeStyle={ETypeButtonStyle.icon}
         image={{
