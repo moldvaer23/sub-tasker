@@ -1,60 +1,58 @@
-import type { FC, MouseEvent, ReactElement } from "react";
-
+import { FC, MouseEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { EDefaultClassNames } from "../classNames";
 
 import "./_style.scss";
 
 export enum ETypeButton {
   button = "button",
-  submit = "submit",
   reset = "reset",
+  submit = "submit",
 }
 
 export enum ETypeButtonStyle {
-  primary = "button__primary",
   accent = "button__accent",
   icon = "button__icon",
+  primary = "button__primary",
 }
 
 export enum ETypeButtonSize {
-  small = "button__small",
-  medium = "button__medium",
-  large = "button__large",
   default = "button__default",
+  large = "button__large",
+  medium = "button__medium",
+  small = "button__small",
 }
 
 export type TImageSrcProps = {
-  imageSrc: string;
   alt: string;
+  imageSrc: string;
 };
 
 interface IProps {
-  text?: string;
+  animate?: boolean;
+  className?: string;
+  disabled?: boolean;
   image?: TImageSrcProps;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  opacity?: number;
+  text?: string;
   type?: ETypeButton;
   typeSize?: ETypeButtonSize;
   typeStyle: ETypeButtonStyle;
-  className?: string;
-  disabled?: boolean;
-  opacity?: number;
-  animate?: boolean;
 }
 
 const Button: FC<IProps> = ({
-  onClick,
-  text,
-  image,
-  type = ETypeButton.button,
-  typeStyle,
-  className,
-  typeSize = ETypeButtonSize.default,
-  disabled = false,
-  opacity = 1,
   animate = true,
-}): ReactElement => {
+  className,
+  disabled = false,
+  image,
+  onClick,
+  opacity = 1,
+  text,
+  type = ETypeButton.button,
+  typeSize = ETypeButtonSize.default,
+  typeStyle,
+}) => {
   const content = image ? (
     <img className={EDefaultClassNames.buttonImage} src={image.imageSrc} alt={image.alt} />
   ) : (
@@ -68,24 +66,24 @@ const Button: FC<IProps> = ({
   return animate ? (
     <AnimatePresence>
       <motion.button
-        initial={{ scale: 1 }}
-        whileTap={{ scale: typeStyle !== ETypeButtonStyle.icon ? 2 : 3 }}
+        className={classNameSeting}
+        disabled={disabled}
         exit={{ scale: 1 }}
+        initial={{ scale: 1 }}
+        onClick={onClick ? onClick : undefined}
         style={{ opacity: opacity }}
         transition={{ type: "spring", stiffness: 500, damping: 5 }}
-        className={classNameSeting}
         type={type}
-        onClick={onClick ? onClick : undefined}
-        disabled={disabled}>
+        whileTap={{ scale: typeStyle !== ETypeButtonStyle.icon ? 2 : 3 }}>
         {content}
       </motion.button>
     </AnimatePresence>
   ) : (
     <button
       className={classNameSeting}
-      type={type}
+      disabled={disabled}
       onClick={onClick ? onClick : undefined}
-      disabled={disabled}>
+      type={type}>
       {content}
     </button>
   );

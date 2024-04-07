@@ -1,11 +1,11 @@
-import type { FC, ReactElement } from "react";
+import { FC } from "react";
 
 import { Todo } from "02-Widgets/Todo";
 import { Fields } from "02-Widgets/Fields";
 
 import "./_style.scss";
 
-const Home: FC = (): ReactElement => {
+const Home: FC = () => {
   return (
     <main className="main">
       <Fields />

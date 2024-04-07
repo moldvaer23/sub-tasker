@@ -1,4 +1,4 @@
-import type { FC, ReactElement } from "react";
+import { FC } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -12,7 +12,7 @@ interface IProps {
   createPresentTodo: (data: { task: string; uuid: string }) => ITodoModel;
 }
 
-const TodoList: FC<IProps> = ({ createPresentTodo }): ReactElement => {
+const TodoList: FC<IProps> = ({ createPresentTodo }) => {
   const todos = useAppSelector((state) => state.todos.todos);
 
   if (Object.keys(todos).length === 0) {

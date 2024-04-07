@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 
 import { AppDispatch } from "00-App/store";
+import { ITodoModel, TSubTodo, TTodo } from "05-Shared/types";
 
-import type { ITodoModel, TSubTodo, TTodo } from "05-Shared/types";
 import {
   addSubTodo,
   addTodo,
@@ -11,6 +11,10 @@ import {
   updateSubTodo,
   updateTodo,
 } from "./TodoSlice";
+
+/*
+ * Класс задачи
+ */
 
 class TodoModel implements ITodoModel {
   protected _uuid: string;
@@ -43,7 +47,6 @@ class TodoModel implements ITodoModel {
       task: data.task,
     };
 
-    // Создание подзадачи
     this._subTodos[uuidSubTodo] = subTodoObj;
 
     if (!data.uuid) {
@@ -108,6 +111,7 @@ class TodoModel implements ITodoModel {
     );
   };
 
+  // Получение задачи
   public getTodo = (): TTodo => {
     return {
       uuid: this._uuid,

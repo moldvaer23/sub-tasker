@@ -1,9 +1,7 @@
-import type { FC, ReactElement } from "react";
+import { FC } from "react";
 
-import editIcon from "05-Shared/assets/svg/edit-icon.svg";
-import closeIcon from "05-Shared/assets/svg/close-icon.svg";
-import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
-import { Button, ETypeButtonStyle, ETypeButtonSize } from "05-Shared/ui/Button";
+import { closeIcon, deleteIcon, editIcon } from "05-Shared/assets/svg";
+import { Button, ETypeButtonSize, ETypeButtonStyle } from "05-Shared/ui/Button";
 
 import "./_style.scss";
 
@@ -13,7 +11,7 @@ interface IProps {
   setIsActiveEdit: (isActive: boolean) => void;
 }
 
-const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }): ReactElement => {
+const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }) => {
   const handleEditButtonClick = (): void => {
     setIsActiveEdit(true);
   };
@@ -29,17 +27,16 @@ const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }
           <Button
             className="todo__button"
             image={{ imageSrc: deleteIcon, alt: "Кнопка удалиния" }}
-            typeStyle={ETypeButtonStyle.icon}
-            typeSize={ETypeButtonSize.small}
             onClick={handleDelete}
+            typeSize={ETypeButtonSize.small}
+            typeStyle={ETypeButtonStyle.icon}
           />
-          {/*  Показываем кнопку редактировать */}
           <Button
             className="todo__button"
             image={{ imageSrc: editIcon, alt: "Кнопка редактирования" }}
-            typeStyle={ETypeButtonStyle.icon}
-            typeSize={ETypeButtonSize.small}
             onClick={handleEditButtonClick}
+            typeSize={ETypeButtonSize.small}
+            typeStyle={ETypeButtonStyle.icon}
           />
         </>
       ) : (
@@ -48,9 +45,9 @@ const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }
           <Button
             className="todo__button"
             image={{ imageSrc: closeIcon, alt: "Кнопка закрыть форму редактирования" }}
-            typeStyle={ETypeButtonStyle.icon}
-            typeSize={ETypeButtonSize.small}
             onClick={handleCloseButtonClick}
+            typeSize={ETypeButtonSize.small}
+            typeStyle={ETypeButtonStyle.icon}
           />
         </>
       )}

@@ -3,12 +3,10 @@ import { FC, useState } from "react";
 import { TField } from "05-Shared/types";
 import { Modal } from "04-Entities/Modal";
 import { useAppSelector } from "00-App/store";
-import { Button, ETypeButtonStyle, ETypeButtonSize } from "05-Shared/ui/Button";
+import { addIconPlus, deleteIcon, editIcon } from "05-Shared/assets/svg";
+import { Button, ETypeButtonSize, ETypeButtonStyle } from "05-Shared/ui/Button";
 
 import Form from "../Form";
-import addIcon from "05-Shared/assets/svg/add-plus-icon.svg";
-import editIcon from "05-Shared/assets/svg/edit-icon.svg";
-import deleteIcon from "05-Shared/assets/svg/delete-icon.svg";
 
 import "./_style.scss";
 
@@ -47,29 +45,29 @@ const FieldsList: FC<IProps> = ({
         <div className="fields__buttons">
           <Button
             className="fields__button"
-            typeStyle={ETypeButtonStyle.icon}
             image={{
               alt: "Добавить новый лист",
-              imageSrc: addIcon,
+              imageSrc: addIconPlus,
             }}
+            typeStyle={ETypeButtonStyle.icon}
             onClick={() => setOpenNewField(true)}
           />
           <Button
             className="fields__button"
-            typeStyle={ETypeButtonStyle.icon}
             image={{
               alt: "Изменить название листа",
               imageSrc: editIcon,
             }}
+            typeStyle={ETypeButtonStyle.icon}
             onClick={() => setOpenEditField(true)}
           />
           <Button
             className="fields__button"
-            typeStyle={ETypeButtonStyle.icon}
             image={{
               alt: "Удалить лист",
               imageSrc: deleteIcon,
             }}
+            typeStyle={ETypeButtonStyle.icon}
             onClick={() =>
               deleteField({ uuid: activeField, uuidTodos: fieldsStore[activeField].uuidTodos })
             }
@@ -105,8 +103,8 @@ const FieldsList: FC<IProps> = ({
       {openNewField && (
         <Modal setOpen={setOpenNewField}>
           <Form
-            label="Создание нового листа"
             buttonText="Создать"
+            label="Создание нового листа"
             placeHolder="Название листа"
             onSubmit={(value: string) => {
               const newField = createNewField({
@@ -123,8 +121,8 @@ const FieldsList: FC<IProps> = ({
       {openEditField && (
         <Modal setOpen={setOpenEditField}>
           <Form
-            label="Изминение названия листа"
             buttonText="Применить"
+            label="Изминение названия листа"
             placeHolder="Название листа"
             onSubmit={(value: string) => {
               editFieldName({ uuid: activeField, name: value });

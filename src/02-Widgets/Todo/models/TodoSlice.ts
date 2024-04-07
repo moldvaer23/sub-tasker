@@ -1,20 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-
-import type { TSubTodo, TTodo } from "05-Shared/types";
+import { TSubTodo, TTodo } from "05-Shared/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ITodosState {
   uuidTodos: string;
   todos: Record<string, TTodo>;
 }
 
-// Типы Action для Main Todo
-type TActionUpdateMainTodo = {
-  uuid: string;
-  task: string;
-};
-
-// Типы Action для Sub Todo
+/*
+ * Типы Action для Sub Todo
+ */
 type TActionSubTodoInstance = {
   uuidPinTodo: string;
 };
@@ -61,7 +55,7 @@ const todosSlice = createSlice({
     },
 
     // Обновление задачи
-    updateTodo(state, action: PayloadAction<TActionUpdateMainTodo>) {
+    updateTodo(state, action: PayloadAction<{ uuid: string; task: string }>) {
       const todoUuid: string = action.payload.uuid;
 
       if (todoUuid in state.todos) {

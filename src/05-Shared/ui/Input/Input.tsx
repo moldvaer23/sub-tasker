@@ -1,5 +1,4 @@
-import type { ChangeEvent, FC, ReactElement } from "react";
-
+import { ChangeEvent, FC } from "react";
 import { EDefaultClassNames } from "../classNames";
 
 import "./_style.scss";
@@ -10,36 +9,36 @@ export enum ETypeInput {
 }
 
 interface IProps {
-  type: ETypeInput;
-  name: string;
-  id?: string;
   className?: string;
-  placeholder?: string;
+  id?: string;
+  name: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  placeholder?: string;
   required?: boolean;
+  type: ETypeInput;
+  value?: string;
 }
 
 // Для работы компонента нужно передать хотя бы type & name, id в случае если его не передали автоматически будет равно name
 const Input: FC<IProps> = ({
-  type,
+  className,
   name,
   id = name,
-  className,
-  placeholder,
   onChange,
-  value,
+  placeholder,
   required = false,
-}): ReactElement => {
+  type,
+  value,
+}) => {
   return (
     <input
       className={className ? `${className} ${EDefaultClassNames.input}` : EDefaultClassNames.input}
-      name={name}
       id={id}
+      name={name}
+      onChange={onChange ? (e: ChangeEvent<HTMLInputElement>): void => onChange(e) : undefined}
+      required={required}
       type={type}
       {...(placeholder !== undefined && { placeholder })}
-      required={required}
-      onChange={onChange ? (e: ChangeEvent<HTMLInputElement>): void => onChange(e) : undefined}
       {...(value !== undefined && { value })}
     />
   );

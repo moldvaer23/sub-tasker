@@ -1,29 +1,30 @@
-import type { ChangeEvent, FC, ReactElement } from "react";
-
+import { ChangeEvent, FC } from "react";
 import { EDefaultClassNames } from "../classNames";
 
 import "./_style.scss";
 
 interface IProps {
   className?: string;
-  name: string;
   id?: string;
-  value?: string;
+  name: string;
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  value?: string;
 }
 
-const TextArea: FC<IProps> = ({ className, value, onChange, name, id = name }): ReactElement => {
+const TextArea: FC<IProps> = ({ className, value, onChange, name, id = name }) => {
+  const classNameSetting = className
+    ? `${className} ${EDefaultClassNames.textArea}`
+    : EDefaultClassNames.textArea;
+
   return (
     <textarea
-      className={
-        className ? `${className} ${EDefaultClassNames.textArea}` : EDefaultClassNames.textArea
-      }
-      name={name}
+      className={classNameSetting}
       id={id}
+      name={name}
       onChange={onChange ? (e: ChangeEvent<HTMLTextAreaElement>): void => onChange(e) : undefined}
-      {...(value !== undefined && { value })}
-      spellCheck={true}
       rows={5}
+      spellCheck={true}
+      {...(value !== undefined && { value })}
     />
   );
 };

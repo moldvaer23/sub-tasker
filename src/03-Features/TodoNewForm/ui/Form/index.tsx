@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import type { ChangeEvent, FC, ReactElement } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 
 import validator from "05-Shared/utils/validator";
+import { addIconPlus } from "05-Shared/assets/svg";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
 import { Button, ETypeButton, ETypeButtonStyle } from "05-Shared/ui/Button";
-
-import addIcon from "05-Shared/assets/svg/add-plus-icon.svg";
 
 import "./_style.scss";
 
@@ -14,10 +12,10 @@ interface IProps {
   createNewTodo: (task: string) => void;
 }
 
-const TodoNewForm: FC<IProps> = ({ createNewTodo }): ReactElement => {
-  const [task, setTask] = useState<string>("");
+const TodoNewForm: FC<IProps> = ({ createNewTodo }) => {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [task, setTask] = useState<string>("");
 
   // Валидируем поле task
   useEffect((): void => {
@@ -44,25 +42,25 @@ const TodoNewForm: FC<IProps> = ({ createNewTodo }): ReactElement => {
         <Input
           className="form-new-todo__input"
           name="new-todo"
+          onChange={(e: ChangeEvent<HTMLInputElement>): void => setTask(e.target.value)}
           placeholder="Напиши её тут"
+          required
           type={ETypeInput.text}
           value={task}
-          required
-          onChange={(e: ChangeEvent<HTMLInputElement>): void => setTask(e.target.value)}
         />
         {errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
       </label>
 
       <Button
+        animate={false}
         className="form-new-todo__button-submit"
+        disabled={error}
         type={ETypeButton.submit}
         typeStyle={ETypeButtonStyle.icon}
         image={{
           alt: "Добавить задачу",
-          imageSrc: addIcon,
+          imageSrc: addIconPlus,
         }}
-        animate={false}
-        disabled={error}
       />
     </form>
   );

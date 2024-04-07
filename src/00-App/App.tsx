@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import type { FC, ReactElement } from "react";
+import { FC, useEffect } from "react";
 
 import { Home } from "01-Pages/Home";
 import { TField, TTodo } from "05-Shared/types";
@@ -10,11 +9,13 @@ import { useAppDispatch, useAppSelector } from "./store";
 
 import "./styles/global.scss";
 
-const App: FC = (): ReactElement => {
+const App: FC = () => {
   const storeActiveField = useAppSelector((state) => state.fields.acitveField);
   const dispatch = useAppDispatch();
 
-  // Инициализация приложения из LocalStorage
+  /*
+   * Инициализация приложения из LocalStorage
+   */
   useEffect(() => {
     const localActiveField = localStorage.getItem("activeField") as string;
 
@@ -24,7 +25,9 @@ const App: FC = (): ReactElement => {
     // eslint-disable-next-line
   }, []);
 
-  // Рендер приложения при изминении активного поля
+  /*
+   * Рендер приложения при изминении активного поля
+   */
   useEffect(() => {
     if (storeActiveField.length !== 0) {
       // Получаем поля из LocalStorage

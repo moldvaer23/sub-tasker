@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import type { FC, ReactElement } from "react";
+import { FC, useEffect, useState } from "react";
 
-import addSubTodoIcon from "05-Shared/assets/svg/add-icon.svg";
-import { Button, ETypeButtonStyle, ETypeButtonSize } from "05-Shared/ui/Button";
+import { addIconDefault } from "05-Shared/assets/svg";
+import { Button, ETypeButtonSize, ETypeButtonStyle } from "05-Shared/ui/Button";
 
 import TodoButtons from "../Buttons";
 import TodoEditForm from "../EditForm";
@@ -10,20 +9,20 @@ import TodoEditForm from "../EditForm";
 import "./_style.scss";
 
 interface IProps {
-  task: string;
+  handleCreateSubTodo?: () => void;
   handleDelete: () => void;
   handleSubmit: (changeTask: string) => void;
-  handleCreateSubTodo?: () => void;
   isSubTodo?: boolean;
+  task: string;
 }
 
 const TodoCard: FC<IProps> = ({
-  task,
-  isSubTodo,
+  handleCreateSubTodo,
   handleDelete,
   handleSubmit,
-  handleCreateSubTodo,
-}): ReactElement => {
+  isSubTodo,
+  task,
+}) => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false);
 
@@ -59,9 +58,9 @@ const TodoCard: FC<IProps> = ({
         {isActiveEdit ? (
           // Показываем форму редактирования
           <TodoEditForm
-            submitHandle={handleSubmit}
             placeholderTask={task}
             setIsActiveEdit={setIsActiveEdit}
+            submitHandle={handleSubmit}
           />
         ) : (
           // Показываем текст задачи
@@ -71,12 +70,12 @@ const TodoCard: FC<IProps> = ({
         {!isSubTodo && handleCreateSubTodo && (
           <Button
             className="todo__button-new-subtodo"
-            image={{ imageSrc: addSubTodoIcon, alt: "Кнопка добавить подзадачу" }}
-            typeStyle={ETypeButtonStyle.icon}
-            typeSize={ETypeButtonSize.small}
+            disabled={isActiveEdit}
+            image={{ imageSrc: addIconDefault, alt: "Кнопка добавить подзадачу" }}
             onClick={handleCreateSubTodo}
             opacity={!isActiveEdit && isMouseEnter ? 1 : 0}
-            disabled={isActiveEdit}
+            typeSize={ETypeButtonSize.small}
+            typeStyle={ETypeButtonStyle.icon}
           />
         )}
       </article>
