@@ -6,8 +6,6 @@
   gap: 50px;
 
   &-item {
-    position: relative;
-
     @include fl-cl;
     gap: 20px;
     align-items: center;
