@@ -86,8 +86,8 @@ const Button: FC<IProps> = ({
       className={classNameSeting}
       disabled={disabled}
       onClick={onClick ? onClick : undefined}
-      onMouseLeave={onMouseLeave}>
-      type={type}
+      onMouseLeave={onMouseLeave}
+      type={type}>
       {content}
     </button>
   );
