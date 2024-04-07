@@ -30,6 +30,9 @@ const TodoNewForm: FC<IProps> = ({ createNewTodo }) => {
       // Создаем новую модель главной задачи
       createNewTodo(task);
 
+      // Прокручиваем страницу в низ
+      window.scrollTo(0, document.body.scrollHeight);
+
       // Обнуляем поле формы
       setTask("");
     }

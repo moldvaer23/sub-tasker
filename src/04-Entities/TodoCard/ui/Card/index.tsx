@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
+import { AnimatePresence, motion } from "framer-motion";
+
 import { addIconDefault } from "05-Shared/assets/svg";
 import { Button, ETypeButtonSize, ETypeButtonStyle } from "05-Shared/ui/Button";
 
@@ -44,11 +46,14 @@ const TodoCard: FC<IProps> = ({
   }, [isActiveEdit]);
 
   return (
-    <>
-      <article
+    <AnimatePresence>
+      <motion.article
         className={isSubTodo ? " subtodo todo" : "todo"}
+        initial={{ scale: 0, opacity: 0 }}
         onMouseEnter={() => setIsMouseEnter(true)}
-        onMouseLeave={() => setIsMouseEnter(false)}>
+        onMouseLeave={() => setIsMouseEnter(false)}
+        transition={{ duration: 0.3 }}
+        whileInView={{ scale: 1, opacity: 1 }}>
         <TodoButtons
           handleDelete={handleDelete}
           isActiveEdit={isActiveEdit}
@@ -78,8 +83,8 @@ const TodoCard: FC<IProps> = ({
             typeStyle={ETypeButtonStyle.icon}
           />
         )}
-      </article>
-    </>
+      </motion.article>
+    </AnimatePresence>
   );
 };
 
