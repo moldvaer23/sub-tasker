@@ -55,3 +55,20 @@
   pointer-events: none;
   filter: unset;
 }
+
+.confirm-delete {
+  &__wrapper {
+    @include fl-cl;
+    align-items: center;
+    gap: 50px;
+    min-width: 400px;
+  }
+
+  &__span {
+    font-size: 20px;
+  }
+
+  &__button {
+    width: 100%;
+  }
+}

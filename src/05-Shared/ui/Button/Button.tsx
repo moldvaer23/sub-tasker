@@ -34,6 +34,7 @@ interface IProps {
   disabled?: boolean;
   image?: TImageSrcProps;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onMouseLeave?: (e: MouseEvent<HTMLButtonElement>) => void;
   opacity?: number;
   text?: string;
   type?: ETypeButton;
@@ -47,6 +48,7 @@ const Button: FC<IProps> = ({
   disabled = false,
   image,
   onClick,
+  onMouseLeave,
   opacity = 1,
   text,
   type = ETypeButton.button,
@@ -71,6 +73,7 @@ const Button: FC<IProps> = ({
         exit={{ scale: 1 }}
         initial={{ scale: 1 }}
         onClick={onClick ? onClick : undefined}
+        onMouseLeave={onMouseLeave}
         style={{ opacity: opacity }}
         transition={{ type: "spring", stiffness: 500, damping: 5 }}
         type={type}
@@ -83,7 +86,8 @@ const Button: FC<IProps> = ({
       className={classNameSeting}
       disabled={disabled}
       onClick={onClick ? onClick : undefined}
-      type={type}>
+      onMouseLeave={onMouseLeave}>
+      type={type}
       {content}
     </button>
   );

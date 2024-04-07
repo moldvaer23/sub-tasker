@@ -26,6 +26,7 @@ const FieldsList: FC<IProps> = ({
   setFields,
 }) => {
   // Состояния статуса модальных окон
+  const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false);
   const [openEditField, setOpenEditField] = useState<boolean>(false);
   const [openNewField, setOpenNewField] = useState<boolean>(false);
 
@@ -68,9 +69,7 @@ const FieldsList: FC<IProps> = ({
               imageSrc: deleteIcon,
             }}
             typeStyle={ETypeButtonStyle.icon}
-            onClick={() =>
-              deleteField({ uuid: activeField, uuidTodos: fieldsStore[activeField].uuidTodos })
-            }
+            onClick={() => setOpenConfirmDelete(true)}
           />
         </div>
         <ul className="fields__list">
@@ -129,6 +128,25 @@ const FieldsList: FC<IProps> = ({
               setOpenEditField(false);
             }}
           />
+        </Modal>
+      )}
+
+      {openConfirmDelete && (
+        <Modal setOpen={setOpenConfirmDelete}>
+          <div className="confirm-delete__wrapper">
+            <span className="confirm-delete__span">Удалить текущий лист?</span>
+            <Button
+              animate={false}
+              className="confirm-delete__button"
+              text="Да"
+              typeSize={ETypeButtonSize.medium}
+              typeStyle={ETypeButtonStyle.primary}
+              onClick={() => {
+                deleteField({ uuid: activeField, uuidTodos: fieldsStore[activeField].uuidTodos });
+                setOpenConfirmDelete(false);
+              }}
+            />
+          </div>
         </Modal>
       )}
     </>

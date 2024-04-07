@@ -9,6 +9,7 @@ export enum ETypeInput {
 }
 
 interface IProps {
+  autoFocus?: boolean;
   className?: string;
   id?: string;
   name: string;
@@ -21,6 +22,7 @@ interface IProps {
 
 // Для работы компонента нужно передать хотя бы type & name, id в случае если его не передали автоматически будет равно name
 const Input: FC<IProps> = ({
+  autoFocus,
   className,
   name,
   id = name,
@@ -38,6 +40,7 @@ const Input: FC<IProps> = ({
       onChange={onChange ? (e: ChangeEvent<HTMLInputElement>): void => onChange(e) : undefined}
       required={required}
       type={type}
+      {...(autoFocus !== undefined && { autoFocus })}
       {...(placeholder !== undefined && { placeholder })}
       {...(value !== undefined && { value })}
     />

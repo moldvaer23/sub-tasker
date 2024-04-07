@@ -28,6 +28,8 @@ const Form: FC<IProps> = ({ onSubmit, placeHolder, buttonText, label }) => {
       <label className="form-fields__label" htmlFor="field-name">
         <span className="form-fields__label-span">{label}</span>
         <Input
+          // eslint-disable-next-line
+          autoFocus
           className="form-fields__input"
           name="field-name"
           onChange={(e) => setValue(e.target.value)}
