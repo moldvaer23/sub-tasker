@@ -25,24 +25,27 @@ const TodoCard: FC<IProps> = ({
   isSubTodo,
   task,
 }) => {
-  const [isActiveEdit, setIsActiveEdit] = useState<boolean>(false);
+  const [isActiveEdit, setIsActiveEdit] = useState<boolean>(task.length !== 0 ? false : true);
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false);
+
+  // Хендлер закрытия формы редактирования задачи
+  const handleCloseEdit = () => {
+    if (task.length === 0) handleDelete();
+
+    setIsActiveEdit(false);
+  };
 
   // Вешаем и снимаем слушатели формы редактирования Todo
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent): void => {
-      if (e.code === "Escape") {
-        setIsActiveEdit(false);
-      }
+      if (e.code === "Escape") handleCloseEdit();
     };
 
-    if (isActiveEdit) {
-      document.addEventListener("keydown", handleEsc);
-    }
+    if (isActiveEdit) document.addEventListener("keydown", handleEsc);
 
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-    };
+    return () => document.removeEventListener("keydown", handleEsc);
+
+    // eslint-disable-next-line
   }, [isActiveEdit]);
 
   return (
@@ -55,9 +58,10 @@ const TodoCard: FC<IProps> = ({
         transition={{ duration: 0.3 }}
         whileInView={{ scale: 1, opacity: 1 }}>
         <TodoButtons
+          handleCloseEdit={handleCloseEdit}
           handleDelete={handleDelete}
+          handleOpenEdit={() => setIsActiveEdit(true)}
           isActiveEdit={isActiveEdit}
-          setIsActiveEdit={setIsActiveEdit}
         />
 
         {isActiveEdit ? (

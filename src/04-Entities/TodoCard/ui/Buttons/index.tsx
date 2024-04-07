@@ -6,20 +6,18 @@ import { Button, ETypeButtonSize, ETypeButtonStyle } from "05-Shared/ui/Button";
 import "./_style.scss";
 
 interface IProps {
+  handleCloseEdit: () => void;
   handleDelete: () => void;
+  handleOpenEdit: () => void;
   isActiveEdit: boolean;
-  setIsActiveEdit: (isActive: boolean) => void;
 }
 
-const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }) => {
-  const handleEditButtonClick = (): void => {
-    setIsActiveEdit(true);
-  };
-
-  const handleCloseButtonClick = (): void => {
-    setIsActiveEdit(false);
-  };
-
+const TodoButtons: FC<IProps> = ({
+  handleCloseEdit,
+  handleDelete,
+  handleOpenEdit,
+  isActiveEdit,
+}) => {
   return (
     <div className="todo__buttons-wrapper">
       {!isActiveEdit ? (
@@ -34,7 +32,7 @@ const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }
           <Button
             className="todo__button"
             image={{ imageSrc: editIcon, alt: "Кнопка редактирования" }}
-            onClick={handleEditButtonClick}
+            onClick={handleOpenEdit}
             typeSize={ETypeButtonSize.small}
             typeStyle={ETypeButtonStyle.icon}
           />
@@ -45,7 +43,7 @@ const TodoButtons: FC<IProps> = ({ handleDelete, isActiveEdit, setIsActiveEdit }
           <Button
             className="todo__button"
             image={{ imageSrc: closeIcon, alt: "Кнопка закрыть форму редактирования" }}
-            onClick={handleCloseButtonClick}
+            onClick={handleCloseEdit}
             typeSize={ETypeButtonSize.small}
             typeStyle={ETypeButtonStyle.icon}
           />

@@ -44,6 +44,8 @@ const TodoEditForm: FC<IProps> = ({ placeholderTask, submitHandle, setIsActiveEd
         name="changeTask"
         onChange={(e: ChangeEvent<HTMLTextAreaElement>): void => setChangedTask(e.target.value)}
         value={changedTask}
+        // eslint-disable-next-line
+        autoFocus
       />
 
       <Button

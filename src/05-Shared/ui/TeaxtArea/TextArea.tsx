@@ -9,12 +9,19 @@ interface IProps {
   name: string;
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   value?: string;
+  autoFocus?: boolean;
 }
 
-const TextArea: FC<IProps> = ({ className, value, onChange, name, id = name }) => {
+const TextArea: FC<IProps> = ({ className, value, onChange, name, id = name, autoFocus }) => {
   const classNameSetting = className
     ? `${className} ${EDefaultClassNames.textArea}`
     : EDefaultClassNames.textArea;
+
+  const onFocus = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const val = e.target.value;
+    e.target.value = "";
+    e.target.value = val;
+  };
 
   return (
     <textarea
@@ -24,7 +31,9 @@ const TextArea: FC<IProps> = ({ className, value, onChange, name, id = name }) =
       onChange={onChange ? (e: ChangeEvent<HTMLTextAreaElement>): void => onChange(e) : undefined}
       rows={5}
       spellCheck={true}
+      {...(autoFocus !== undefined && { autoFocus })}
       {...(value !== undefined && { value })}
+      onFocus={(e) => onFocus(e)}
     />
   );
 };

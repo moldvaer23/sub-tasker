@@ -31,7 +31,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
               handleSubmit={(changeTask: string) =>
                 todoModel.editTodo({ task: changeTask, uuid: todoModel.uuid })
               }
-              handleCreateSubTodo={() => todoModel.createSubTodo({ task: "Введите текст" })}
+              handleCreateSubTodo={() => todoModel.createSubTodo({ task: "" })}
             />
 
             {Object.values(todo.subTodos).length > 0 && (
