@@ -4,36 +4,47 @@
 .fields {
   @include fl-cl;
   position: fixed;
+  top: 0;
 
+  grid-row: 2;
   gap: 50px;
   justify-content: center;
 
+  width: 100%;
+  max-width: 250px;
   height: 100%;
-  padding: 10px;
 
   &__buttons {
-    @include fl-cl;
+    display: flex;
     gap: 10px;
+    align-self: center;
   }
 
   &__button {
+    padding: 10px;
     font-size: 14px;
+    background-color: $primary-color;
+    border-radius: 5px;
   }
 
   &__list {
     @include fl-cl;
-    gap: 10px;
+    gap: 15px;
   }
-}
-
-.list__field-item {
-  max-width: 300px;
 }
 
 .field__button {
   width: 100%;
+  padding: 10px 20px;
+
+  font-size: 17px;
+  font-weight: 500;
+  color: $accent-text-color;
   overflow-wrap: break-word;
+
+  background-color: $secondary-color;
   filter: brightness(40%);
+  border-radius: 0 10px 10px 0;
 }
 
 .field__button::first-letter {

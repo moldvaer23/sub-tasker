@@ -1,0 +1,17 @@
+@import "/src/00-App/styles/variables";
+
+.header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  grid-column: 2;
+  justify-self: center;
+}
+
+.section__todo-list {
+  grid-column: 2;
+  justify-self: center;
+  width: $primary-width-element;
+  margin-top: 100px;
+  margin-bottom: 200px;
+}

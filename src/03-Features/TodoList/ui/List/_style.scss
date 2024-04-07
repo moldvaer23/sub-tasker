@@ -1,39 +1,31 @@
 @import "/src/00-App/styles/mixin";
 @import "/src/00-App/styles/variables";
 
-.section-todos__list-todos {
+.todo__list {
   @include fl-cl;
-  gap: 30px;
-  margin-top: 200px;
-  margin-bottom: 200px;
-}
+  gap: 50px;
 
-.list-todos__todo-item {
-  position: relative;
+  &-item {
+    position: relative;
 
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-
-  @media (max-width: $media-width-mobile) {
     @include fl-cl;
-    position: unset;
     gap: 20px;
-    align-items: flex-end;
+    align-items: center;
+
+    @media (max-width: $media-width-mobile) {
+      @include fl-cl;
+      position: unset;
+      gap: 20px;
+      align-items: flex-end;
+    }
   }
 }
 
-.todo-item__list-subtodos {
-  @include fl-cl;
-  gap: 30px;
-  align-items: flex-end;
-  width: 100%;
-}
-
-.list-subtodos__subtodo-item {
-  position: relative;
-  display: flex;
-  gap: 30px;
-  align-items: center;
+.list-item {
+  &__list-subtodos {
+    @include fl-cl;
+    gap: 20px;
+    align-items: flex-end;
+    width: 100%;
+  }
 }

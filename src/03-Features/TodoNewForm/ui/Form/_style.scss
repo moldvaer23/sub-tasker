@@ -1,15 +1,10 @@
 @import "/src/00-App/styles/mixin";
 @import "/src/00-App/styles/variables";
 
-.section-todos__form-new-todo {
-  @include fl-cl;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  gap: 40px;
-}
-
 .form-new-todo {
+  display: flex;
+  gap: 40px;
+
   &__label {
     @include fl-cl;
     gap: 20px;
@@ -22,7 +17,7 @@
     backdrop-filter: blur(10px);
   }
 
-  &__label-head {
+  &__label-span {
     font-size: $accent-font-size;
   }
 
@@ -34,10 +29,20 @@
 
     background-color: $primary-color;
     border-radius: 5px;
-    box-shadow: $primary-box-shadow;
   }
 
   &__button-submit {
     align-self: flex-end;
+    padding: 11px;
+    background-color: $primary-color;
+  }
+
+  &__button-submit img {
+    width: 40px;
+    height: 40px;
+  }
+
+  &__button-submit:disabled {
+    filter: brightness(80%);
   }
 }

@@ -2,17 +2,19 @@ import { FC, useEffect, useState } from "react";
 
 import validator from "05-Shared/utils/validator";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
-import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
+import { Button, ETypeButton, ETypeButtonStyle, ETypeButtonSize } from "05-Shared/ui/Button";
 
 import "./_style.scss";
+import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 
 interface IProps {
   buttonText: string;
   label: string;
+  placeHolder: string;
   onSubmit: (value: string) => void;
 }
 
-const Form: FC<IProps> = ({ onSubmit, buttonText, label }) => {
+const Form: FC<IProps> = ({ onSubmit, placeHolder, buttonText, label }) => {
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [value, setValue] = useState<string>("");
@@ -22,28 +24,26 @@ const Form: FC<IProps> = ({ onSubmit, buttonText, label }) => {
   }, [value]);
 
   return (
-    <form className="form-list">
-      <label className="form-list__label" htmlFor="list-name">
-        <span>{label}</span>
+    <form className="form-fields" id="field" name="field" onSubmit={() => onSubmit(value)}>
+      <label className="form-fields__label" htmlFor="field-name">
+        <span className="form-fields__label-span">{label}</span>
         <Input
-          className="form-list__input"
-          name="list-name"
+          className="form-fields__input"
+          name="field-name"
+          placeholder={placeHolder}
           onChange={(e) => setValue(e.target.value)}
           type={ETypeInput.text}
         />
-        <span className="error-alert">{errorMessage}</span>
+        {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
       </label>
 
       <Button
-        className="form-list__submit"
+        className="form-fields__button-submit"
         text={buttonText}
         type={ETypeButton.submit}
-        typeSize={ETypeSizeButtom.medium}
+        typeSize={ETypeButtonSize.medium}
         typeStyle={ETypeButtonStyle.accent}
-        onClick={(e) => {
-          e.preventDefault();
-          onSubmit(value);
-        }}
+        animate={false}
         disabled={error}
       />
     </form>

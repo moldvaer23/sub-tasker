@@ -20,7 +20,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }): ReactElement => {
   }
 
   return (
-    <ul className="section-todos__list-todos">
+    <ul className="todo__list">
       {Object.values(todos).map((todo, indexMain) => {
         // Создаем модель
         const todoModel = createPresentTodo({ task: todo.task, uuid: todo.uuid });
@@ -28,7 +28,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }): ReactElement => {
         return (
           <AnimatePresence key={indexMain}>
             <motion.li
-              className="list-todos__todo-item"
+              className="todo__list-item"
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}>
@@ -42,7 +42,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }): ReactElement => {
               />
 
               {Object.values(todo.subTodos).length > 0 && (
-                <ul className="todo-item__list-subtodos">
+                <ul className="list-item__list-subtodos">
                   {Object.values(todo.subTodos).map((subTodo, indexSub) => {
                     // Создаем и получаем объект подзадачи
                     const subTodoObj = todoModel.createSubTodo({
@@ -52,7 +52,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }): ReactElement => {
 
                     return (
                       <motion.li
-                        className="list-subtodos__subtodo-item"
+                        className="list-subtodos__item"
                         key={indexSub}
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}

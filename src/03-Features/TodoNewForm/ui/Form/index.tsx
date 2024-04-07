@@ -4,7 +4,9 @@ import type { ChangeEvent, FC, ReactElement } from "react";
 import validator from "05-Shared/utils/validator";
 import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
 import { ETypeInput, Input } from "05-Shared/ui/Input";
-import { Button, ETypeButton, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
+import { Button, ETypeButton, ETypeButtonStyle } from "05-Shared/ui/Button";
+
+import addIcon from "05-Shared/assets/svg/add-plus-icon.svg";
 
 import "./_style.scss";
 
@@ -36,12 +38,12 @@ const TodoNewForm: FC<IProps> = ({ createNewTodo }): ReactElement => {
   };
 
   return (
-    <form className="section-todos__form-new-todo" onSubmit={handleSubmit}>
-      <label className="form-new-todo__label" htmlFor="task">
-        <span className="form-new-todo__label-head">У тебя новая задача?</span>
+    <form className="form-new-todo" name="new-todo" id="new-todo" onSubmit={handleSubmit}>
+      <label className="form-new-todo__label" htmlFor="new-todo">
+        <span className="form-new-todo__label-span">У тебя новая задача?</span>
         <Input
           className="form-new-todo__input"
-          name="task"
+          name="new-todo"
           placeholder="Напиши её тут"
           type={ETypeInput.text}
           value={task}
@@ -53,10 +55,13 @@ const TodoNewForm: FC<IProps> = ({ createNewTodo }): ReactElement => {
 
       <Button
         className="form-new-todo__button-submit"
-        text="Добавить"
         type={ETypeButton.submit}
-        typeStyle={ETypeButtonStyle.accent}
-        typeSize={ETypeSizeButtom.large}
+        typeStyle={ETypeButtonStyle.icon}
+        image={{
+          alt: "Добавить задачу",
+          imageSrc: addIcon,
+        }}
+        animate={false}
         disabled={error}
       />
     </form>

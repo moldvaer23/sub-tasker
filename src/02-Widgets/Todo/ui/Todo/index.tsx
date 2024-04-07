@@ -5,6 +5,8 @@ import { TodoList } from "03-Features/TodoList";
 import { TodoNewForm } from "03-Features/TodoNewForm";
 import TodoModel from "02-Widgets/Todo/models/TodoModel";
 
+import "./_style.scss";
+
 const Todo: FC = (): ReactElement => {
   const dispatch = useAppDispatch();
 
@@ -20,8 +22,12 @@ const Todo: FC = (): ReactElement => {
 
   return (
     <>
-      <TodoNewForm createNewTodo={createNewTodo} />
-      <TodoList createPresentTodo={createPresentTodo} />
+      <header className="header">
+        <TodoNewForm createNewTodo={createNewTodo} />
+      </header>
+      <section className="section__todo-list">
+        <TodoList createPresentTodo={createPresentTodo} />
+      </section>
     </>
   );
 };

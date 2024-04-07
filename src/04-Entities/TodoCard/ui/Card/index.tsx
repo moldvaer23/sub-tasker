@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { FC, ReactElement } from "react";
 
 import addSubTodoIcon from "05-Shared/assets/svg/add-icon.svg";
-import { Button, ETypeButtonStyle, ETypeSizeButtom } from "05-Shared/ui/Button";
+import { Button, ETypeButtonStyle, ETypeButtonSize } from "05-Shared/ui/Button";
 
 import TodoButtons from "../Buttons";
 import TodoEditForm from "../EditForm";
@@ -47,7 +47,7 @@ const TodoCard: FC<IProps> = ({
   return (
     <>
       <article
-        className={isSubTodo ? " subtodo todo-item__todo" : "todo-item__todo"}
+        className={isSubTodo ? " subtodo todo" : "todo"}
         onMouseEnter={() => setIsMouseEnter(true)}
         onMouseLeave={() => setIsMouseEnter(false)}>
         <TodoButtons
@@ -70,10 +70,10 @@ const TodoCard: FC<IProps> = ({
 
         {!isSubTodo && handleCreateSubTodo && (
           <Button
-            className="todo__new-subtodo-button"
+            className="todo__button-new-subtodo"
             image={{ imageSrc: addSubTodoIcon, alt: "Кнопка добавить подзадачу" }}
             typeStyle={ETypeButtonStyle.icon}
-            typeSize={ETypeSizeButtom.small}
+            typeSize={ETypeButtonSize.small}
             onClick={handleCreateSubTodo}
             opacity={!isActiveEdit && isMouseEnter ? 1 : 0}
             disabled={isActiveEdit}

@@ -18,10 +18,11 @@ export enum ETypeButtonStyle {
   icon = "button__icon",
 }
 
-export enum ETypeSizeButtom {
+export enum ETypeButtonSize {
   small = "button__small",
   medium = "button__medium",
   large = "button__large",
+  default = "button__default",
 }
 
 export type TImageSrcProps = {
@@ -34,11 +35,12 @@ interface IProps {
   image?: TImageSrcProps;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type?: ETypeButton;
-  typeSize?: ETypeSizeButtom;
+  typeSize?: ETypeButtonSize;
   typeStyle: ETypeButtonStyle;
   className?: string;
   disabled?: boolean;
   opacity?: number;
+  animate?: boolean;
 }
 
 const Button: FC<IProps> = ({
@@ -48,11 +50,22 @@ const Button: FC<IProps> = ({
   type = ETypeButton.button,
   typeStyle,
   className,
-  typeSize,
+  typeSize = ETypeButtonSize.default,
   disabled = false,
   opacity = 1,
+  animate = true,
 }): ReactElement => {
-  return (
+  const content = image ? (
+    <img className={EDefaultClassNames.buttonImage} src={image.imageSrc} alt={image.alt} />
+  ) : (
+    text
+  );
+
+  const classNameSeting = className
+    ? `${className} ${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
+    : `${EDefaultClassNames.button} ${typeSize} ${typeStyle}`;
+
+  return animate ? (
     <AnimatePresence>
       <motion.button
         initial={{ scale: 1 }}
@@ -60,21 +73,21 @@ const Button: FC<IProps> = ({
         exit={{ scale: 1 }}
         style={{ opacity: opacity }}
         transition={{ type: "spring", stiffness: 500, damping: 5 }}
-        className={
-          className
-            ? `${className} ${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
-            : `${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
-        }
+        className={classNameSeting}
         type={type}
         onClick={onClick ? onClick : undefined}
         disabled={disabled}>
-        {image ? (
-          <img className={EDefaultClassNames.buttonImage} src={image.imageSrc} alt={image.alt} />
-        ) : (
-          text
-        )}
+        {content}
       </motion.button>
     </AnimatePresence>
+  ) : (
+    <button
+      className={classNameSeting}
+      type={type}
+      onClick={onClick ? onClick : undefined}
+      disabled={disabled}>
+      {content}
+    </button>
   );
 };
 

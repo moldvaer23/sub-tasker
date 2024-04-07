@@ -9,9 +9,7 @@ const Home: FC = (): ReactElement => {
   return (
     <main className="main">
       <Fields />
-      <section className="main__section-todos">
-        <Todo />
-      </section>
+      <Todo />
     </main>
   );
 };
