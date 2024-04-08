@@ -30,7 +30,7 @@ const FieldsList: FC<IProps> = ({
   const [openEditField, setOpenEditField] = useState<boolean>(false);
   const [openNewField, setOpenNewField] = useState<boolean>(false);
 
-  const activeField = useAppSelector((state) => state.fields.acitveField);
+  const activeField = useAppSelector((state) => state.fields.activeField);
   const fieldsStore = useAppSelector((state) => state.fields.fields);
 
   const fields: TField[] = Object.values(fieldsStore);

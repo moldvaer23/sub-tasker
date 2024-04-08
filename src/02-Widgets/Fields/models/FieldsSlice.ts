@@ -2,12 +2,12 @@ import { TField } from "05-Shared/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IFieldsState {
-  acitveField: string;
+  activeField: string;
   fields: Record<string, TField>;
 }
 
 const initialState: IFieldsState = {
-  acitveField: "", // uuid активного поля
+  activeField: "", // uuid активного поля
   fields: {}, // Поля
 };
 
@@ -17,7 +17,7 @@ const fieldsSlice = createSlice({
   reducers: {
     // Установка активного поля
     setActiveField(state, action: PayloadAction<string>) {
-      state.acitveField = action.payload;
+      state.activeField = action.payload;
     },
 
     // Инициализация полей

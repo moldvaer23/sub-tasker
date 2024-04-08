@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "./store";
 import "./styles/global.scss";
 
 const App: FC = () => {
-  const storeActiveField = useAppSelector((state) => state.fields.acitveField);
+  const storeActiveField = useAppSelector((state) => state.fields.activeField);
   const dispatch = useAppDispatch();
 
   /*
