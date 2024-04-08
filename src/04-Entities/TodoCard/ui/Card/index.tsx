@@ -99,7 +99,7 @@ const TodoCard: FC<IProps> = ({
         {!isSubTodo && handleCreateSubTodo && (
           <Button
             className="todo__button-new-subtodo"
-            disabled={isActiveEdit}
+            disabled={uuidActiveEditTodo.length === 0 ? false : true}
             image={{ imageSrc: addIconDefault, alt: "Кнопка добавить подзадачу" }}
             onClick={handleCreateSubTodo}
             opacity={!isActiveEdit && isMouseEnter ? 1 : 0}
