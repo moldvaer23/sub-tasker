@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 
 import { checkIcon } from "05-Shared/assets/svg";
 import validator from "05-Shared/utils/validator";
@@ -19,15 +19,15 @@ const TodoEditForm: FC<IProps> = ({ placeholderTask, submitHandle, setIsActiveEd
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const ref: React.LegacyRef<HTMLFormElement> = useRef(null);
+
   // Валидируем поле chgangeTask
   useEffect(() => {
     validator({ data: changedTask, setError: setError, setErrorMessage: setErrorMessage });
   }, [changedTask]);
 
-  // Хендлер подтверждения формы
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
+  // Разширение хендлера подтверждения формы
+  const handleSubmit = (): void => {
     if (!error) {
       submitHandle(changedTask);
       setIsActiveEdit(false);
@@ -35,7 +35,13 @@ const TodoEditForm: FC<IProps> = ({ placeholderTask, submitHandle, setIsActiveEd
   };
 
   return (
-    <form className="todo__form-edit-todo" onSubmit={handleSubmit}>
+    <form
+      className="todo__form-edit-todo"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      ref={ref}>
       {errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
 
       <TextArea
@@ -44,6 +50,7 @@ const TodoEditForm: FC<IProps> = ({ placeholderTask, submitHandle, setIsActiveEd
         className="form-edit-todo__textarea"
         name="changeTask"
         onChange={(e: ChangeEvent<HTMLTextAreaElement>): void => setChangedTask(e.target.value)}
+        refCallBack={() => handleSubmit()}
         value={changedTask}
       />
 
