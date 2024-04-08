@@ -6,6 +6,7 @@ import { Button, ETypeButtonSize, ETypeButtonStyle } from "05-Shared/ui/Button";
 import "./_style.scss";
 
 interface IProps {
+  disabled: boolean;
   handleCloseEdit: () => void;
   handleDelete: () => void;
   handleOpenEdit: () => void;
@@ -13,6 +14,7 @@ interface IProps {
 }
 
 const TodoButtons: FC<IProps> = ({
+  disabled,
   handleCloseEdit,
   handleDelete,
   handleOpenEdit,
@@ -46,6 +48,7 @@ const TodoButtons: FC<IProps> = ({
           )}
           <Button
             className="todo__button"
+            disabled={disabled}
             image={{ imageSrc: editIcon, alt: "Кнопка редактирования" }}
             onClick={handleOpenEdit}
             typeSize={ETypeButtonSize.small}

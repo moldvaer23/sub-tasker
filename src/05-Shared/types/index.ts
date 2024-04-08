@@ -21,6 +21,7 @@ export interface ITodoModel {
   editTodo: (data: { uuid: string; task: string }) => void | undefined;
   getSubTodos: () => TSubTodo[];
   getTodo: () => TTodo;
+  setActiveEdit: (uuid: string) => void;
   uuid: string;
 }
 

@@ -13,6 +13,8 @@ interface IProps {
 const TodoList: FC<IProps> = ({ createPresentTodo }) => {
   const todos = useAppSelector((state) => state.todos.todos);
 
+  const uuidActiveEditTodo = useAppSelector((state) => state.todos.activeEdit);
+
   if (Object.keys(todos).length === 0) {
     return <p>Список задач пуст</p>;
   }
@@ -26,12 +28,15 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
         return (
           <li className="todo__list-item" key={indexMain}>
             <TodoCard
-              task={todo.task}
+              handleClearActiveEdit={() => todoModel.setActiveEdit("")}
+              handleCreateSubTodo={() => todoModel.createSubTodo({ task: "" })}
               handleDelete={() => todoModel.deleteTodo()}
+              handleSetActiveEdit={() => todoModel.setActiveEdit(todo.uuid)}
               handleSubmit={(changeTask: string) =>
                 todoModel.editTodo({ task: changeTask, uuid: todoModel.uuid })
               }
-              handleCreateSubTodo={() => todoModel.createSubTodo({ task: "" })}
+              task={todo.task}
+              uuidActiveEditTodo={uuidActiveEditTodo}
             />
 
             {Object.values(todo.subTodos).length > 0 && (
@@ -46,17 +51,21 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
                   return (
                     <li className="list-subtodos__item" key={indexSub}>
                       <TodoCard
+                        handleClearActiveEdit={() => todoModel.setActiveEdit("")}
+                        handleSetActiveEdit={() => todoModel.setActiveEdit(subTodoObj.uuid)}
+                        isSubTodo
                         task={subTodoObj.task}
+                        uuidActiveEditTodo={uuidActiveEditTodo}
                         handleDelete={() =>
                           todoModel.deleteSubTodo({
                             uuidPinTodo: todoModel.uuid,
                             uuidSubTodo: subTodoObj.uuid,
                           })
                         }
-                        handleSubmit={(changeTask: string) =>
-                          todoModel.editSubTodo({ task: changeTask, uuid: subTodoObj.uuid })
-                        }
-                        isSubTodo
+                        handleSubmit={(changeTask: string) => {
+                          todoModel.setActiveEdit("");
+                          todoModel.editSubTodo({ task: changeTask, uuid: subTodoObj.uuid });
+                        }}
                       />
                     </li>
                   );

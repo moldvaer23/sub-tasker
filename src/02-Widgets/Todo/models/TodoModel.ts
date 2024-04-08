@@ -8,6 +8,7 @@ import {
   addTodo,
   deleteSubTodo,
   deleteTodo,
+  setActiveEdit,
   updateSubTodo,
   updateTodo,
 } from "./TodoSlice";
@@ -74,6 +75,11 @@ class TodoModel implements ITodoModel {
         task: this._task,
       })
     );
+  };
+
+  // Установка uuid задачи которая редактируется
+  public setActiveEdit = (uuid: string) => {
+    this.props.dispatch(setActiveEdit(uuid));
   };
 
   // Редактирование подзадачи

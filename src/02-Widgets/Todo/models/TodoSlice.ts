@@ -2,6 +2,7 @@ import { TSubTodo, TTodo } from "05-Shared/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ITodosState {
+  activeEdit: string;
   uuidTodos: string;
   todos: Record<string, TTodo>;
 }
@@ -28,6 +29,7 @@ type TActionDelSubTodo = TActionSubTodoInstance & {
 
 const initialState: ITodosState = {
   uuidTodos: "",
+  activeEdit: "",
   todos: {},
 };
 
@@ -78,8 +80,13 @@ const todosSlice = createSlice({
       }
     },
 
+    // Установка uuid задачи которая редактируется
+    setActiveEdit(state, action: PayloadAction<string>) {
+      if (state.activeEdit !== action.payload) state.activeEdit = action.payload;
+    },
+
     // Работа с подзадачами
-    // Добавления новой подзадачи
+    // Добавление новой подзадачи
     addSubTodo(state, action: PayloadAction<TActionAddSubTodo>) {
       const todoUuid: string = action.payload.uuidPinTodo;
       const subTodo: TSubTodo = action.payload.subTodo;
@@ -129,14 +136,15 @@ const todosSlice = createSlice({
 });
 
 export const {
-  setUuidTodos,
-  addTodo,
   addSubTodo,
-  setTodos,
-  updateTodo,
-  updateSubTodo,
-  deleteTodo,
+  addTodo,
   deleteSubTodo,
+  deleteTodo,
+  setActiveEdit,
+  setTodos,
+  setUuidTodos,
+  updateSubTodo,
+  updateTodo,
 } = todosSlice.actions;
 
 export default todosSlice.reducer;

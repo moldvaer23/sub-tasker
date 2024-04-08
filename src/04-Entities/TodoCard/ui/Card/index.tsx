@@ -11,27 +11,37 @@ import TodoEditForm from "../EditForm";
 import "./_style.scss";
 
 interface IProps {
+  handleClearActiveEdit: () => void;
   handleCreateSubTodo?: () => void;
   handleDelete: () => void;
+  handleSetActiveEdit: () => void;
   handleSubmit: (changeTask: string) => void;
   isSubTodo?: boolean;
   task: string;
+  uuidActiveEditTodo: string;
 }
 
 const TodoCard: FC<IProps> = ({
+  handleClearActiveEdit,
   handleCreateSubTodo,
   handleDelete,
+  handleSetActiveEdit,
   handleSubmit,
   isSubTodo,
   task,
+  uuidActiveEditTodo,
 }) => {
   const [isActiveEdit, setIsActiveEdit] = useState<boolean>(task.length !== 0 ? false : true);
   const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false);
 
   // Хендлер закрытия формы редактирования задачи
   const handleCloseEdit = () => {
-    if (task.length === 0) handleDelete();
+    if (task.length === 0) {
+      if (isActiveEdit) handleClearActiveEdit();
+      return handleDelete();
+    }
 
+    handleClearActiveEdit();
     setIsActiveEdit(false);
   };
 
@@ -41,7 +51,11 @@ const TodoCard: FC<IProps> = ({
       if (e.code === "Escape") handleCloseEdit();
     };
 
-    if (isActiveEdit) document.addEventListener("keydown", handleEsc);
+    if (isActiveEdit) {
+      if (uuidActiveEditTodo.length === 0) handleSetActiveEdit();
+
+      document.addEventListener("keydown", handleEsc);
+    }
 
     return () => document.removeEventListener("keydown", handleEsc);
 
@@ -60,7 +74,13 @@ const TodoCard: FC<IProps> = ({
         <TodoButtons
           handleCloseEdit={handleCloseEdit}
           handleDelete={handleDelete}
-          handleOpenEdit={() => setIsActiveEdit(true)}
+          handleOpenEdit={() => {
+            if (uuidActiveEditTodo.length === 0) {
+              handleSetActiveEdit();
+              setIsActiveEdit(true);
+            }
+          }}
+          disabled={uuidActiveEditTodo.length === 0 ? false : true}
           isActiveEdit={isActiveEdit}
         />
 
