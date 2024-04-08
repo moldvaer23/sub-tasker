@@ -7,5 +7,6 @@ import checkIcon from "./check-icon.svg";
 import closeIcon from "./close-icon.svg";
 import deleteIcon from "./delete-icon.svg";
 import editIcon from "./edit-icon.svg";
+import starIcon from "./star-icon.svg";
 
-export { addIconDefault, addIconPlus, checkIcon, closeIcon, deleteIcon, editIcon };
+export { addIconDefault, addIconPlus, checkIcon, closeIcon, deleteIcon, editIcon, starIcon };

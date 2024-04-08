@@ -20,8 +20,13 @@ const Todo: FC = () => {
   };
 
   // Хендлер  создания существующей задачи
-  const createPresentTodo = (data: { task: string; uuid: string }) => {
-    return new TodoModel({ task: data.task, uuid: data.uuid, dispatch: dispatch });
+  const createPresentTodo = (data: { task: string; important: boolean; uuid: string }) => {
+    return new TodoModel({
+      task: data.task,
+      important: data.important,
+      uuid: data.uuid,
+      dispatch: dispatch,
+    });
   };
 
   return (

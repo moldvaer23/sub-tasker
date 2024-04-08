@@ -1,6 +1,7 @@
 // Объекты задач
 type TAbstractTodo = {
   readonly uuid: string;
+  important: boolean;
   task: string;
 };
 
@@ -14,7 +15,7 @@ export type TTodo = TAbstractTodo & {
 
 // Модель задачи
 export interface ITodoModel {
-  createSubTodo: (data: { uuid?: string; task: string }) => TSubTodo;
+  createSubTodo: (data: { uuid?: string; important?: boolean; task: string }) => TSubTodo;
   deleteSubTodo: (data: { uuidPinTodo: string; uuidSubTodo: string }) => void;
   deleteTodo: () => void;
   editSubTodo: (data: { uuid: string; task: string }) => void | undefined;
@@ -22,6 +23,8 @@ export interface ITodoModel {
   getSubTodos: () => TSubTodo[];
   getTodo: () => TTodo;
   setActiveEdit: (uuid: string) => void;
+  setImportantSubTodo: (data: { uuid: string; value: boolean }) => void;
+  setImportantTodo: (value: boolean) => void;
   uuid: string;
 }
 

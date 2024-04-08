@@ -9,6 +9,8 @@ import {
   deleteSubTodo,
   deleteTodo,
   setActiveEdit,
+  setImportantSubTodo,
+  setImportantTodo,
   updateSubTodo,
   updateTodo,
 } from "./TodoSlice";
@@ -19,11 +21,15 @@ import {
 
 class TodoModel implements ITodoModel {
   protected _uuid: string;
+  protected _important: boolean;
   protected _task: string;
   protected _subTodos: Record<string, TSubTodo> = {};
 
-  constructor(protected props: { uuid?: string; task: string; dispatch: AppDispatch }) {
+  constructor(
+    protected props: { uuid?: string; task: string; important?: boolean; dispatch: AppDispatch }
+  ) {
     this._uuid = props.uuid ? props.uuid : uuidv4();
+    this._important = props.important || false;
     this._task = props.task;
 
     // Если это новая задача пушим в state
@@ -31,6 +37,7 @@ class TodoModel implements ITodoModel {
       props.dispatch(
         addTodo({
           uuid: this._uuid,
+          important: this._important,
           task: this._task,
           subTodos: this._subTodos,
         })
@@ -39,12 +46,13 @@ class TodoModel implements ITodoModel {
   }
 
   // Создание подзадачи
-  public createSubTodo = (data: { uuid?: string; task: string }): TSubTodo => {
+  public createSubTodo = (data: { uuid?: string; important?: boolean; task: string }): TSubTodo => {
     const uuidSubTodo = data.uuid ? data.uuid : uuidv4();
 
     const subTodoObj: TSubTodo = {
       uuidPinTodo: this._uuid,
       uuid: uuidSubTodo,
+      important: data.important || false,
       task: data.task,
     };
 
@@ -80,6 +88,22 @@ class TodoModel implements ITodoModel {
   // Установка uuid задачи которая редактируется
   public setActiveEdit = (uuid: string) => {
     this.props.dispatch(setActiveEdit(uuid));
+  };
+
+  // Устанавливает пометку важное у задачи
+  public setImportantTodo = (value: boolean) => {
+    this._important = value;
+
+    this.props.dispatch(setImportantTodo({ uuid: this._uuid, value: value }));
+  };
+
+  // Устанавливает пометку важное у подзадачи
+  public setImportantSubTodo = (data: { uuid: string; value: boolean }) => {
+    this._subTodos[data.uuid].important = data.value;
+
+    this.props.dispatch(
+      setImportantSubTodo({ uuidPinTodo: this._uuid, uuidSubTodo: data.uuid, value: data.value })
+    );
   };
 
   // Редактирование подзадачи
@@ -121,6 +145,7 @@ class TodoModel implements ITodoModel {
   public getTodo = (): TTodo => {
     return {
       uuid: this._uuid,
+      important: this._important,
       task: this._task,
       subTodos: this._subTodos,
     };

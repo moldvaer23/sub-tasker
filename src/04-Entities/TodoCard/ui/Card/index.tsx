@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { addIconDefault } from "05-Shared/assets/svg";
+import { addIconDefault, starIcon } from "05-Shared/assets/svg";
 import { Button, ETypeButtonSize, ETypeButtonStyle } from "05-Shared/ui/Button";
 
 import TodoButtons from "../Buttons";
@@ -15,7 +15,9 @@ interface IProps {
   handleCreateSubTodo?: () => void;
   handleDelete: () => void;
   handleSetActiveEdit: () => void;
+  handleSetImportant: (value: boolean) => void;
   handleSubmit: (changeTask: string) => void;
+  important: boolean;
   isSubTodo?: boolean;
   task: string;
   uuidActiveEditTodo: string;
@@ -26,7 +28,9 @@ const TodoCard: FC<IProps> = ({
   handleCreateSubTodo,
   handleDelete,
   handleSetActiveEdit,
+  handleSetImportant,
   handleSubmit,
+  important,
   isSubTodo,
   task,
   uuidActiveEditTodo,
@@ -94,6 +98,17 @@ const TodoCard: FC<IProps> = ({
         ) : (
           // Показываем текст задачи
           <p className="todo__task">{task}</p>
+        )}
+
+        {!isActiveEdit && (
+          <Button
+            className="todo__button-important"
+            image={{ imageSrc: starIcon, alt: "Важное" }}
+            onClick={() => handleSetImportant(!important)}
+            opacity={!important ? (isMouseEnter ? 1 : 0) : 1}
+            typeSize={ETypeButtonSize.small}
+            typeStyle={ETypeButtonStyle.icon}
+          />
         )}
 
         {!isSubTodo && handleCreateSubTodo && (

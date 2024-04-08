@@ -85,6 +85,18 @@ const todosSlice = createSlice({
       if (state.activeEdit !== action.payload) state.activeEdit = action.payload;
     },
 
+    // Установка пометки важно у задачи
+    setImportantTodo(state, action: PayloadAction<{ uuid: string; value: boolean }>) {
+      const todoUuid: string = action.payload.uuid;
+
+      if (todoUuid in state.todos) {
+        state.todos[todoUuid].important = action.payload.value;
+        localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
+      } else {
+        console.error(`Task with id ${todoUuid} not found.`);
+      }
+    },
+
     // Работа с подзадачами
     // Добавление новой подзадачи
     addSubTodo(state, action: PayloadAction<TActionAddSubTodo>) {
@@ -132,6 +144,27 @@ const todosSlice = createSlice({
         console.error(`Task with id ${todoUuid} not found.`);
       }
     },
+
+    // Установка пометки важно у подзадачи
+    setImportantSubTodo(
+      state,
+      action: PayloadAction<{ uuidPinTodo: string; uuidSubTodo: string; value: boolean }>
+    ) {
+      const todoUuid: string = action.payload.uuidPinTodo;
+      const subTodoUuid: string = action.payload.uuidSubTodo;
+
+      if (todoUuid in state.todos) {
+        if (subTodoUuid in state.todos[todoUuid].subTodos) {
+          state.todos[todoUuid].subTodos[subTodoUuid].important = action.payload.value;
+
+          localStorage.setItem(state.uuidTodos, JSON.stringify(state.todos));
+        } else {
+          console.error(`Sub Task with id ${subTodoUuid} not found.`);
+        }
+      } else {
+        console.error(`Task with id ${todoUuid} not found.`);
+      }
+    },
   },
 });
 
@@ -141,6 +174,8 @@ export const {
   deleteSubTodo,
   deleteTodo,
   setActiveEdit,
+  setImportantSubTodo,
+  setImportantTodo,
   setTodos,
   setUuidTodos,
   updateSubTodo,

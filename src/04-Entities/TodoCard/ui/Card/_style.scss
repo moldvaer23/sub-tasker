@@ -28,6 +28,12 @@
     overflow-wrap: break-word;
   }
 
+  &__button-important {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   &__button-new-subtodo {
     position: absolute;
     right: 0;

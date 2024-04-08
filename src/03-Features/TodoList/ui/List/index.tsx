@@ -7,7 +7,7 @@ import { TodoCard } from "04-Entities/TodoCard";
 import "./_style.scss";
 
 interface IProps {
-  createPresentTodo: (data: { task: string; uuid: string }) => ITodoModel;
+  createPresentTodo: (data: { task: string; important: boolean; uuid: string }) => ITodoModel;
 }
 
 const TodoList: FC<IProps> = ({ createPresentTodo }) => {
@@ -23,7 +23,11 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
     <ul className="todo__list">
       {Object.values(todos).map((todo, indexMain) => {
         // Создаем модель
-        const todoModel = createPresentTodo({ task: todo.task, uuid: todo.uuid });
+        const todoModel = createPresentTodo({
+          task: todo.task,
+          important: todo.important,
+          uuid: todo.uuid,
+        });
 
         return (
           <li className="todo__list-item" key={indexMain}>
@@ -32,9 +36,11 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
               handleCreateSubTodo={() => todoModel.createSubTodo({ task: "" })}
               handleDelete={() => todoModel.deleteTodo()}
               handleSetActiveEdit={() => todoModel.setActiveEdit(todo.uuid)}
+              handleSetImportant={(value: boolean) => todoModel.setImportantTodo(value)}
               handleSubmit={(changeTask: string) =>
                 todoModel.editTodo({ task: changeTask, uuid: todoModel.uuid })
               }
+              important={todo.important}
               task={todo.task}
               uuidActiveEditTodo={uuidActiveEditTodo}
             />
@@ -46,6 +52,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
                   const subTodoObj = todoModel.createSubTodo({
                     uuid: subTodo.uuid,
                     task: subTodo.task,
+                    important: subTodo.important,
                   });
 
                   return (
@@ -53,6 +60,10 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
                       <TodoCard
                         handleClearActiveEdit={() => todoModel.setActiveEdit("")}
                         handleSetActiveEdit={() => todoModel.setActiveEdit(subTodoObj.uuid)}
+                        handleSetImportant={(value: boolean) =>
+                          todoModel.setImportantSubTodo({ uuid: subTodoObj.uuid, value: value })
+                        }
+                        important={subTodoObj.important}
                         isSubTodo
                         task={subTodoObj.task}
                         uuidActiveEditTodo={uuidActiveEditTodo}
