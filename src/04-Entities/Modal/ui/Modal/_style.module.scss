@@ -1,4 +1,4 @@
-@import '/src/00-App/styles/variables';
+@import '../../../../00-App/styles/variables';
 
 .overlay {
 	position: absolute;
@@ -20,15 +20,15 @@
 	background-color: $page-background-color;
 	border-radius: 5px;
 	transform: translate(-50%, -50%);
+}
 
-	&__close-button {
-		position: absolute;
-		top: -40px;
-		right: -40px;
-	}
+.close-button {
+	position: absolute;
+	top: -40px;
+	right: -40px;
+}
 
-	&__close-button img {
-		width: 35px;
-		height: 35px;
-	}
+.close-button img {
+	width: 35px;
+	height: 35px;
 }

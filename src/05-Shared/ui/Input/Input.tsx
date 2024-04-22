@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useRef } from 'react'
+import clsx from 'clsx'
 import { EDefaultClassNames } from '../classNames'
 
 import './_style.scss'
@@ -10,7 +11,7 @@ export enum ETypeInput {
 
 interface IProps {
 	focus?: boolean
-	className?: string
+	className: string
 	id?: string
 	name: string
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -38,11 +39,7 @@ const Input: FC<IProps> = ({
 
 	return (
 		<input
-			className={
-				className
-					? `${className} ${EDefaultClassNames.input}`
-					: EDefaultClassNames.input
-			}
+			className={clsx({ [className]: className }, EDefaultClassNames.input)}
 			id={id}
 			name={name}
 			onChange={

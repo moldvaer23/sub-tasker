@@ -4,7 +4,7 @@ import { ITodoModel } from '05-Shared/types'
 import { useAppSelector } from '00-App/store'
 import { TodoCard } from '04-Entities/TodoCard'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 interface IProps {
 	createPresentTodo: (data: {
@@ -24,7 +24,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
 	}
 
 	return (
-		<ul className='todo__list'>
+		<ul className={style.todo__list}>
 			{Object.values(todos).map((todo, indexMain) => {
 				// Создаем модель
 				const todoModel = createPresentTodo({
@@ -34,7 +34,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
 				})
 
 				return (
-					<li className='todo__list-item' key={indexMain}>
+					<li className={style.todo__item} key={indexMain}>
 						<TodoCard
 							handleClearActiveEdit={() => todoModel.setActiveEdit('')}
 							handleCreateSubTodo={() => todoModel.createSubTodo({ task: '' })}
@@ -52,7 +52,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
 						/>
 
 						{Object.values(todo.subTodos).length > 0 && (
-							<ul className='list-item__list-subtodos'>
+							<ul className={style.subtodos__list}>
 								{Object.values(todo.subTodos).map((subTodo, indexSub) => {
 									// Создаем и получаем объект подзадачи
 									const subTodoObj = todoModel.createSubTodo({
@@ -62,7 +62,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
 									})
 
 									return (
-										<li className='list-subtodos__item' key={indexSub}>
+										<li key={indexSub}>
 											<TodoCard
 												handleClearActiveEdit={() =>
 													todoModel.setActiveEdit('')

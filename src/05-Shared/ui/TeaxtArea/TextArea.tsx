@@ -1,11 +1,12 @@
 import { ChangeEvent, FC, useRef } from 'react'
+import clsx from 'clsx'
 import { EDefaultClassNames } from '../classNames'
 
 import './_style.scss'
 
 interface IProps {
 	focus?: boolean
-	className?: string
+	className: string
 	id?: string
 	name: string
 	onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
@@ -26,10 +27,6 @@ const TextArea: FC<IProps> = ({
 
 	if (focus) rootRef.current?.focus()
 
-	const classNameSetting = className
-		? `${className} ${EDefaultClassNames.textArea}`
-		: EDefaultClassNames.textArea
-
 	const onFocus = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const val = e.target.value
 		e.target.value = ''
@@ -45,7 +42,7 @@ const TextArea: FC<IProps> = ({
 
 	return (
 		<textarea
-			className={classNameSetting}
+			className={clsx({ [className]: className }, EDefaultClassNames.textArea)}
 			id={id}
 			name={name}
 			onChange={

@@ -8,7 +8,8 @@ import { Button, ETypeButtonSize, ETypeButtonStyle } from '05-Shared/ui/Button'
 
 import Form from '../Form'
 
-import './_style.scss'
+import style from './_style.module.scss'
+import clsx from 'clsx'
 
 interface IProps {
 	createNewField: (data: { name: string; uuidTodos?: string }) => TField
@@ -42,10 +43,10 @@ const FieldsList: FC<IProps> = ({
 
 	return (
 		<>
-			<aside className='fields'>
-				<div className='fields__buttons'>
+			<aside className={style.aside}>
+				<div className={style.aside__buttons}>
 					<Button
-						className='fields__button'
+						className={style.aside__button}
 						image={{
 							alt: 'Добавить новый лист',
 							imageSrc: addIconPlus,
@@ -54,7 +55,7 @@ const FieldsList: FC<IProps> = ({
 						onClick={() => setOpenNewField(true)}
 					/>
 					<Button
-						className='fields__button'
+						className={style.aside__button}
 						image={{
 							alt: 'Изменить название листа',
 							imageSrc: editIcon,
@@ -63,7 +64,7 @@ const FieldsList: FC<IProps> = ({
 						onClick={() => setOpenEditField(true)}
 					/>
 					<Button
-						className='fields__button'
+						className={style.aside__button}
 						image={{
 							alt: 'Удалить лист',
 							imageSrc: deleteIcon,
@@ -72,18 +73,16 @@ const FieldsList: FC<IProps> = ({
 						onClick={() => setOpenConfirmDelete(true)}
 					/>
 				</div>
-				<ul className='fields__list'>
+				<ul className={style.list}>
 					{fields.length !== 0 &&
 						fields.map((field, index) => {
 							return (
-								<li className='fields__list-item' key={index}>
+								<li key={index}>
 									<Button
 										text={field.name}
-										className={
-											field.uuid === activeField
-												? 'field__button field__active'
-												: 'field__button'
-										}
+										className={clsx(style.list__button, {
+											[style.field__active]: field.uuid === activeField,
+										})}
 										typeStyle={ETypeButtonStyle.primary}
 										typeSize={ETypeButtonSize.medium}
 										onClick={
@@ -135,11 +134,11 @@ const FieldsList: FC<IProps> = ({
 
 			{openConfirmDelete && (
 				<Modal setOpen={setOpenConfirmDelete}>
-					<div className='confirm-delete__wrapper'>
-						<span className='confirm-delete__span'>Удалить текущий лист?</span>
+					<div className={style.wrapper}>
+						<span className={style.span}>Удалить текущий лист?</span>
 						<Button
 							animate={false}
-							className='confirm-delete__button'
+							className={style.confirm__button}
 							text='Да'
 							typeSize={ETypeButtonSize.medium}
 							typeStyle={ETypeButtonStyle.primary}

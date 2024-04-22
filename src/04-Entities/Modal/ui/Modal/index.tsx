@@ -3,7 +3,7 @@ import { FC, ReactElement, useEffect } from 'react'
 import { closeIcon } from '05-Shared/assets/svg'
 import { Button, ETypeButtonStyle } from '05-Shared/ui/Button'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 interface IProps {
 	children: ReactElement
@@ -36,10 +36,10 @@ const Modal: FC<IProps> = ({ children, setOpen }) => {
 	})
 
 	return (
-		<div className='overlay'>
-			<div className='modal'>
+		<div className={style.overlay}>
+			<div className={style.modal}>
 				<Button
-					className='modal__close-button'
+					className={style['close-button']}
 					onClick={() => setOpen(false)}
 					typeStyle={ETypeButtonStyle.icon}
 					image={{

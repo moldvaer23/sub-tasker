@@ -1,0 +1,27 @@
+@import '../../../../00-App/styles/mixin';
+@import '../../../../00-App/styles/variables';
+
+.todo__list {
+	@include fl-cl;
+	gap: 50px;
+}
+
+.todo__item {
+	@include fl-cl;
+	align-items: center;
+	gap: 20px;
+
+	@media (max-width: $media-width-mobile) {
+		@include fl-cl;
+		position: unset;
+		align-items: flex-end;
+		gap: 20px;
+	}
+}
+
+.subtodos__list {
+	@include fl-cl;
+	align-items: flex-end;
+	gap: 20px;
+	width: 100%;
+}

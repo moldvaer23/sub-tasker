@@ -6,7 +6,7 @@ import { ErrorAlert } from '05-Shared/ui/ErrorAlert'
 import { ETypeInput, Input } from '05-Shared/ui/Input'
 import { Button, ETypeButton, ETypeButtonStyle } from '05-Shared/ui/Button'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 interface IProps {
 	createNewTodo: (task: string) => void
@@ -44,15 +44,15 @@ const TodoNewForm: FC<IProps> = ({ createNewTodo }) => {
 
 	return (
 		<form
-			className='form-new-todo'
+			className={style.form}
 			name='new-todo'
 			id='new-todo'
 			onSubmit={handleSubmit}
 		>
-			<label className='form-new-todo__label' htmlFor='new-todo'>
-				<span className='form-new-todo__label-span'>У тебя новая задача?</span>
+			<label className={style.label} htmlFor='new-todo'>
+				<span className={style.span}>У тебя новая задача?</span>
 				<Input
-					className='form-new-todo__input'
+					className={style.form__input}
 					name='new-todo'
 					onChange={(e: ChangeEvent<HTMLInputElement>): void =>
 						setTask(e.target.value)
@@ -67,7 +67,7 @@ const TodoNewForm: FC<IProps> = ({ createNewTodo }) => {
 
 			<Button
 				animate={false}
-				className='form-new-todo__button-submit'
+				className={style.form__button}
 				disabled={error}
 				type={ETypeButton.submit}
 				typeStyle={ETypeButtonStyle.icon}

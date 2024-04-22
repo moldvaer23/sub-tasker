@@ -10,7 +10,7 @@ import {
 	ETypeButtonStyle,
 } from '05-Shared/ui/Button'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 interface IProps {
 	buttonText: string
@@ -34,16 +34,16 @@ const Form: FC<IProps> = ({ onSubmit, placeHolder, buttonText, label }) => {
 
 	return (
 		<form
-			className='form-fields'
+			className={style.form}
 			id='field'
 			name='field'
 			onSubmit={() => onSubmit(value)}
 		>
-			<label className='form-fields__label' htmlFor='field-name'>
-				<span className='form-fields__label-span'>{label}</span>
+			<label className={style.label} htmlFor='field-name'>
+				<span className={style.span}>{label}</span>
 				<Input
 					focus={true}
-					className='form-fields__input'
+					className={style.input}
 					name='field-name'
 					onChange={(e) => setValue(e.target.value)}
 					placeholder={placeHolder}
@@ -54,7 +54,7 @@ const Form: FC<IProps> = ({ onSubmit, placeHolder, buttonText, label }) => {
 
 			<Button
 				animate={false}
-				className='form-fields__button-submit'
+				className={style.button}
 				disabled={error}
 				text={buttonText}
 				type={ETypeButton.submit}

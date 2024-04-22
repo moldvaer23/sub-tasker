@@ -5,7 +5,7 @@ import { TodoList } from '03-Features/TodoList'
 import { TodoNewForm } from '03-Features/TodoNewForm'
 import TodoModel from '02-Widgets/Todo/models/TodoModel'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 const Todo: FC = () => {
 	const dispatch = useAppDispatch()
@@ -35,10 +35,10 @@ const Todo: FC = () => {
 
 	return (
 		<>
-			<header className='header'>
+			<section className={style['section__new-todo']}>
 				<TodoNewForm createNewTodo={createNewTodo} />
-			</header>
-			<section className='section__todo-list'>
+			</section>
+			<section className={style.section__todos}>
 				<TodoList createPresentTodo={createPresentTodo} />
 			</section>
 		</>
