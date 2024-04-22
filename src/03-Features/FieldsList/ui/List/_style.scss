@@ -1,74 +1,70 @@
-@import "/src/00-App/styles/mixin";
-@import "/src/00-App/styles/variables";
+@import '/src/00-App/styles/mixin';
+@import '/src/00-App/styles/variables';
 
 .fields {
-  @include fl-cl;
-  position: fixed;
-  top: 0;
+	@include fl-cl;
+	position: fixed;
+	top: 0;
+	grid-row: 2;
+	justify-content: center;
+	gap: 50px;
+	width: 100%;
+	max-width: 250px;
+	height: 100%;
 
-  grid-row: 2;
-  gap: 50px;
-  justify-content: center;
+	&__buttons {
+		display: flex;
+		align-self: center;
+		gap: 10px;
+	}
 
-  width: 100%;
-  max-width: 250px;
-  height: 100%;
+	&__button {
+		padding: 10px;
+		font-size: 14px;
+		background-color: $primary-color;
+		border-radius: 5px;
+	}
 
-  &__buttons {
-    display: flex;
-    gap: 10px;
-    align-self: center;
-  }
-
-  &__button {
-    padding: 10px;
-    font-size: 14px;
-    background-color: $primary-color;
-    border-radius: 5px;
-  }
-
-  &__list {
-    @include fl-cl;
-    gap: 15px;
-  }
+	&__list {
+		@include fl-cl;
+		gap: 15px;
+	}
 }
 
 .field__button {
-  width: 100%;
-  padding: 10px 20px;
-
-  font-size: 17px;
-  font-weight: 500;
-  color: $accent-text-color;
-  overflow-wrap: break-word;
-
-  background-color: $secondary-color;
-  filter: brightness(40%);
-  border-radius: 0 10px 10px 0;
+	width: 100%;
+	padding: 10px 20px;
+	color: $accent-text-color;
+	font-weight: 500;
+	font-size: 17px;
+	overflow-wrap: break-word;
+	background-color: $secondary-color;
+	border-radius: 0 10px 10px 0;
+	filter: brightness(40%);
 }
 
 .field__button::first-letter {
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .field__active {
-  pointer-events: none;
-  filter: unset;
+	filter: unset;
+	pointer-events: none;
 }
 
 .confirm-delete {
-  &__wrapper {
-    @include fl-cl;
-    align-items: center;
-    gap: 50px;
-    min-width: 400px;
-  }
+	&__wrapper {
+		@include fl-cl;
+		align-items: center;
+		gap: 50px;
+		min-width: 400px;
+	}
 
-  &__span {
-    font-size: 20px;
-  }
+	&__span {
+		font-size: 20px;
+	}
 
-  &__button {
-    width: 100%;
-  }
+	&__button {
+		width: 100%;
+	}
 }

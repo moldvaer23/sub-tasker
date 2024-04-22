@@ -1,3 +1,3 @@
-import FieldsList from "./ui/List";
+import FieldsList from './ui/List'
 
-export { FieldsList };
+export { FieldsList }

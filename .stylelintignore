@@ -1,7 +1,6 @@
-*.tsx
-*.jsx
-*.ts
-*.js
-*.md
-*.svg
-/node_modules
+**/normalize.css
+**/normalize.min.css
+**/fonts/
+**/images/
+**/img/
+    

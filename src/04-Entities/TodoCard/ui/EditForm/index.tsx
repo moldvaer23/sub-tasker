@@ -1,71 +1,81 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 
-import { checkIcon } from "05-Shared/assets/svg";
-import validator from "05-Shared/utils/validator";
-import { TextArea } from "05-Shared/ui/TeaxtArea";
-import { ErrorAlert } from "05-Shared/ui/ErrorAlert";
-import { Button, ETypeButton, ETypeButtonStyle } from "05-Shared/ui/Button";
+import { checkIcon } from '05-Shared/assets/svg'
+import validator from '05-Shared/utils/validator'
+import { TextArea } from '05-Shared/ui/TeaxtArea'
+import { ErrorAlert } from '05-Shared/ui/ErrorAlert'
+import { Button, ETypeButton, ETypeButtonStyle } from '05-Shared/ui/Button'
 
-import "./_style.scss";
+import './_style.scss'
 
 interface IProps {
-  placeholderTask: string;
-  setIsActiveEdit: (isActiveEdit: boolean) => void;
-  submitHandle: (changedTask: string) => void;
+	placeholderTask: string
+	setIsActiveEdit: (isActiveEdit: boolean) => void
+	submitHandle: (changedTask: string) => void
 }
 
-const TodoEditForm: FC<IProps> = ({ placeholderTask, submitHandle, setIsActiveEdit }) => {
-  const [changedTask, setChangedTask] = useState<string>(placeholderTask);
-  const [error, setError] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+const TodoEditForm: FC<IProps> = ({
+	placeholderTask,
+	submitHandle,
+	setIsActiveEdit,
+}) => {
+	const [changedTask, setChangedTask] = useState<string>(placeholderTask)
+	const [error, setError] = useState<boolean>(false)
+	const [errorMessage, setErrorMessage] = useState<string>('')
 
-  const ref: React.LegacyRef<HTMLFormElement> = useRef(null);
+	const ref: React.LegacyRef<HTMLFormElement> = useRef(null)
 
-  // Валидируем поле chgangeTask
-  useEffect(() => {
-    validator({ data: changedTask, setError: setError, setErrorMessage: setErrorMessage });
-  }, [changedTask]);
+	// Валидируем поле chgangeTask
+	useEffect(() => {
+		validator({
+			data: changedTask,
+			setError: setError,
+			setErrorMessage: setErrorMessage,
+		})
+	}, [changedTask])
 
-  // Разширение хендлера подтверждения формы
-  const handleSubmit = (): void => {
-    if (!error) {
-      submitHandle(changedTask);
-      setIsActiveEdit(false);
-    }
-  };
+	// Разширение хендлера подтверждения формы
+	const handleSubmit = (): void => {
+		if (!error) {
+			submitHandle(changedTask)
+			setIsActiveEdit(false)
+		}
+	}
 
-  return (
-    <form
-      className="todo__form-edit-todo"
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleSubmit();
-      }}
-      ref={ref}>
-      {errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
+	return (
+		<form
+			className='todo__form-edit-todo'
+			onSubmit={(e) => {
+				e.preventDefault()
+				handleSubmit()
+			}}
+			ref={ref}
+		>
+			{errorMessage.length > 0 && <ErrorAlert errorMessage={errorMessage} />}
 
-      <TextArea
-        // eslint-disable-next-line
-        autoFocus
-        className="form-edit-todo__textarea"
-        name="changeTask"
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>): void => setChangedTask(e.target.value)}
-        refCallBack={() => handleSubmit()}
-        value={changedTask}
-      />
+			<TextArea
+				focus={true}
+				className='form-edit-todo__textarea'
+				name='changeTask'
+				onChange={(e: ChangeEvent<HTMLTextAreaElement>): void =>
+					setChangedTask(e.target.value)
+				}
+				refCallBack={() => handleSubmit()}
+				value={changedTask}
+			/>
 
-      <Button
-        className="form-edit-todo__button-submit"
-        disabled={error}
-        type={ETypeButton.submit}
-        typeStyle={ETypeButtonStyle.icon}
-        image={{
-          imageSrc: checkIcon,
-          alt: "Кнопка подтвердить",
-        }}
-      />
-    </form>
-  );
-};
+			<Button
+				className='form-edit-todo__button-submit'
+				disabled={error}
+				type={ETypeButton.submit}
+				typeStyle={ETypeButtonStyle.icon}
+				image={{
+					imageSrc: checkIcon,
+					alt: 'Кнопка подтвердить',
+				}}
+			/>
+		</form>
+	)
+}
 
-export default TodoEditForm;
+export default TodoEditForm

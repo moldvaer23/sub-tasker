@@ -1,59 +1,70 @@
-import { TField } from "05-Shared/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TField } from '05-Shared/types'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface IFieldsState {
-  activeField: string;
-  fields: Record<string, TField>;
+	activeField: string
+	fields: Record<string, TField>
 }
 
 const initialState: IFieldsState = {
-  activeField: "", // uuid активного поля
-  fields: {}, // Поля
-};
+	activeField: '', // uuid активного поля
+	fields: {}, // Поля
+}
 
 const fieldsSlice = createSlice({
-  name: "fields",
-  initialState,
-  reducers: {
-    // Установка активного поля
-    setActiveField(state, action: PayloadAction<string>) {
-      state.activeField = action.payload;
-    },
+	name: 'fields',
+	initialState,
+	reducers: {
+		// Установка активного поля
+		setActiveField(state, action: PayloadAction<string>) {
+			state.activeField = action.payload
+		},
 
-    // Инициализация полей
-    setFields(state, action: PayloadAction<TField[]>) {
-      const fields = action.payload;
+		// Инициализация полей
+		setFields(state, action: PayloadAction<TField[]>) {
+			const fields = action.payload
 
-      fields.map((field) => {
-        state.fields[field.uuid] = field;
-      });
-    },
+			fields.map((field) => {
+				state.fields[field.uuid] = field
+			})
+		},
 
-    // Создания поля
-    createField(state, action: PayloadAction<TField>) {
-      const field = action.payload;
+		// Создания поля
+		createField(state, action: PayloadAction<TField>) {
+			const field = action.payload
 
-      state.fields[field.uuid] = field;
-      localStorage.setItem("fields", JSON.stringify(state.fields));
-    },
+			state.fields[field.uuid] = field
+			localStorage.setItem('fields', JSON.stringify(state.fields))
+		},
 
-    // Редактирование имени поля
-    editFieldName(state, action: PayloadAction<{ uuid: string; name: string }>) {
-      state.fields[action.payload.uuid].name = action.payload.name;
-      localStorage.setItem("fields", JSON.stringify(state.fields));
-    },
+		// Редактирование имени поля
+		editFieldName(
+			state,
+			action: PayloadAction<{ uuid: string; name: string }>
+		) {
+			state.fields[action.payload.uuid].name = action.payload.name
+			localStorage.setItem('fields', JSON.stringify(state.fields))
+		},
 
-    // Удаление поля
-    deleteField(state, action: PayloadAction<{ uuid: string; uuidTodos: string }>) {
-      delete state.fields[action.payload.uuid];
+		// Удаление поля
+		deleteField(
+			state,
+			action: PayloadAction<{ uuid: string; uuidTodos: string }>
+		) {
+			delete state.fields[action.payload.uuid]
 
-      localStorage.setItem("fields", JSON.stringify(state.fields));
-      localStorage.removeItem(action.payload.uuidTodos);
-    },
-  },
-});
+			localStorage.setItem('fields', JSON.stringify(state.fields))
+			localStorage.removeItem(action.payload.uuidTodos)
+		},
+	},
+})
 
-export const { setActiveField, setFields, createField, editFieldName, deleteField } =
-  fieldsSlice.actions;
+export const {
+	setActiveField,
+	setFields,
+	createField,
+	editFieldName,
+	deleteField,
+} = fieldsSlice.actions
 
-export default fieldsSlice.reducer;
+export default fieldsSlice.reducer

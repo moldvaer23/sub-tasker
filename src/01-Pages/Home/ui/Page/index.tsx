@@ -1,17 +1,17 @@
-import { FC } from "react";
+import { FC } from 'react'
 
-import { Todo } from "02-Widgets/Todo";
-import { Fields } from "02-Widgets/Fields";
+import { Todo } from '02-Widgets/Todo'
+import { Fields } from '02-Widgets/Fields'
 
-import "./_style.scss";
+import './_style.scss'
 
 const Home: FC = () => {
-  return (
-    <main className="main">
-      <Fields />
-      <Todo />
-    </main>
-  );
-};
+	return (
+		<main className='main'>
+			<Fields />
+			<Todo />
+		</main>
+	)
+}
 
-export default Home;
+export default Home

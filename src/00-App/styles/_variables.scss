@@ -1,33 +1,33 @@
-// colors
+/* Палитра */
 $primary-color: #423e3b;
 $accent-color: #5448c8;
 $secondary-color: #fffecb;
 $error-color: rgb(255 113 113);
-$primary-outline-color: #fff;
 
-// page-bcg-color
+/* Цвет страницы */
 $page-background-color: #2c2826;
 
-// text-color
-$primary-text-color: #fff;
+/* Цвет outline */
+$primary-outline-color: #ffffff;
+
+/* Цвет текста */
+$primary-text-color: #ffffff;
 $accent-text-color: #2c2826;
 
-// placeholder-colors
+/* Цвет Placeholder */
 $input-placeholder-color: rgb(255 255 255 / 50%);
 
-// font-family
+/* Fonts */
 $primary-font-family: roboto, arial, sans-serif;
 
-// font-size
-$primary-font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
-$accent-font-size: clamp(1.25rem, 1.136rem + 0.57vw, 1.563rem);
+/* Font size */
+$primary-font-size: clamp(1rem, 0.91rem + 0.45vw, 1.25rem);
+$accent-font-size: clamp(1.25rem, 1.14rem + 0.57vw, 1.56rem);
 $secondary-font-size: 20px;
 $min-font-size: 16px;
 
-// width-element
-$primary-width-element: clamp(23.125rem, 20.17rem + 14.77vw, 31.25rem);
-$accent-width-element: clamp(12.5rem, 9.091rem + 17.05vw, 21.875rem);
-$secondary-width-element: clamp(31.25rem, 24.432rem + 34.09vw, 50rem);
-
-// medias
+/* Width */
+$primary-width-element: clamp(23.13rem, 20.17rem + 14.77vw, 31.25rem);
+$accent-width-element: clamp(12.5rem, 9.09rem + 17.05vw, 21.88rem);
+$secondary-width-element: clamp(31.25rem, 24.43rem + 34.09vw, 50rem);
 $media-width-mobile: 576px;

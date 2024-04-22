@@ -1,3 +1,3 @@
-import TodoCard from "./ui/Card";
+import TodoCard from './ui/Card'
 
-export { TodoCard };
+export { TodoCard }

@@ -1,57 +1,65 @@
-import { ChangeEvent, FC } from "react";
-import { EDefaultClassNames } from "../classNames";
+import { ChangeEvent, FC, useRef } from 'react'
+import { EDefaultClassNames } from '../classNames'
 
-import "./_style.scss";
+import './_style.scss'
 
 interface IProps {
-  autoFocus?: boolean;
-  className?: string;
-  id?: string;
-  name: string;
-  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  refCallBack: () => void;
-  value?: string;
+	focus?: boolean
+	className?: string
+	id?: string
+	name: string
+	onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
+	refCallBack: () => void
+	value?: string
 }
 
 const TextArea: FC<IProps> = ({
-  autoFocus,
-  className,
-  name,
-  id = name,
-  onChange,
-  refCallBack,
-  value,
+	focus,
+	className,
+	name,
+	id = name,
+	onChange,
+	refCallBack,
+	value,
 }) => {
-  const classNameSetting = className
-    ? `${className} ${EDefaultClassNames.textArea}`
-    : EDefaultClassNames.textArea;
+	const rootRef = useRef<HTMLTextAreaElement | null>(null)
 
-  const onFocus = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const val = e.target.value;
-    e.target.value = "";
-    e.target.value = val;
-  };
+	if (focus) rootRef.current?.focus()
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.code === "Enter" && e.shiftKey === false) {
-      e.preventDefault();
-      refCallBack();
-    }
-  };
+	const classNameSetting = className
+		? `${className} ${EDefaultClassNames.textArea}`
+		: EDefaultClassNames.textArea
 
-  return (
-    <textarea
-      className={classNameSetting}
-      id={id}
-      name={name}
-      onChange={onChange ? (e: ChangeEvent<HTMLTextAreaElement>): void => onChange(e) : undefined}
-      onFocus={(e) => onFocus(e)}
-      onKeyDown={onKeyDown}
-      rows={5}
-      spellCheck={true}
-      {...(autoFocus !== undefined && { autoFocus })}
-      {...(value !== undefined && { value })}
-    />
-  );
-};
-export default TextArea;
+	const onFocus = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		const val = e.target.value
+		e.target.value = ''
+		e.target.value = val
+	}
+
+	const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+		if (e.code === 'Enter' && e.shiftKey === false) {
+			e.preventDefault()
+			refCallBack()
+		}
+	}
+
+	return (
+		<textarea
+			className={classNameSetting}
+			id={id}
+			name={name}
+			onChange={
+				onChange
+					? (e: ChangeEvent<HTMLTextAreaElement>): void => onChange(e)
+					: undefined
+			}
+			onFocus={(e) => onFocus(e)}
+			onKeyDown={onKeyDown}
+			rows={5}
+			spellCheck={true}
+			ref={rootRef}
+			{...(value !== undefined && { value })}
+		/>
+	)
+}
+export default TextArea
