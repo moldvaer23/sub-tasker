@@ -1,5 +1,5 @@
-@import '/src/00-App/styles/variables';
-@import '/src/00-App/styles/mixin';
+@import '../../../../00-App/styles/variables';
+@import '../../../../00-App/styles/mixin';
 
 .todo {
 	position: relative;
@@ -14,26 +14,26 @@
 	font-size: $primary-font-size;
 	background-color: $primary-color;
 	border-radius: 5px;
+}
 
-	&__task {
-		width: 100%;
-		font-weight: 300;
-		line-height: 1.5;
-		letter-spacing: 1.2px;
-		overflow-wrap: break-word;
-	}
+.task {
+	width: 100%;
+	font-weight: 300;
+	line-height: 1.5;
+	letter-spacing: 1.2px;
+	overflow-wrap: break-word;
+}
 
-	&__button-important {
-		position: absolute;
-		top: 0;
-		right: 0;
-	}
+.button__important {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
 
-	&__button-new-subtodo {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-	}
+.button__subtodo {
+	position: absolute;
+	right: 0;
+	bottom: 0;
 }
 
 .subtodo {

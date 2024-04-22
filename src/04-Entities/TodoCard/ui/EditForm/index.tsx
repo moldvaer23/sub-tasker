@@ -6,7 +6,7 @@ import { TextArea } from '05-Shared/ui/TeaxtArea'
 import { ErrorAlert } from '05-Shared/ui/ErrorAlert'
 import { Button, ETypeButton, ETypeButtonStyle } from '05-Shared/ui/Button'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 interface IProps {
 	placeholderTask: string
@@ -44,7 +44,7 @@ const TodoEditForm: FC<IProps> = ({
 
 	return (
 		<form
-			className='todo__form-edit-todo'
+			className={style.form}
 			onSubmit={(e) => {
 				e.preventDefault()
 				handleSubmit()
@@ -55,7 +55,7 @@ const TodoEditForm: FC<IProps> = ({
 
 			<TextArea
 				focus={true}
-				className='form-edit-todo__textarea'
+				className={style.form__textarea}
 				name='changeTask'
 				onChange={(e: ChangeEvent<HTMLTextAreaElement>): void =>
 					setChangedTask(e.target.value)
@@ -65,7 +65,7 @@ const TodoEditForm: FC<IProps> = ({
 			/>
 
 			<Button
-				className='form-edit-todo__button-submit'
+				className={style.form__button}
 				disabled={error}
 				type={ETypeButton.submit}
 				typeStyle={ETypeButtonStyle.icon}

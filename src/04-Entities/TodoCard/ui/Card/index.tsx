@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 
+import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { addIconDefault, starIcon } from '05-Shared/assets/svg'
@@ -8,7 +9,7 @@ import { Button, ETypeButtonSize, ETypeButtonStyle } from '05-Shared/ui/Button'
 import TodoButtons from '../Buttons'
 import TodoEditForm from '../EditForm'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 interface IProps {
 	handleClearActiveEdit: () => void
@@ -86,7 +87,7 @@ const TodoCard: FC<IProps> = ({
 	return (
 		<AnimatePresence>
 			<motion.article
-				className={isSubTodo ? ' subtodo todo' : 'todo'}
+				className={clsx(style.todo, { [style.subtodo]: isSubTodo })}
 				initial={{ scale: 0, opacity: 0 }}
 				onMouseEnter={() => setIsMouseEnter(true)}
 				onMouseLeave={() => setIsMouseEnter(false)}
@@ -115,12 +116,12 @@ const TodoCard: FC<IProps> = ({
 					/>
 				) : (
 					// Показываем текст задачи
-					<p className='todo__task'>{task}</p>
+					<p className={style.task}>{task}</p>
 				)}
 
 				{!isActiveEdit && (
 					<Button
-						className='todo__button-important'
+						className={style.button__important}
 						image={{ imageSrc: starIcon, alt: 'Важное' }}
 						onClick={() => handleSetImportant(!important)}
 						opacity={!important ? (isMouseEnter ? 1 : 0) : 1}
@@ -131,7 +132,7 @@ const TodoCard: FC<IProps> = ({
 
 				{!isSubTodo && handleCreateSubTodo && (
 					<Button
-						className='todo__button-new-subtodo'
+						className={style.button__subtodo}
 						disabled={uuidActiveEditTodo.length === 0 ? false : true}
 						image={{
 							imageSrc: addIconDefault,

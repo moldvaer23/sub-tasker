@@ -1,5 +1,8 @@
 import { FC, MouseEvent } from 'react'
+
+import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
+
 import { EDefaultClassNames } from '../classNames'
 
 import './_style.scss'
@@ -30,7 +33,7 @@ export type TImageSrcProps = {
 
 interface IProps {
 	animate?: boolean
-	className?: string
+	className: string
 	disabled?: boolean
 	image?: TImageSrcProps
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => void
@@ -65,14 +68,17 @@ const Button: FC<IProps> = ({
 		text
 	)
 
-	const classNameSeting = className
-		? `${className} ${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
-		: `${EDefaultClassNames.button} ${typeSize} ${typeStyle}`
+	const resultClassName = clsx(
+		{ [className]: className },
+		EDefaultClassNames.button,
+		typeSize,
+		typeStyle
+	)
 
 	return animate ? (
 		<AnimatePresence>
 			<motion.button
-				className={classNameSeting}
+				className={resultClassName}
 				disabled={disabled}
 				exit={{ scale: 1 }}
 				initial={{ scale: 1 }}
@@ -88,7 +94,7 @@ const Button: FC<IProps> = ({
 		</AnimatePresence>
 	) : (
 		<button
-			className={classNameSeting}
+			className={resultClassName}
 			disabled={disabled}
 			onClick={onClick ? onClick : undefined}
 			onMouseLeave={onMouseLeave}

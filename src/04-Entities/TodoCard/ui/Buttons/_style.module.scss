@@ -1,7 +1,7 @@
-@import '/src/00-App/styles/variables';
-@import '/src/00-App/styles/mixin';
+@import '../../../../00-App/styles/variables';
+@import '../../../../00-App/styles/mixin';
 
-.todo__buttons-wrapper {
+.todo__buttons {
 	@include fl-cl;
 	position: absolute;
 	left: -45px;

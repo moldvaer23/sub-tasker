@@ -1,0 +1,43 @@
+@import '../../../../00-App/styles/mixin';
+@import '../../../../00-App/styles/variables';
+
+.form {
+	display: flex;
+	gap: 40px;
+}
+
+.label {
+	@include fl-cl;
+	align-items: center;
+	gap: 20px;
+	padding-top: 20px;
+	color: $primary-text-color;
+	backdrop-filter: blur(10px);
+}
+
+.span {
+	font-size: $accent-font-size;
+}
+
+.form__input {
+	width: $secondary-width-element;
+	padding: 20px;
+	font-size: 20px;
+	background-color: $primary-color;
+	border-radius: 5px;
+}
+
+.form__button {
+	align-self: flex-end;
+	padding: 11px;
+	background-color: $primary-color;
+}
+
+.form__button img {
+	width: 40px;
+	height: 40px;
+}
+
+.form__button:disabled {
+	filter: brightness(80%);
+}

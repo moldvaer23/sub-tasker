@@ -8,7 +8,7 @@ import {
 } from '05-Shared/assets/svg'
 import { Button, ETypeButtonSize, ETypeButtonStyle } from '05-Shared/ui/Button'
 
-import './_style.scss'
+import style from './_style.module.scss'
 
 interface IProps {
 	disabled: boolean
@@ -28,13 +28,13 @@ const TodoButtons: FC<IProps> = ({
 	const [openConfirmDelete, setOpenConfirmDelete] = useState<boolean>(false)
 
 	return (
-		<div className='todo__buttons-wrapper'>
+		<div className={style.todo__buttons}>
 			{!isActiveEdit ? (
 				<>
 					{!openConfirmDelete ? (
 						/* Показываем кнопку удалить */
 						<Button
-							className='todo__button'
+							className={style.todo__button}
 							image={{ imageSrc: deleteIcon, alt: 'Кнопка удаления' }}
 							onClick={() => setOpenConfirmDelete(true)}
 							typeSize={ETypeButtonSize.small}
@@ -43,7 +43,7 @@ const TodoButtons: FC<IProps> = ({
 					) : (
 						/* Показываем кнопку подтверждения удаления */
 						<Button
-							className='todo__button'
+							className={style.todo__button}
 							image={{
 								imageSrc: checkIcon,
 								alt: 'Кнопка подтвердить удаление',
@@ -55,7 +55,7 @@ const TodoButtons: FC<IProps> = ({
 						/>
 					)}
 					<Button
-						className='todo__button'
+						className={style.todo__button}
 						disabled={disabled}
 						image={{ imageSrc: editIcon, alt: 'Кнопка редактирования' }}
 						onClick={handleOpenEdit}
@@ -67,7 +67,7 @@ const TodoButtons: FC<IProps> = ({
 				// Показываем кнопку закрыть форму редактирования
 				<>
 					<Button
-						className='todo__button'
+						className={style.todo__button}
 						image={{
 							imageSrc: closeIcon,
 							alt: 'Кнопка закрыть форму редактирования',
