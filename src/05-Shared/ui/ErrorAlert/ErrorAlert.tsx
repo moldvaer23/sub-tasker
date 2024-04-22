@@ -1,14 +1,14 @@
-import { FC } from "react";
-import { EDefaultClassNames } from "../classNames";
+import { FC } from 'react'
+import { EDefaultClassNames } from '../classNames'
 
-import "./_style.scss";
+import './_style.scss'
 
 interface IProps {
-  errorMessage: string;
+	errorMessage: string
 }
 
 const ErrorAlert: FC<IProps> = ({ errorMessage }) => {
-  return <span className={EDefaultClassNames.errorAlert}>{errorMessage}</span>;
-};
+	return <span className={EDefaultClassNames.errorAlert}>{errorMessage}</span>
+}
 
-export default ErrorAlert;
+export default ErrorAlert

@@ -1,29 +1,29 @@
-@import "/src/00-App/styles/mixin";
-@import "/src/00-App/styles/variables";
+@import '/src/00-App/styles/mixin';
+@import '/src/00-App/styles/variables';
 
 .todo__list {
-  @include fl-cl;
-  gap: 50px;
+	@include fl-cl;
+	gap: 50px;
 
-  &-item {
-    @include fl-cl;
-    gap: 20px;
-    align-items: center;
+	&-item {
+		@include fl-cl;
+		align-items: center;
+		gap: 20px;
 
-    @media (max-width: $media-width-mobile) {
-      @include fl-cl;
-      position: unset;
-      gap: 20px;
-      align-items: flex-end;
-    }
-  }
+		@media (max-width: $media-width-mobile) {
+			@include fl-cl;
+			position: unset;
+			align-items: flex-end;
+			gap: 20px;
+		}
+	}
 }
 
 .list-item {
-  &__list-subtodos {
-    @include fl-cl;
-    gap: 20px;
-    align-items: flex-end;
-    width: 100%;
-  }
+	&__list-subtodos {
+		@include fl-cl;
+		align-items: flex-end;
+		gap: 20px;
+		width: 100%;
+	}
 }

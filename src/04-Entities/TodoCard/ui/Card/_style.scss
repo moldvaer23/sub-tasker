@@ -1,49 +1,43 @@
-@import "/src/00-App/styles/variables";
-@import "/src/00-App/styles/mixin";
+@import '/src/00-App/styles/variables';
+@import '/src/00-App/styles/mixin';
 
 .todo {
-  position: relative;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	min-height: 90px;
+	max-height: 470px;
+	padding: 10px 20px;
+	color: $primary-text-color;
+	font-size: $primary-font-size;
+	background-color: $primary-color;
+	border-radius: 5px;
 
-  display: flex;
-  gap: 10px;
-  align-items: center;
+	&__task {
+		width: 100%;
+		font-weight: 300;
+		line-height: 1.5;
+		letter-spacing: 1.2px;
+		overflow-wrap: break-word;
+	}
 
-  width: 100%;
-  min-height: 90px;
-  max-height: 470px;
-  padding: 10px 20px;
+	&__button-important {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
 
-  font-size: $primary-font-size;
-  color: $primary-text-color;
-
-  background-color: $primary-color;
-  border-radius: 5px;
-
-  &__task {
-    width: 100%;
-
-    font-weight: 300;
-    line-height: 19px;
-    letter-spacing: 1.2px;
-    overflow-wrap: break-word;
-  }
-
-  &__button-important {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  &__button-new-subtodo {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
+	&__button-new-subtodo {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
 }
 
 .subtodo {
-  width: $accent-width-element;
-
-  max-height: 320px;
-  font-size: $min-font-size;
+	width: $accent-width-element;
+	max-height: 320px;
+	font-size: $min-font-size;
 }

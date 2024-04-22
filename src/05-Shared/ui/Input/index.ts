@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from './Input'
 
-export * from "./Input";
-export { Input };
+export * from './Input'
+export { Input }

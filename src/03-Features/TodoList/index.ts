@@ -1,3 +1,3 @@
-import TodoList from "./ui/List";
+import TodoList from './ui/List'
 
-export { TodoList };
+export { TodoList }

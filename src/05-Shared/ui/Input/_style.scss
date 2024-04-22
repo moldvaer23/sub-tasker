@@ -1,14 +1,14 @@
-@import "/src/00-App/styles/variables";
+@import '/src/00-App/styles/variables';
 
 .input {
-  color: $primary-text-color;
-  border: 0;
+	color: $primary-text-color;
+	border: 0;
 }
 
 .input::placeholder {
-  color: $input-placeholder-color;
+	color: $input-placeholder-color;
 }
 
 .input:focus-visible {
-  outline: 1px solid $primary-outline-color;
+	outline: 1px solid $primary-outline-color;
 }

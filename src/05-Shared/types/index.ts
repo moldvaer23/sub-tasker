@@ -1,47 +1,51 @@
 // Объекты задач
 type TAbstractTodo = {
-  readonly uuid: string;
-  important: boolean;
-  task: string;
-};
+	readonly uuid: string
+	important: boolean
+	task: string
+}
 
 export type TSubTodo = TAbstractTodo & {
-  uuidPinTodo: string;
-};
+	uuidPinTodo: string
+}
 
 export type TTodo = TAbstractTodo & {
-  subTodos: Record<string, TSubTodo>;
-};
+	subTodos: Record<string, TSubTodo>
+}
 
 // Модель задачи
 export interface ITodoModel {
-  createSubTodo: (data: { uuid?: string; important?: boolean; task: string }) => TSubTodo;
-  deleteSubTodo: (data: { uuidPinTodo: string; uuidSubTodo: string }) => void;
-  deleteTodo: () => void;
-  editSubTodo: (data: { uuid: string; task: string }) => void | undefined;
-  editTodo: (data: { uuid: string; task: string }) => void | undefined;
-  getSubTodos: () => TSubTodo[];
-  getTodo: () => TTodo;
-  setActiveEdit: (uuid: string) => void;
-  setImportantSubTodo: (data: { uuid: string; value: boolean }) => void;
-  setImportantTodo: (value: boolean) => void;
-  uuid: string;
+	createSubTodo: (data: {
+		uuid?: string
+		important?: boolean
+		task: string
+	}) => TSubTodo
+	deleteSubTodo: (data: { uuidPinTodo: string; uuidSubTodo: string }) => void
+	deleteTodo: () => void
+	editSubTodo: (data: { uuid: string; task: string }) => void | undefined
+	editTodo: (data: { uuid: string; task: string }) => void | undefined
+	getSubTodos: () => TSubTodo[]
+	getTodo: () => TTodo
+	setActiveEdit: (uuid: string) => void
+	setImportantSubTodo: (data: { uuid: string; value: boolean }) => void
+	setImportantTodo: (value: boolean) => void
+	uuid: string
 }
 
 // Объект поля
 export type TField = {
-  uuid: string;
-  uuidTodos: string;
-  name: string;
-};
+	uuid: string
+	uuidTodos: string
+	name: string
+}
 
 // Модель листов задач
 export interface IFields {
-  createField: (data: { uuidTodos?: string; name: string }) => TField;
-  deleteField: (data: { uuid: string; uuidTodos: string }) => void;
-  editFieldName: (data: { uuid: string; name: string }) => void;
-  getfield: (uuid: string) => TField | undefined;
-  getfields: () => TField[];
-  setActiveField: (uuid: string) => void;
-  setFields: (fields: TField[]) => TField[];
+	createField: (data: { uuidTodos?: string; name: string }) => TField
+	deleteField: (data: { uuid: string; uuidTodos: string }) => void
+	editFieldName: (data: { uuid: string; name: string }) => void
+	getfield: (uuid: string) => TField | undefined
+	getfields: () => TField[]
+	setActiveField: (uuid: string) => void
+	setFields: (fields: TField[]) => TField[]
 }

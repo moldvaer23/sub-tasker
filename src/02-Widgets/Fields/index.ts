@@ -1,3 +1,3 @@
-import Fields from "./ui/Fields";
+import Fields from './ui/Fields'
 
-export { Fields };
+export { Fields }

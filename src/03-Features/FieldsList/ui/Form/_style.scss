@@ -1,32 +1,30 @@
-@import "/src/00-App/styles/mixin";
-@import "/src/00-App/styles/variables";
+@import '/src/00-App/styles/mixin';
+@import '/src/00-App/styles/variables';
 
 .form-fields {
-  @include fl-cl;
-  gap: 50px;
-  min-width: 400px;
+	@include fl-cl;
+	gap: 50px;
+	min-width: 400px;
 
-  &__label {
-    @include fl-cl;
-    gap: 15px;
-    align-items: center;
+	&__label {
+		@include fl-cl;
+		align-items: center;
+		gap: 15px;
 
-    &-span {
-      font-size: 20px;
-    }
-  }
+		&-span {
+			font-size: 20px;
+		}
+	}
 
-  &__input {
-    width: 100%;
-    padding: 10px;
+	&__input {
+		width: 100%;
+		padding: 10px;
+		background-color: $primary-color;
+		border-radius: 5px;
+	}
 
-    background-color: $primary-color;
-
-    border-radius: 5px;
-  }
-
-  &__button-submit {
-    color: $accent-text-color;
-    background-color: $secondary-color;
-  }
+	&__button-submit {
+		color: $accent-text-color;
+		background-color: $secondary-color;
+	}
 }

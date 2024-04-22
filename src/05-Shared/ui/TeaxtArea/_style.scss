@@ -1,11 +1,9 @@
-@import "/src/00-App/styles/variables";
+@import '/src/00-App/styles/variables';
 
 .textarea {
-  resize: none;
-
-  color: $primary-text-color;
-
-  background: transparent;
-  border: 0;
-  outline: 1px solid $primary-outline-color;
+	color: $primary-text-color;
+	background: transparent;
+	border: 0;
+	outline: 1px solid $primary-outline-color;
+	resize: none;
 }

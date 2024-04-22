@@ -1,24 +1,24 @@
-@import "/src/00-App/styles/variables";
-@import "/src/00-App/styles/mixin";
+@import '/src/00-App/styles/variables';
+@import '/src/00-App/styles/mixin';
 
 .todo__buttons-wrapper {
-  @include fl-cl;
-  position: absolute;
-  left: -45px;
-  gap: 10px;
+	@include fl-cl;
+	position: absolute;
+	left: -45px;
+	gap: 10px;
 
-  @media (max-width: $media-width-mobile) {
-    position: unset;
-    left: unset;
-    flex-direction: row;
-  }
+	@media (max-width: $media-width-mobile) {
+		position: unset;
+		left: unset;
+		flex-direction: row;
+	}
 }
 
 .todo__button {
-  background-color: $primary-color;
-  padding: 5px;
+	padding: 5px;
+	background-color: $primary-color;
 }
 
 .todo__button img {
-  width: 20px;
+	width: 20px;
 }

@@ -1,66 +1,58 @@
-@import "/src/00-App/styles/variables";
+@import '/src/00-App/styles/variables';
 
 .button {
-  cursor: pointer;
+	color: $accent-text-color;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s;
 
-  color: $accent-text-color;
+	&__image {
+		width: 25px;
+	}
 
-  border: 0;
-  border-radius: 5px;
+	&__icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0;
+		background: transparent;
+	}
 
-  transition: all 0.3s;
+	&__primary {
+		background-color: $secondary-color;
+	}
 
-  &__image {
-    width: 25px;
-  }
+	&__accent {
+		background-color: $accent-color;
+	}
 
-  // types styles
-  &__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	&__large {
+		padding: 10px 20px;
+		font-size: $secondary-font-size;
+	}
 
-    padding: 0;
+	&__medium {
+		padding: 8px 10px;
+		font-size: $min-font-size;
+	}
 
-    background: transparent;
-  }
+	&__small {
+		padding: 5px;
+	}
 
-  &__primary {
-    background-color: $secondary-color;
-  }
-
-  &__accent {
-    background-color: $accent-color;
-  }
-
-  // types sizes
-  &__large {
-    padding: 10px 20px;
-    font-size: $secondary-font-size;
-  }
-
-  &__medium {
-    padding: 8px 10px;
-    font-size: $min-font-size;
-  }
-
-  &__small {
-    padding: 5px;
-  }
-
-  // medias
-  @media (max-width: $media-width-mobile) {
-    &__image {
-      width: 40px;
-    }
-  }
+	@media (max-width: $media-width-mobile) {
+		&__image {
+			width: 40px;
+		}
+	}
 }
 
 .button:hover {
-  filter: brightness(80%);
+	filter: brightness(80%);
 }
 
 .button:disabled {
-  pointer-events: none;
-  filter: brightness(65%);
+	filter: brightness(65%);
+	pointer-events: none;
 }
