@@ -10,6 +10,11 @@ interface IProps {
 	setOpen: (value: boolean) => void
 }
 
+/**
+ * (Entities)\
+ * \
+ * Функциональный компонент предназначенный для отображения модального окна.
+ */
 const Modal: FC<IProps> = ({ children, setOpen }) => {
 	// При монтировании
 	useEffect(() => {

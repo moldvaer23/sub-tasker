@@ -15,10 +15,11 @@ import {
 	updateTodo,
 } from './TodoSlice'
 
-/*
- * Класс задачи
+/**
+ * (Model)\
+ * \
+ * Класс задачи.
  */
-
 class TodoModel implements ITodoModel {
 	protected _uuid: string
 	protected _important: boolean

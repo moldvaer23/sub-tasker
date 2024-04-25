@@ -10,10 +10,11 @@ import {
 	setActiveField,
 } from './FieldsSlice'
 
-/*
+/**
+ * (Model)\
+ * \
  * Класс полей, для хранения и работы с полями (листами)
  */
-
 class FieldsModel implements IFields {
 	protected _fields: Record<string, TField> = {}
 	protected _activeField = ''

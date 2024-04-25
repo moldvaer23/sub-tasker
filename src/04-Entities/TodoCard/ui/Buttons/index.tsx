@@ -18,6 +18,11 @@ interface IProps {
 	isActiveEdit: boolean
 }
 
+/**
+ * (Entities)\
+ * \
+ * Функциональный компонент предназначенный для отображения кнопок карточки задачи.
+ */
 const TodoButtons: FC<IProps> = ({
 	disabled,
 	handleCloseEdit,

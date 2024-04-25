@@ -12,12 +12,17 @@ interface IProps {
 	createNewTodo: (task: string) => void
 }
 
+/**
+ * (Features)\
+ * \
+ * Функциональный компонент предназначенный для отображения формы добавления задачи.
+ */
 const TodoNewForm: FC<IProps> = ({ createNewTodo }) => {
 	const [error, setError] = useState<boolean>(false)
 	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [task, setTask] = useState<string>('')
 
-	// Валидируем поле task
+	// Проводим валидацию поля task
 	useEffect((): void => {
 		validator({
 			data: task,
@@ -26,7 +31,7 @@ const TodoNewForm: FC<IProps> = ({ createNewTodo }) => {
 		})
 	}, [task])
 
-	// Хендлер подтверждения формы
+	// Функция обработчик подтверждения формы
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault()
 

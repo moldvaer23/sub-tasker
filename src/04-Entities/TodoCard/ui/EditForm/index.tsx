@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 
 import { checkIcon } from '05-Shared/assets/svg'
 import validator from '05-Shared/utils/validator'
-import { TextArea } from '05-Shared/ui/TeaxtArea'
+import { TextArea } from '05-Shared/ui/TextArea'
 import { ErrorAlert } from '05-Shared/ui/ErrorAlert'
 import { Button, ETypeButton, ETypeButtonStyle } from '05-Shared/ui/Button'
 
@@ -14,6 +14,11 @@ interface IProps {
 	submitHandle: (changedTask: string) => void
 }
 
+/**
+ * (Entities)\
+ * \
+ * Функциональный компонент предназначенный для отображения формы редактирования задачи.
+ */
 const TodoEditForm: FC<IProps> = ({
 	placeholderTask,
 	submitHandle,
@@ -25,7 +30,7 @@ const TodoEditForm: FC<IProps> = ({
 
 	const ref: React.LegacyRef<HTMLFormElement> = useRef(null)
 
-	// Валидируем поле chgangeTask
+	// Проводим валидацию поля changedTask
 	useEffect(() => {
 		validator({
 			data: changedTask,
@@ -34,7 +39,7 @@ const TodoEditForm: FC<IProps> = ({
 		})
 	}, [changedTask])
 
-	// Разширение хендлера подтверждения формы
+	// Расширение функции обработчика подтверждения формы
 	const handleSubmit = (): void => {
 		if (!error) {
 			submitHandle(changedTask)

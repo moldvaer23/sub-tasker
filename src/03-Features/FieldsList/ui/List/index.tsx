@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
 
+import clsx from 'clsx'
+
 import { TField } from '05-Shared/types'
 import { Modal } from '04-Entities/Modal'
 import { useAppSelector } from '00-App/store'
@@ -7,9 +9,7 @@ import { addIconPlus, deleteIcon, editIcon } from '05-Shared/assets/svg'
 import { Button, ETypeButtonSize, ETypeButtonStyle } from '05-Shared/ui/Button'
 
 import Form from '../Form'
-
 import style from './_style.module.scss'
-import clsx from 'clsx'
 
 interface IProps {
 	createNewField: (data: { name: string; uuidTodos?: string }) => TField
@@ -19,6 +19,11 @@ interface IProps {
 	setFields: (fields: TField[]) => void
 }
 
+/**
+ * (Features)\
+ * \
+ * Функциональный компонент предназначенный для отображения полей с кнопками взаимодействия.
+ */
 const FieldsList: FC<IProps> = ({
 	createNewField,
 	deleteField,

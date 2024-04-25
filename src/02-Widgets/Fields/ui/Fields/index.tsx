@@ -6,25 +6,27 @@ import { FieldsList } from '03-Features/FieldsList'
 
 import FieldsModel from '../../models/FieldsModel'
 
+/**
+ * (Widget)\
+ * \
+ * Функциональный компонент предназначенный для создания обработчиков,\
+ * инициализации dispatch и создания модели полей.
+ */
 const Fields: FC = () => {
 	const dispatch = useAppDispatch()
 	const fieldsModel = new FieldsModel({ dispatch: dispatch })
 
-	/*
-	 * Хендлеры для работы с моделью полей
-	 */
-
-	// Хендлер установки активного поля
+	// Функция обработчик для установки активного поля.
 	const setActiveField = (uuid: string) => {
 		fieldsModel.setActiveField(uuid)
 	}
 
-	// Хендлер инициализации полей
+	// Функция обработчик для инициализации полей.
 	const setFields = (fields: TField[]) => {
 		fieldsModel.setFields(fields)
 	}
 
-	// Хендлер создания нового поля
+	// Функция обработчик для создания нового поля.
 	const createNewField = (data: { name: string; uuidTodos?: string }) => {
 		return fieldsModel.createField({
 			name: data.name,
@@ -32,12 +34,12 @@ const Fields: FC = () => {
 		})
 	}
 
-	// Хендлер редактирования поля
+	// Функция обработчик для редактирования поля.
 	const editFieldName = (data: { uuid: string; name: string }) => {
 		fieldsModel.editFieldName({ uuid: data.uuid, name: data.name })
 	}
 
-	// Хендлер удаления поля
+	//  Функция обработчик для удаления поля.
 	const deleteField = (data: { uuid: string; uuidTodos: string }) => {
 		fieldsModel.deleteField({ uuid: data.uuid, uuidTodos: data.uuidTodos })
 	}

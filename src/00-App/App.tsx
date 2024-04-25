@@ -9,13 +9,16 @@ import { useAppDispatch, useAppSelector } from './store'
 
 import './styles/global.scss'
 
+/**
+ * (App)\
+ * \
+ * Функциональный компонент APP, точка входа.
+ */
 const App: FC = () => {
 	const storeActiveField = useAppSelector((state) => state.fields.activeField)
 	const dispatch = useAppDispatch()
 
-	/*
-	 * Инициализация приложения из LocalStorage
-	 */
+	// Инициализация приложения из LocalStorage
 	useEffect(() => {
 		const localActiveField = localStorage.getItem('activeField') as string
 
@@ -24,9 +27,7 @@ const App: FC = () => {
 		}
 	})
 
-	/*
-	 * Рендер приложения при изминении активного поля
-	 */
+	// Рендер приложения при изменении активного поля
 	useEffect(() => {
 		if (storeActiveField.length !== 0) {
 			// Получаем поля из LocalStorage
@@ -36,7 +37,7 @@ const App: FC = () => {
 
 			// Если поля и активное поле не пустые
 			if (storeActiveField && localFields) {
-				// Если в полях есть uuid активного поля то рендерим
+				// Если в полях есть uuid активного поля то выполняем рендер
 				if (Object.keys(localFields).includes(storeActiveField)) {
 					dispatch(setFields(Object.values(localFields)))
 
@@ -57,6 +58,20 @@ const App: FC = () => {
 			}
 		}
 	}, [storeActiveField, dispatch])
+
+	// Показываем информацию о разработчике при открытии приложения
+	useEffect(() => {
+		console.log(`
+███╗   ███╗ ██████╗ ██╗     ██████╗ ██╗   ██╗ █████╗ ███████╗██████╗ 
+████╗ ████║██╔═══██╗██║     ██╔══██╗██║   ██║██╔══██╗██╔════╝██╔══██╗
+██╔████╔██║██║   ██║██║     ██║  ██║██║   ██║███████║█████╗  ██████╔╝
+██║╚██╔╝██║██║   ██║██║     ██║  ██║╚██╗ ██╔╝██╔══██║██╔══╝  ██╔══██╗
+██║ ╚═╝ ██║╚██████╔╝███████╗██████╔╝ ╚████╔╝ ██║  ██║███████╗██║  ██║
+╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═════╝   ╚═══╝  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝`)
+
+		console.log('⚠ GitHub: https://github.com/moldvaer23')
+		console.log('⚠ Email: moldvaer33@gmail.com')
+	}, [])
 
 	return (
 		<>

@@ -1,0 +1,12 @@
+{
+	"cSpell.enableFiletypes": ["typescriptreact"],
+	"cSpell.ignoreWords": [
+		"Moldvaer",
+		"Tasker",
+		"clsx",
+		"reduxjs",
+		"todos",
+		"uuid",
+		"uuidv"
+	]
+}

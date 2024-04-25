@@ -14,6 +14,11 @@ interface IProps {
 	}) => ITodoModel
 }
 
+/**
+ * (Features)\
+ * \
+ * Функциональный компонент предназначенный для отображения списка задач.
+ */
 const TodoList: FC<IProps> = ({ createPresentTodo }) => {
 	const todos = useAppSelector((state) => state.todos.todos)
 
@@ -43,9 +48,10 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
 							handleSetImportant={(value: boolean) =>
 								todoModel.setImportantTodo(value)
 							}
-							handleSubmit={(changeTask: string) =>
+							handleSubmit={(changeTask: string) => {
+								todoModel.setActiveEdit('')
 								todoModel.editTodo({ task: changeTask, uuid: todoModel.uuid })
-							}
+							}}
 							important={todo.important}
 							task={todo.task}
 							uuidActiveEditTodo={uuidActiveEditTodo}

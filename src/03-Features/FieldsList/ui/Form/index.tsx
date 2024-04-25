@@ -19,6 +19,12 @@ interface IProps {
 	placeHolder: string
 }
 
+/**
+ * (Features)\
+ * \
+ * Функциональный компонент предназначенный для отображения формы,\
+ * работы с названием полей.
+ */
 const Form: FC<IProps> = ({ onSubmit, placeHolder, buttonText, label }) => {
 	const [error, setError] = useState<boolean>(false)
 	const [errorMessage, setErrorMessage] = useState<string>('')

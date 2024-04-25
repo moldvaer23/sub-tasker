@@ -24,6 +24,11 @@ interface IProps {
 	uuidActiveEditTodo: string
 }
 
+/**
+ * (Entities)\
+ * \
+ * Функциональный компонент предназначенный для отображения карточки задачи.
+ */
 const TodoCard: FC<IProps> = ({
 	handleClearActiveEdit,
 	handleCreateSubTodo,
@@ -41,7 +46,7 @@ const TodoCard: FC<IProps> = ({
 	)
 	const [isMouseEnter, setIsMouseEnter] = useState<boolean>(false)
 
-	// Хендлер закрытия формы редактирования задачи
+	// Функция обработчик закрытия формы редактирования задачи
 	const handleCloseEdit = () => {
 		if (task.length === 0) {
 			if (isActiveEdit) handleClearActiveEdit()

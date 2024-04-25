@@ -7,19 +7,21 @@ import TodoModel from '02-Widgets/Todo/models/TodoModel'
 
 import style from './_style.module.scss'
 
+/**
+ * (Widget)\
+ * \
+ * Функциональный компонент предназначенный для создания обработчиков,\
+ * инициализации dispatch и создания модели задачи.
+ */
 const Todo: FC = () => {
 	const dispatch = useAppDispatch()
 
-	/*
-	 * Хендлеры для работы с моделью задачи
-	 */
-
-	// Хендлер создания новой задачи
+	// Обработчик событий для создания новой задачи.
 	const createNewTodo = (task: string) => {
 		new TodoModel({ task: task, dispatch: dispatch })
 	}
 
-	// Хендлер  создания существующей задачи
+	// Обработчик событий для создания существующей задачи.
 	const createPresentTodo = (data: {
 		task: string
 		important: boolean
