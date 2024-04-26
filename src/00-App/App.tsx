@@ -2,12 +2,21 @@ import { FC, useEffect } from 'react'
 
 import { Home } from '01-Pages/Home'
 import { TField, TTodo } from '05-Shared/types'
-import { setTodos, setUuidTodos } from '02-Widgets/Todo/models/TodoSlice'
-import { setActiveField, setFields } from '02-Widgets/Fields/models/FieldsSlice'
+import {
+	addTodo,
+	setTodos,
+	setUuidTodos,
+} from '02-Widgets/Todo/models/TodoSlice'
+import {
+	createField,
+	setActiveField,
+	setFields,
+} from '02-Widgets/Fields/models/FieldsSlice'
 
 import { useAppDispatch, useAppSelector } from './store'
 
 import './styles/global.scss'
+import { buildConfig } from './config/AppConfig'
 
 /**
  * (App)\
@@ -25,7 +34,18 @@ const App: FC = () => {
 		if (localActiveField) {
 			dispatch(setActiveField(localActiveField))
 		}
-	})
+		// Если активного поля нету то проводим инициализацию конфига
+		else {
+			const { configField, configTodo, configUuidTodos } = buildConfig()
+
+			dispatch(setUuidTodos(configUuidTodos))
+			dispatch(addTodo(configTodo))
+
+			localStorage.setItem('activeField', configField.uuid)
+			dispatch(createField(configField))
+			dispatch(setActiveField(configField.uuid))
+		}
+	}, [dispatch])
 
 	// Рендер приложения при изменении активного поля
 	useEffect(() => {

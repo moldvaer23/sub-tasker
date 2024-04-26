@@ -43,9 +43,7 @@ const FieldsList: FC<IProps> = ({
 	const fields: TField[] = Object.values(fieldsStore)
 
 	// Инициализируем поля
-	if (fields.length !== 0) {
-		setFields(fields)
-	}
+	if (fields.length !== 0) setFields(fields)
 
 	return (
 		<>
@@ -88,7 +86,10 @@ const FieldsList: FC<IProps> = ({
 							imageSrc: deleteIcon,
 						}}
 						typeStyle={ETypeButtonStyle.icon}
-						onClick={() => setOpenConfirmDelete(true)}
+						onClick={() => {
+							if (fields.length !== 1) setOpenConfirmDelete(true)
+						}}
+						disabled={fields.length === 1 ? true : false}
 						otherSettings={{
 							['data-tooltip-id']: 'delete-field-tooltip',
 							['data-tooltip-content']: 'Удалить активное поле',

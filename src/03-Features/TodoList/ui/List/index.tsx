@@ -25,7 +25,7 @@ const TodoList: FC<IProps> = ({ createPresentTodo }) => {
 	const uuidActiveEditTodo = useAppSelector((state) => state.todos.activeEdit)
 
 	if (Object.keys(todos).length === 0) {
-		return <p>Список задач пуст</p>
+		return <p className={style.empty__list}>Список задач пуст</p>
 	}
 
 	return (
