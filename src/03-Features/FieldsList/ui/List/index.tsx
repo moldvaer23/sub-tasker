@@ -1,6 +1,7 @@
 import { FC, useState } from 'react'
 
 import clsx from 'clsx'
+import { Tooltip } from 'react-tooltip'
 
 import { TField } from '05-Shared/types'
 import { Modal } from '04-Entities/Modal'
@@ -58,7 +59,13 @@ const FieldsList: FC<IProps> = ({
 						}}
 						typeStyle={ETypeButtonStyle.icon}
 						onClick={() => setOpenNewField(true)}
+						otherSettings={{
+							['data-tooltip-id']: 'new-field-tooltip',
+							['data-tooltip-content']: 'Новый лист',
+						}}
 					/>
+					<Tooltip variant='light' place='bottom' id='new-field-tooltip' />
+
 					<Button
 						className={style.aside__button}
 						image={{
@@ -67,7 +74,13 @@ const FieldsList: FC<IProps> = ({
 						}}
 						typeStyle={ETypeButtonStyle.icon}
 						onClick={() => setOpenEditField(true)}
+						otherSettings={{
+							['data-tooltip-id']: 'edit-field-tooltip',
+							['data-tooltip-content']: 'Изменить название поля',
+						}}
 					/>
+					<Tooltip variant='light' place='bottom' id='edit-field-tooltip' />
+
 					<Button
 						className={style.aside__button}
 						image={{
@@ -76,7 +89,12 @@ const FieldsList: FC<IProps> = ({
 						}}
 						typeStyle={ETypeButtonStyle.icon}
 						onClick={() => setOpenConfirmDelete(true)}
+						otherSettings={{
+							['data-tooltip-id']: 'delete-field-tooltip',
+							['data-tooltip-content']: 'Удалить активное поле',
+						}}
 					/>
+					<Tooltip variant='light' place='bottom' id='delete-field-tooltip' />
 				</div>
 				<ul className={style.list}>
 					{fields.length !== 0 &&

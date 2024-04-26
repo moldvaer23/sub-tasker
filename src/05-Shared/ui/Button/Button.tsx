@@ -39,6 +39,7 @@ interface IProps {
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => void
 	onMouseLeave?: (e: MouseEvent<HTMLButtonElement>) => void
 	opacity?: number
+	otherSettings?: Record<string, string>
 	text?: string
 	type?: ETypeButton
 	typeSize?: ETypeButtonSize
@@ -53,6 +54,7 @@ const Button: FC<IProps> = ({
 	onClick,
 	onMouseLeave,
 	opacity = 1,
+	otherSettings,
 	text,
 	type = ETypeButton.button,
 	typeSize = ETypeButtonSize.default,
@@ -88,6 +90,7 @@ const Button: FC<IProps> = ({
 				transition={{ type: 'spring', stiffness: 500, damping: 5 }}
 				type={type}
 				whileTap={{ scale: typeStyle !== ETypeButtonStyle.icon ? 2 : 3 }}
+				{...otherSettings}
 			>
 				{content}
 			</motion.button>
@@ -99,6 +102,7 @@ const Button: FC<IProps> = ({
 			onClick={onClick ? onClick : undefined}
 			onMouseLeave={onMouseLeave}
 			type={type}
+			{...otherSettings}
 		>
 			{content}
 		</button>

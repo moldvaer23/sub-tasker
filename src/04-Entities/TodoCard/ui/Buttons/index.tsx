@@ -38,6 +38,7 @@ const TodoButtons: FC<IProps> = ({
 				<>
 					{!openConfirmDelete ? (
 						/* Показываем кнопку удалить */
+
 						<Button
 							className={style.todo__button}
 							image={{ imageSrc: deleteIcon, alt: 'Кнопка удаления' }}
