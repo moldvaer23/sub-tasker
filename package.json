@@ -1,8 +1,8 @@
 {
 	"name": "sub-tasker",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"private": true,
-	"homepage": "https://moldvaer23.github.io/",
+	"homepage": "https://moldvaer23.github.io/sub-tasker",
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.2.1",
 		"clsx": "^2.1.0",
