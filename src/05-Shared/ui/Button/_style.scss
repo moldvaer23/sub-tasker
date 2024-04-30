@@ -40,12 +40,6 @@
 	&__small {
 		padding: 5px;
 	}
-
-	@media (max-width: $media-width-mobile) {
-		&__image {
-			width: 40px;
-		}
-	}
 }
 
 .button:hover {

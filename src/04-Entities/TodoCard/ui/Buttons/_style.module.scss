@@ -6,12 +6,6 @@
 	position: absolute;
 	left: -45px;
 	gap: 10px;
-
-	@media (max-width: $media-width-mobile) {
-		position: unset;
-		left: unset;
-		flex-direction: row;
-	}
 }
 
 .todo__button {
