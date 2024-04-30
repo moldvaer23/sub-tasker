@@ -38,6 +38,7 @@ const FieldsList: FC<IProps> = ({
 	const [openNewField, setOpenNewField] = useState<boolean>(false)
 
 	const activeField = useAppSelector((state) => state.fields.activeField)
+	const activeUuidEditTodo = useAppSelector((state) => state.todos.activeEdit)
 	const fieldsStore = useAppSelector((state) => state.fields.fields)
 
 	const fields: TField[] = Object.values(fieldsStore)
@@ -116,6 +117,7 @@ const FieldsList: FC<IProps> = ({
 													}
 												: undefined
 										}
+										disabled={activeUuidEditTodo.length !== 0 && true}
 									/>
 								</li>
 							)
