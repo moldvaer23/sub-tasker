@@ -1,7 +1,8 @@
 {
-	"name": "todo-list",
+	"name": "sub-tasker",
 	"version": "0.1.2",
 	"private": true,
+	"homepage": "https://moldvaer23.github.io/",
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.2.1",
 		"clsx": "^2.1.0",
@@ -17,14 +18,16 @@
 	},
 	"scripts": {
 		"build": "react-scripts build",
+		"check": "npm run stylelint:fix && npm run lint && npm run format",
+		"commit": "npm run check && cz",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
+		"format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\" --ignore-path ./.prettierignore",
+		"lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
+		"prepare": "husky install",
 		"start": "react-scripts start",
 		"stylelint": "stylelint \"src/**/*.{css,scss}\"",
-		"stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
-		"lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\"",
-		"format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\" --ignore-path ./.prettierignore",
-		"check": "npm run stylelint:fix && npm run lint && npm run format",
-		"prepare": "husky install",
-		"commit": "npm run check && cz"
+		"stylelint:fix": "stylelint \"src/**/*.{css,scss}\" --fix"
 	},
 	"lint-staged": {
 		"*.{css,scss}": "npm run stylelint:fix",
@@ -77,6 +80,7 @@
 		"eslint-plugin-react": "^7.34.1",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-sonarjs": "^0.24.0",
+		"gh-pages": "^6.1.1",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
 		"prettier": "^3.2.5",
