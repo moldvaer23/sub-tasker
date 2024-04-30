@@ -1,6 +1,6 @@
 {
 	"name": "sub-tasker",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"private": true,
 	"homepage": "https://moldvaer23.github.io/sub-tasker",
 	"dependencies": {
